@@ -1,0 +1,244 @@
+\chapter{Jan.~6 --- Introduction to Dispersion}
+
+\section{Introduction to Dispersion}
+\begin{definition}
+  An evolution equation is \emph{dispersive} if
+  when no boundary conditions are imposed (e.g. on
+  $\R^n$), its wave solutions spread out in space
+  as they evolve in time.
+\end{definition}
+
+\begin{example}
+  Two classic examples of dispersive equations are:
+  \begin{itemize}
+    \item The \emph{Schr\"odinger equation}: $i u_t + \Delta u = 0$.
+    \item The \emph{Airy (linearized KdV) equation}:
+      $u_t + u_{xxx} = 0$.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  Consider the equation
+  $u_t + p(\partial_x) u = 0$, where $p$ is a polynomial,
+  and a plane-wave solution
+  \[
+    u(t, x) = e^{i(kx - \omega t)}
+    = e^{ik(x - (\omega / k) t)}.
+  \]
+  Here $k$ is the \emph{wave number} or
+  \emph{space frequency}, and $\omega$ is the
+  \emph{(time) frequency}. Plugging the plane-wave
+  solution into the equation, we obtain the
+  relation $\omega(k) = -i p(ik)$, i.e.
+  \[
+    \frac{\omega(k)}{k} = \frac{1}{ik} p(ik).
+  \]
+  The above equation is known as the
+  \emph{dispersive relation}. This gives the
+  traveling speed of the plane-wave solution with
+  wave number $k$,
+  which is called the \emph{phase velocity}.
+\end{remark}
+
+\begin{example}
+  The following are some examples of dispersive relations:
+  \begin{itemize}
+    \item For the \emph{linear advection equation}
+      $u_t + c u_x = 0$ with $c \in \R$, one
+      can compute that $\omega / k = c$.
+    \item For the Schr\"odinger equation
+      $i u_t + \frac{1}{2} \Delta u = 0$, we have
+      $\omega / k = k / 2 \in \R$.
+     
+      In this case of the Schr\"odinger equation,
+      plane waves with large wave number (large space
+      frequency) travel faster than low-frequency waves.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  In general, dispersion means that different
+  frequency plane waves travel at different speeds.
+\end{remark}
+
+\begin{remark}
+  Given initial data $u_0$,
+  we can write using the Fourier transform that
+  \[
+    u_0 = \int \widehat{u}_0(k) e^{ikx} \, dk.
+  \]
+  Then we get the solution $u$ as
+  \[
+    u(t, x) = \int \widehat{u}_0(k) e^{i k (x - (\omega(k) / k) t)} \, dk.
+  \]
+\end{remark}
+
+\begin{example}
+  In the case of the linear advection equation, we
+  obtain the solution as
+  \[
+    u(t, x) = \int \widehat{u}_0(k) e^{i k (x - ct)} \, dk
+    = u_0(x - ct).
+  \]
+  For the Schr\"odinger equation, we instead have
+  the solution
+  \[
+    u(t, x) = \int \widehat{u}_0(k) e^{i k (x - (k / 2) t)} \, dk.
+  \]
+  Since different $k$ travels at different speeds,
+  the original profile quickly spreads out.
+\end{example}
+
+\begin{exercise}
+  Calculate the dispersive relation $\omega / k$
+  for the linearized KdV equation $u_t + u_{xxx} = 0$.
+\end{exercise}
+
+\begin{example}
+  The \emph{KdV equation} is given by
+  \[
+    \partial_t u + \partial_{xxx} u + 6 u \partial_x u = 0.
+  \]
+  This equation is used to model shallow water
+  surfaces, and is a nonlinear dispersive
+  equation. Russell observed a great bump of water
+  in a channel that traveled for a long time
+  and kept its shape. This is due to the
+  nonlinear effects in the KdV equation, and these
+  effects are called \emph{solitons}.
+\end{example}
+
+\begin{definition}
+  A \emph{soliton} is a self-reinforcing solitary
+  wave (a wave packet or pulse) that maintains
+  its shape while traveling at a constant speed.
+\end{definition}
+
+\section{Fourier Transform and the Free Schr\"odinger Equation}
+Consider the following free Schr\"odinger equation:
+\[
+  \begin{cases}
+    i \partial_t \psi + \frac{1}{2} \Delta \psi = 0, \\
+    \psi|_{t = 0} = \psi_0.
+  \end{cases}
+\]
+We will solve this equation using the \emph{Fourier transform}
+\[
+  \widehat{f}(\xi) = \int_{\R^d} e^{-ix \cdot \xi} f(x)\, dx.
+\]
+Note that one can recover $f$ from its Fourier
+transform via the \emph{inversion formula}
+\[
+  f(x) = \frac{1}{(2\pi)^d} \int_{\R^d} e^{ix \cdot \xi} \widehat{f}(\xi)\, d\xi.
+\]
+
+\begin{exercise}
+  Check that $(\partial_{x_j} f)^\wedge = i \xi_j \widehat{f}$.
+\end{exercise}
+
+Applying the Fourier transform to the free Schr\"odinger
+equation, one has
+\[
+  i \partial_t \psi + \frac{1}{2} \Delta \psi = 0 \quad
+  \xrightarrow{\text{F.T.}} \quad
+  i \partial_t \widehat{\psi} - \frac{1}{2} |\xi|^2 \widehat{\psi} = 0
+\]
+and initial condition $\widehat{\psi}(0, \xi) = \widehat{\psi}_0(\xi)$.
+So for fixed $\xi$, we have an ODE, so we
+can solve the equation via
+\[
+  \widehat{\psi}(t, \xi) =
+  e^{-i |\xi|^2 t / 2} \widehat{\psi}_0(\xi).
+\]
+Now by applying the inverse Fourier transform, we obtain
+the solution
+\[
+  \psi(t, x) = \frac{1}{(2\pi)^d} \int e^{ix\xi} \widehat{\psi}(t, \xi)\, d\xi
+  = \frac{1}{(2\pi)^d} \int e^{ix\xi} e^{-i |\xi|^2 t / 2} \widehat{\psi}_0(\xi)\, d\xi.
+\]
+Recalling Plancherel's theorem that
+$\|f\|_{L^2} = C\|\widehat{f}\|_{L^2}$ (for a constant
+$C$ independent of $f$), we obtain
+\[
+  \|\psi(t, x)\|_{L^2}
+  = C\|\widehat{\psi}(t, \xi)\|_{L^2}
+  = C\|\widehat{\psi}(0, \xi)\|_{L^2}
+  = \|\psi(0, x)\|_{L^2}
+  = \|\psi_0(x)\|_{L^2},
+\]
+where the second equality is noticing that
+$e^{-i |\xi|^2 t / 2}$ is purely imaginary. This is
+a rigorous justification that the linear Schr\"odinger
+evolution preserves the $L^2$ norm of the solution.
+
+\begin{exercise}
+  Compute that
+  \[
+    \frac{d}{dt} \int_{\R^d} |\psi(t, x)|^2\, dx = 0.
+  \]
+  This is an alternative way to show that
+  the $L^2$ norm of the solution is preserved.
+\end{exercise}
+
+\section{Sobolev Spaces}
+\begin{definition}
+  The \emph{Sobolev spaces} $H^{\gamma} = W^{\gamma, 2}$
+  for $\gamma \in \R$
+  are defined via the norm
+  \[
+    \|f\|_{H^{\gamma}}
+    = \left(\int_{\R^d} (1 + |\xi|^2)^\gamma |\widehat{f}(\xi)|^2\, d\xi\right)^{1 / 2}.
+  \]
+  The \emph{homogeneous Sobolev spaces} $\dot{H}^\gamma$
+  are defined by the norm
+  \[
+    \|f\|_{\dot{H}^\gamma}
+    = \left(\int_{\R^d} |\xi|^{2\gamma} |\widehat{f}(\xi)|^2\, d\xi\right)^{1 / 2}.
+  \]
+\end{definition}
+
+\begin{remark}
+  If $\gamma \in \N$ and $d = 1$, then
+  \[
+    \|f\|_{H^{\gamma}}
+    = \sum_{m = 0}^\gamma \| \partial_x^m f \|_{L^2}.
+  \]
+  In particular, this means that
+  $f \in H^\gamma$ if and only if
+  $\partial_x^m f \in L^2$ for all $m \le \gamma$.
+\end{remark}
+
+\begin{exercise}
+  Check that if $f_\lambda(x) = f(\lambda x)$, then
+  $\widehat{f_\lambda}(\xi) = \lambda^{-d} \widehat{f}(\xi / \lambda)$.
+\end{exercise}
+
+\begin{remark}
+  In the Sobolev spaces, this means that (change
+  variables $\eta = \xi / \lambda$ for the last equality)
+  \[
+    \|f_\lambda\|_{\dot{H}^{\gamma}}
+    = \left(\int_{\R^d} |\xi|^{2\gamma} |\widehat{f_\lambda}(\xi)|^2\, d\xi\right)^{1 / 2}
+    = \left(\int_{\R^d} |\xi|^{2\gamma} |\lambda^{-d} \widehat{f}(\xi / \lambda)|^2\, d\xi\right)^{1 / 2}
+    = \lambda^{\gamma - d / 2} \|f\|_{\dot{H}^{\gamma}}.
+  \]
+\end{remark}
+
+\begin{lemma}
+  In the Schr\"odinger equation, $\|\psi(t)\|_{H^{\gamma}} = \|\psi_0\|_{H^{\gamma}}$
+  and $\|\psi(t)\|_{\dot{H}^{\gamma}} = \|\psi_0\|_{\dot{H}^{\gamma}}$
+  for all $t$ and $\gamma$.
+\end{lemma}
+
+\begin{proof}
+  We can compute that
+  \[
+    \|\psi(t)\|_{\dot{H}^{\gamma}}
+    = \int_{\R^d} |\xi|^{2\gamma} |\widehat{\psi}(t, \xi)|^2\, d\xi
+    = \int_{\R^d} |\xi|^{2\gamma} |e^{-i |\xi|^2 / 2}\widehat{\psi_0}(\xi)|^2\, d\xi
+    = \int_{\R^d} |\xi|^{2\gamma} |\widehat{\psi_0}(\xi)|^2\, d\xi
+    = \|\psi_0\|_{\dot{H}^{\gamma}}.
+  \]
+  The same argument works for the $H^{\gamma}$ case
+  after replacing.
+\end{proof}
