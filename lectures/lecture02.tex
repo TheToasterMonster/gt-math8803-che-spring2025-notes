@@ -84,8 +84,9 @@
       We will find $K$ by scaling arguments. Suppose
       such a $K$ exists. Then we must have
       \[
-        \psi(t, x) = \int_{\R^d} K(t, x - y) \psi_0(y)\, dy. \tag{1}
+        \psi(t, x) = \int_{\R^d} K(t, x - y) \psi_0(y)\, dy \tag{1}
       \]
+      since $K|_{t = 0} = \delta_0$.
       Now define the scaling
       $\psi_\lambda(t, x) = \psi(\lambda^2 t, \lambda x)$.
       Then $\psi_\lambda$ also solves
@@ -137,11 +138,11 @@
         d\left(\Phi'(m) - \frac{i}{2} \Phi(m)\right)
         + 2m \frac{d}{dm} \left(\Phi'(m) - \frac{i}{2}\Phi(m)\right) = 0.
       \]
-      Now simply observe that
+      Now observe that
       $\Phi(m) = e^{im / 2}$ solves the above equation.
       Since $\Phi(m)$ solves the
       equation, $c \Phi(m)$ also solves the equation for
-      any $c \in \C$. So
+      any $c \in \C$, and thus we have
       \[
         K(t, x) = c t^{-d / 2} \Phi(|x|^2 / t)
         = c t^{-d / 2} e^{i|x|^2 / 2t}.
