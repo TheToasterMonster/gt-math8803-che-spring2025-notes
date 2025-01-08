@@ -1,0 +1,208 @@
+\chapter{Jan.~8 --- Special Solutions}
+
+\section{Special Solutions}
+\begin{example}
+  The following are special solutions to the
+  Schr\"odinger equation:
+  \begin{enumerate}
+    \item Gaussian: $\psi_0 = e^{-|x|^2 / 2}$.
+      One can compute the Fourier transform and get
+      \[
+        \widehat{\psi}_0(\xi)
+        = \int_{\R^d} e^{-ix \cdot \xi} e^{-|x|^2 / 2} \, dx
+        = \int_{\R^d} e^{-|x + i\xi|^2 / 2} e^{-|\xi|^2 / 2} \, dx
+        = e^{-|\xi|^2 / 2}\int_{\R^d} e^{-|x + i\xi|^2 / 2} \, dx.
+      \]
+      The last integral is a contour integral in the
+      complex plane along $\Im z = \xi$, and
+      we can deform the contour via Cauchy's theorem
+      to the real axis to obtain (the integrand is
+      analytic on $0 \le \Im z \le \xi$)
+      \[
+        \widehat{\psi}_0(\xi)
+        = e^{-|\xi|^2 / 2}\int_{\R^d} e^{-|x|^2 / 2} \, dx
+        = (2\pi)^{d / 2} e^{-|\xi|^2 / 2}.
+      \]
+      Then taking inverse Fourier transforms, we obtain
+      the solution
+      \begin{align*}
+        \psi(t, x)
+        = (2\pi)^{-d} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)} \widehat{\psi}_0(\xi) \, d\xi
+        &= (2\pi)^{-d / 2} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)} e^{-|\xi|^2 / 2} \, d\xi \\
+        &= (2\pi)^{-d / 2} \int_{\R^d} e^{-\frac{1}{2}(1 + it)|\xi|^2} e^{ix \cdot \xi} \, d\xi.
+      \end{align*}
+      Now formally put $\eta = (1 + it)^{1 / 2} \xi$
+      to get
+      \[
+        \psi(t, x) = (2\pi)^{-d / 2} (1 + it)^{-d / 2} \int_{\R^d} e^{-\frac{1}{2}|\eta|^2} e^{ix \eta / (1 + it)^{1 / 2}}\, d\eta.
+      \]
+      Fill in the details of the above change of
+      variables as an exercise (e.g. one has to
+      worry about choosing a branch cut when taking
+      the square root). Computing the integral explicitly,
+      one obtains
+      \[
+        \psi(t, x) = (1 + it)^{-d / 2} e^{-|x|^2 / (2(1 + it))}.
+      \]
+      One can from this that $\psi$ has decay in
+      time. Furthermore, one can see that
+      \[
+        |\psi(t, x)|^2 = (1 + t^2)^{-d / 2} e^{-|x|^2 / (1 + t^2)}.
+      \]
+      From this we can observe an $L^\infty$ decay
+      of $\psi$ like $t^{-d / 2}$, and that the influence
+      region of the solution grows like order $t$.
+      We can also see again from this explicit
+      computation that $\|\psi(t)\|_{L^2} = C$.
+    \item Modulated Gaussian: $\psi_0 = e^{-|x|^2 / 2} e^{ix \cdot v}$.
+      The Fourier transform of this initial data is
+      \[
+        \widehat{\psi}_0(\xi)
+        = (2\pi)^{d / 2} e^{-i|\xi - v|^2 / 2}.
+      \]
+      So the solution corresponding to this initial
+      data is
+      \begin{align*}
+        \psi(t, x)
+        = (2\pi)^{-d} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)} \widehat{\psi}_0(\xi) \, d\xi
+        &= (2\pi)^{-d / 2} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)} e^{-|\xi - v|^2} \, d\xi \\
+        &= e^{ix \cdot v} e^{-|v|^2 t / 2} (2\pi)^{-d / 2}
+        \int_{\R^d} e^{i(x - vt) \cdot \xi} e^{-(1 + it) |\xi|^2 / 2}\, d\xi \\
+        &= e^{ix \cdot v} e^{-|v|^2 t / 2}
+        (1 + it)^{-d / 2}
+        \exp\left(-\frac{|x - vt|^2}{2(1 + it)}\right).
+      \end{align*}
+      From this we can see that the influence region
+      of the solution moves with velocity $v$.
+    \item Fundamental solution: We want a
+      \emph{fundamental solution} $K$ such that
+      $K$ solves
+      \[
+        i \partial_t K + \frac{1}{2} \Delta K = 0
+        \quad \text{and} \quad K|_{t = 0} = \delta_0.
+      \]
+      We will find $K$ by scaling arguments. Suppose
+      such a $K$ exists. Then we must have
+      \[
+        \psi(t, x) = \int_{\R^d} K(t, x - y) \psi_0(y)\, dy. \tag{1}
+      \]
+      Now define the scaling
+      $\psi_\lambda(t, x) = \psi(\lambda^2 t, \lambda x)$.
+      Then $\psi_\lambda$ also solves
+      \[
+        i \partial_t \psi_\lambda + \frac{1}{2} \Delta \psi_\lambda = 0
+      \]
+      and we have the initial condition
+      $\psi_\lambda(0, x) = \psi_0(\lambda x)$. Then
+      \[
+        \psi_\lambda(t, x)
+        = \int_{\R^d} K(t, x - y)\psi_0(\lambda y)\, dy
+        = \psi(\lambda^2 t, \lambda x).
+      \]
+      Setting $t' = \lambda^2 t$, $x' = \lambda x$, and
+      $y' = \lambda y$, we get
+      \[
+        \psi(t', x')
+        = \frac{1}{\lambda^d} \int_{\R^d} K\left(\frac{t'}{\lambda^2}, \frac{x' - y'}{\lambda}\right)
+        \psi_0(y')\, dy'.
+        \tag{2}
+      \]
+      Comparing (1) and (2), we see that we must have
+      \[
+        K(t, x - y) = \lambda^{-d} K\left(\frac{t}{\lambda^2}, \frac{x - y}{\lambda}\right).
+      \]
+      Setting $u = x - y$, we get
+      \[
+        K(t, u) = \lambda^{-d} K\left(\frac{t}{\lambda^2}, \frac{u}{\lambda}\right).
+      \]
+      Thus we expect
+      $K(t, x) = t^{-d / 2} \Phi(|x|^2 / t)$
+      for some $\Phi$. Now we use the fact that
+      $i \partial_t K + \frac{1}{2} \Delta K = 0$.
+      Setting $m = |x|^2 / t$, one can
+      plug in the above guess for $K$ to obtain
+      (note that $\Delta = \nabla \cdot \nabla$)
+      \[
+        -\frac{id}{2} t^{-d / 2 - 1} \Phi(m)
+        - it^{-d / 2} \Phi'(m) \frac{m}{t}
+        + \frac{1}{2} t^{-d / 2} \nabla \cdot \left(\frac{2x}{t} \Phi'(m)\right) = 0.
+      \]
+      Then we get
+      \[
+        -i \frac{d}{2} \Phi(m) - im \Phi'(m)
+        + d \Phi'(m) + 2m \Phi''(m) = 0,
+      \]
+      which gives
+      \[
+        d\left(\Phi'(m) - \frac{i}{2} \Phi(m)\right)
+        + 2m \frac{d}{dm} \left(\Phi'(m) - \frac{i}{2}\Phi(m)\right) = 0.
+      \]
+      Now simply observe that
+      $\Phi(m) = e^{im / 2}$ solves the above equation.
+      Since $\Phi(m)$ solves the
+      equation, $c \Phi(m)$ also solves the equation for
+      any $c \in \C$. So
+      \[
+        K(t, x) = c t^{-d / 2} \Phi(|x|^2 / t)
+        = c t^{-d / 2} e^{i|x|^2 / 2t}.
+      \]
+      To determine $c$, we use $K|_{t = 0} = \delta_0$,
+      from which one can obtain $c = (2\pi i)^{-d / 2}$. Thus
+      \[
+        K(t, x) = (2\pi it)^{-d / 2} e^{i|x|^2 / 2t}.
+      \]
+      The rough computation is that since
+      $\widehat{K}(0, \xi) = 1$, we have
+      \[
+        K = (2\pi)^{-d} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)} \widehat{K}(0, \xi)\, d\xi
+        = (2\pi)^{-d} \int_{\R^d} e^{i(x \cdot \xi - |\xi|^2 t / 2)}\, d\xi
+      \]
+      This is not necessarily integrable a priori,
+      but one can take limits and obtain
+      \begin{align*}
+        K
+        = (2\pi)^{-d} \lim_{\epsilon \to 0^+}
+        \int_{\R^d} e^{ix \cdot \xi} e^{-(\epsilon + it)|\xi|^2 / 2}\, d\xi
+        &= \lim_{\epsilon \to 0^+} (\epsilon + it)^{-d / 2} (2\pi)^{-d / 2} e^{-|x|^2 / (2(\epsilon + it))} \\
+        &= (2\pi it)^{-d / 2} e^{-|x|^2 / 2it}.
+      \end{align*}
+      Note that this computation matches the result
+      of the previous scaling argument.
+  \end{enumerate}
+\end{example}
+
+\begin{theorem}
+  Let $\psi_0 \in \mathcal{S}(\R^d)$.\footnote{Here $\mathcal{S}(\R^d)$ is the space of Schwartz functions.}
+  Then there exists a solution to
+  \[
+    \begin{cases}
+      i \partial_t \psi + \frac{1}{2} \Delta \psi = 0, \\
+      \psi|_{t = 0} = \psi_0,
+    \end{cases}
+  \]
+  which is unique and given by
+  \[
+    \psi(t, x) = \int_{\R^d} K(t, x - y) \psi_0(y)\, dy
+    = (2\pi it)^{-d / 2} \int_{\R^d} e^{-|x - y|^2 / 2it} \psi_0(y)\, dy.
+  \]
+\end{theorem}
+
+\begin{proof}
+  This theorem is a summary of the previous
+  explicit computations.
+\end{proof}
+
+\begin{remark}
+  Recall that the Schr\"odinger evolution
+  preserves the $L^2$ norm of a solution, i.e.
+  \[
+    \|\psi(t)\|_{L^2} = \|\psi(0)\|_{L^2} = \|\psi_0\|_{L^2}.
+  \]
+  The above theorem also gives an $L^\infty$ bound
+  (a so-called \emph{dispersive estimate})
+  \[
+    \|\psi(t)\|_{L^\infty}
+    \le |2\pi t|^{-d / 2} \int_{\R^d} |\psi_0(y)|\, dy
+    \le |2\pi t|^{-d / 2} \|\psi_0\|_{L^1}.
+  \]
+\end{remark}

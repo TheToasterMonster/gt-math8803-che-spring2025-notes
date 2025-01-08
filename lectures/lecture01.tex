@@ -129,7 +129,7 @@ We will solve this equation using the \emph{Fourier transform}
 Note that one can recover $f$ from its Fourier
 transform via the \emph{inversion formula}
 \[
-  f(x) = \frac{1}{(2\pi)^d} \int_{\R^d} e^{ix \cdot \xi} \widehat{f}(\xi)\, d\xi.
+  f(x) = (2\pi)^{-d} \int_{\R^d} e^{ix \cdot \xi} \widehat{f}(\xi)\, d\xi.
 \]
 
 \begin{exercise}
@@ -153,8 +153,8 @@ can solve the equation via
 Now by applying the inverse Fourier transform, we obtain
 the solution
 \[
-  \psi(t, x) = \frac{1}{(2\pi)^d} \int e^{ix\xi} \widehat{\psi}(t, \xi)\, d\xi
-  = \frac{1}{(2\pi)^d} \int e^{ix\xi} e^{-i |\xi|^2 t / 2} \widehat{\psi}_0(\xi)\, d\xi.
+  \psi(t, x) = (2\pi)^{-d} \int e^{ix\xi} \widehat{\psi}(t, \xi)\, d\xi
+  = (2\pi)^{-d} \int e^{ix\xi} e^{-i |\xi|^2 t / 2} \widehat{\psi}_0(\xi)\, d\xi.
 \]
 Recalling Plancherel's theorem that
 $\|f\|_{L^2} = C\|\widehat{f}\|_{L^2}$ (for a constant
