@@ -1,0 +1,216 @@
+\chapter{Jan.~15 --- Strichartz Estimates}
+
+\section{Interpolation Results}
+\begin{remark}[Interpolation]
+  Consider a linear operator $T$ which maps
+  $T : L^{p_1} \to L^{q_1}$ and
+  $T : L^{p_2} \to L^{q_2}$, where $1 \le p_1 \le p_2 \le \infty$.
+  Then $T$ also maps $T : L^p \to L^q$ for any $p, q$
+  such that
+  \[
+    \frac{1}{p} = \frac{\theta}{p_1} + \frac{1 - \theta}{p_2}
+    \quad \text{and} \quad
+    \frac{1}{q} = \frac{\theta}{q_1} + \frac{1 - \theta}{q_2}
+  \]
+  for some $0 \le \theta \le 1$. More specifically, if
+  $\|Tf\|_{L^{q_1}} \le C_1 \|f\|_{L^{p_1}}$ and
+  $\|Tf\|_{L^{q_2}} \le C_2 \|f\|_{L^{p_2}}$, then
+  \[
+    \|Tf\|_{L^q} \le C_1^\theta C_2^{1 - \theta} \|f\|_{L^p}.
+  \]
+  This $L^p$ interpolation is a result from real and
+  functional analysis. Note that by interpolation,
+  we have
+  \[
+    \|\psi\|_{L^{p'}(\R^d)} \le C |t|^{-d(1 / p - 1 / 2)} \|\psi_0\|_{L^p(\R^d)}
+  \]
+  for $1 \le p \le 2$, where $p'$ is the
+  \emph{H\"older conjugate} of $p$, i.e.
+  $1 / p' + 1 / p = 1$.
+\end{remark}
+
+\section{Strichartz Estimates}
+
+\begin{remark}
+  We will now consider the inhomogeneous Schr\"odinger
+  equation:
+  \[
+    \begin{cases}
+      i \psi_t + \frac{1}{2}\Delta \psi = F, & F \in \mathcal{S}_{x, t} \\
+      \psi(0) = \psi_0, & \psi_0 \in \mathcal{S},
+    \end{cases}
+  \]
+  where $F \in \mathcal{S}_{x, t}$ means that $F$ is
+  Schwartz in both $x$ and $t$. We can solve this
+  via the \emph{Duhamel formula}:
+  \[
+    \psi(t) = e^{i t \Delta / 2} \psi_0 - i \int_0^t e^{i(t - s) \Delta / 2} F(s)\, ds,
+  \]
+  where $e^{it \Delta / 2}$ is the \emph{linear
+  propagator} given by
+  \[
+    e^{it \Delta / 2} \psi_0
+    = (e^{-it |\xi|^2 / 2} \widehat{\psi}_0)^\vee
+    = \frac{1}{(2\pi)^d} \int_{\R^d} e^{ix \cdot \xi} e^{-it |\xi|^2 / 2} \widehat{\psi}_0(\xi)\, d\xi.
+  \]
+\end{remark}
+
+\begin{theorem}[Strichartz estimates]\label{thm:strichartz}
+  For $p' = 2 + 4 / d$, we have the estimate\footnote{Here $A \lesssim B$ means that $A \le CB$ for some prescribed constant $C$.}
+  \[
+    \|\psi\|_{L^{p'}_{t, x}(\R \times \R^d)}
+    \lesssim \|\psi_0\|_{L^2_x(\R^d)}
+    + \|F\|_{L^{p}_{t, x}(\R \times \R^d)}.
+  \]
+\end{theorem}
+
+\begin{remark}
+  If $F = 0$, this is the bound
+  \[
+    \|\psi\|_{L^{p'}_{t, x}}
+    \lesssim \|\psi_0\|_{L^2}
+  \]
+  for $p' > 2$. Formally, this means that we gain
+  integrability in $x$. Note that this gain in
+  integrability is not pointwise in time, i.e.
+  we do \emph{not} have $\|\psi(t)\|_{L^\infty_t L^{p'}_x} \lesssim \|\psi_0\|_{L^2_x}$. We must instead average
+  over $t$.
+\end{remark}
+
+\begin{remark}
+  Why $p'$ and why do we also pick $p'$ in the time
+  integration? Actually, $p'$ is the only possible
+  choice for the above result. This follows by a
+  scaling argument: Set
+  \[
+    \psi_\lambda(t, x) = \psi(\lambda^2 t, \lambda x),
+    \quad
+    (\psi_\lambda)_0(x) = \psi_0(\lambda x),
+    \quad
+    F_\lambda(t, x) = \lambda^2 F(\lambda^2 t, \lambda x).
+  \]
+  Then $\psi_\lambda$ solves the equation
+  \[
+    \begin{cases}
+    i \partial_t \psi_\lambda + \frac{1}{2} \Delta \psi_\lambda = F_\lambda, \\
+    \psi_\lambda(0) = (\psi_{\lambda})_0.
+    \end{cases}
+  \]
+  If the above theorem makes sense, then it must hold
+  for both $\psi_\lambda$ and $\psi$. Now
+  \[
+    \|\psi_\lambda\|_{L^{p'}_{t, x}}
+    = \lambda^{-d / p'} \lambda^{-2 / p'} \|\psi\|_{L^{p'}_{t, x}}
+  \]
+  by a change of variables, and
+  \[
+    \|(\psi_\lambda)_0\|_{L^2_x}
+    = \lambda^{-d / 2} \|\psi_0\|_{L^2_x}.
+  \]
+  Now if $F = 0$, then we have the estimates
+  \[
+    \|\psi\|_{L^{p'}_{t, x}} \lesssim \|\psi_0\|_{L^2_x}
+    \quad \text{and} \quad
+    \|\psi_\lambda\|_{L^{p'}_{t, x}}
+    \lesssim \|(\psi_\lambda)_0\|_{L^2_x}, \tag{$*$}
+  \]
+  Using the scaling computations in the second estimate
+  in $(*)$ implies that
+  \[
+    \| \psi \|_{L^{p'}_{t, x}} \lambda^{-d / p'} \lambda^{-2 / p'}
+    \lesssim \lambda^{-d / 2} \|\psi_0\|_{L^2_x}.
+  \]
+  This inequality should hold independent of $\lambda$,
+  since otherwise taking $\lambda \to \infty$ or
+  $\lambda \to 0$ yields a contradiction with the
+  first inequality in $(*)$.
+  Thus the powers in $\lambda$ should match:
+  \[
+    -\frac{d}{p'} - \frac{2}{p'} = -\frac{d}{2},
+  \]
+  so we find that $p'$ must be
+  \[
+    p' = \frac{d + 2}{d / 2} + \frac{2d + 4}{d} = 2 + \frac{4}{d}.
+  \]
+  This uniquely determines $p'$. Now consider $F \ne 0$.
+  Using a similar computation as before, we have
+  \[
+    \|F_\lambda\|_{L^q_{t, x}} = \lambda^2 \lambda^{-d / q} \lambda^{-2 / q} \|F\|_{L^q_{t, x}}.
+  \]
+  Then the theorem says that
+  $\|\psi_\lambda\|_{L^{p'}_{t, x}} \lesssim \|\psi_0\|_{L^2_x} + \|F\|_{L^q_{t, x}}$,
+  so we have
+  \[
+    \|\psi\|_{L^{p'}_{t, x}} \lambda^{-d / p'} \lambda^{-2 / p'}
+    \lesssim \lambda^{-d / 2} \| \psi_0 \|_{L^2_x} + \lambda^2 \lambda^{-d / q} \lambda^{-2 / q} \|F\|_{L^q_{t, x}}.
+  \]
+  Again the estimate should hold independent of
+  $\lambda$, so the powers in $\lambda$ must match:
+  \[
+    -\frac{d}{p'} - \frac{2}{p'} = 2 - \frac{d}{q} - \frac{2}{q} = -\frac{d}{2},
+  \]
+  which then gives $p$ as
+  \[
+    p = \left(1 - \frac{1}{p'}\right)^{-1} = \left(1 - \frac{d}{2d + 4}\right)^{-1} = \frac{2d + 4}{d + 4}.
+  \]
+\end{remark}
+
+\begin{lemma}
+  Let $\psi(t) = e^{it \Delta / 2} \psi_0$.
+  Then for $1 \le p \le 2$,
+  \[
+    \|\psi(t) \|_{L^{p'}_x(\R^d)}
+    \lesssim |t|^{-d (1 / p - 1 / 2)} \|\psi_0\|_{L^p_x(\R^d)}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  This is the interpolation result from the beginning
+  of class.
+\end{proof}
+
+\begin{lemma}[Hardy-Littlewood-Sobolev inequality]
+  Let $0 < \alpha < 1$ and $g \in \mathcal{S}(\R)$.
+  Let
+  \[
+    (T_\alpha g)(t) = \int_{-\infty}^\infty |t - s|^{-\alpha} g(s)\, ds.
+  \]
+  Then we have
+  $\|T_\alpha g\|_{L^q(\R)} \lesssim \|g\|_{L^p(\R)}$,
+  where $1 < p < q < \infty$ such that
+  $1 + 1 / q = \alpha + 1 / p$.
+\end{lemma}
+
+\begin{proof}
+  One approach is via harmonic analysis and maximal
+  functions. An alternative approach can be found in
+  Theorem 4.3 of Analysis by Lieb and Loss.
+\end{proof}
+
+\begin{remark}
+  Recall \emph{Young's inequality} that for
+  \[
+    h(t) = \int f(t - s) g(s)\, dx,
+  \]
+  we have $\|h\|_{L^r} \le \|f\|_{L^p} \|g\|_{L^q}$,
+  where $1 / r + 1 = 1 / q + 1 / p$. The
+  Hardy-Littlewood-Sobolev inequality can be
+  seen as a generalized Young's inequality: If
+  $f(s) = |s|^{-\alpha}$, then $f$ barely fails to be
+  in $L^{1 / \alpha}$. Informally, we can think of
+  ``$f \in L^{1 / \alpha}$,'' and the standard
+  Young's inequality would imply
+  Hardy-Littlewood-Sobolev.
+\end{remark}
+
+\begin{remark}
+  We have $q > p$ in the Hardy-Littlewood-Sobolev
+  inequality, so we gain some integrability via
+  fractional integration for $p > 1$
+  (the type of integral defining
+  $T_\alpha g$ is known as \emph{fractional integration}).
+\end{remark}
+
+\begin{proof}[Proof of Theorem \ref{thm:strichartz}]
+  This proof is left for next class.
+\end{proof}
