@@ -56,7 +56,7 @@
 \end{remark}
 
 \begin{theorem}[Strichartz estimates]\label{thm:strichartz}
-  For $p' = 2 + 4 / d$, we have the estimate\footnote{Here $A \lesssim B$ means that $A \le CB$ for some prescribed constant $C$.}
+  For $p' = 2 + 4 / d$ and $1 / p' + 1 / p = 1$, we have the estimate\footnote{Here $A \lesssim B$ means that $A \le CB$ for some prescribed constant $C$.}
   \[
     \|\psi\|_{L^{p'}_{t, x}(\R \times \R^d)}
     \lesssim \|\psi_0\|_{L^2_x(\R^d)}
@@ -155,7 +155,7 @@
   \]
 \end{remark}
 
-\begin{lemma}
+\begin{lemma}\label{lem:decay}
   Let $\psi(t) = e^{it \Delta / 2} \psi_0$.
   Then for $1 \le p \le 2$,
   \[
@@ -169,7 +169,7 @@
   of class.
 \end{proof}
 
-\begin{lemma}[Hardy-Littlewood-Sobolev inequality]
+\begin{lemma}[Hardy-Littlewood-Sobolev inequality]\label{lem:hardy-littlewood-sobolev}
   Let $0 < \alpha < 1$ and $g \in \mathcal{S}(\R)$.
   Let
   \[
@@ -210,7 +210,3 @@
   (the type of integral defining
   $T_\alpha g$ is known as \emph{fractional integration}).
 \end{remark}
-
-\begin{proof}[Proof of Theorem \ref{thm:strichartz}]
-  This proof is left for next class.
-\end{proof}

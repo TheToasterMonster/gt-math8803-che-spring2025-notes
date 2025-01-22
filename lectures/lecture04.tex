@@ -1,0 +1,196 @@
+\chapter{Jan.~22 --- Strichartz Estimates, Part 2}
+
+\section{Proof of Strichartz Estimates}
+
+\begin{proof}[Proof of Theorem \ref{thm:strichartz}]
+  The first step is a $TT^*$ argument. Define the
+  operator $T$ by $Tf = e^{it \Delta / 2} f$. We know
+  that $T : L^2_x(\R^d) \to L^\infty_t(\R \to L^2_x(\R^d))$.
+  The adjoint $T^* : L^1_t L^2_x \to L^2_x$ is defined
+  via the relation
+  \[
+    \langle f, T^* G \rangle_{L^2_x}
+    = \langle Tf, G \rangle_{L^2_{t, x}}
+    = \iint (e^{it \Delta / 2} f)(x) \overline{G}(t, x)\, dt dx
+    = \int f(x) \int \overline{(e^{-it \Delta / 2} G(t, \cdot))}(x)\, dt dx,
+  \]
+  and so we have the formula
+  \[
+    T^* G = \int (e^{-it \Delta / 2} G(t, \cdot))(x)\, dt.
+  \]
+  Then we can see that
+  \[
+    (TT^* G)(t, x)
+    = \int (e^{i(t - s) \Delta / 2} G(s, \cdot))(x)\, ds
+    = \left(e^{i t \Delta / 2} \int e^{-is \Delta / 2} G(s, \cdot)\, ds\right)(x).
+  \]
+  Note that there is a convolution structure in the
+  time variable. Clearly $TT^* : L^1_t L^2_x \to L^\infty_x L^2_x$.
+  Then the goal for now will be to show that
+  \[
+    \|TT^* G\|_{L^{p'}_{t, x}} \le C \|G\|_{L^p_{t, x}}.
+  \]
+  To do this, observe that by the above expression for
+  $TT^* G$ and Minkowski's inequality, we have
+  \[
+    \|TT^* G\|_{L^{p'}_{x}}
+    \le \int \|e^{i(t - s) \Delta / 2} G(s)\|_{L^{p'}_x}\, ds
+    \le C \int |t - s|^{-d(1 / p - 1 / 2)} \|G(s)\|_{L^p_x}\, ds,
+  \]
+  where the second inequality follows by
+  Lemma \ref{lem:decay}. Now by Lemma \ref{lem:hardy-littlewood-sobolev},
+  \[
+    \|TT^* G\|_{L^q_t L^{p'}_x}
+    \le C \|G(s)\|_{L^p_{t, x}}
+  \]
+  if $1 / q + 1 = d(1 / p - 1 / 2) + 1 / p$
+  (also check that $0 < \alpha = d(1 / p - 1 / 2) < 1$,
+  where $p = (2d + 4) / (d + 4)$).
+  From this relation, we find that we must have
+  $q = 2 + 4 / d = p'$, so we have shown the goal.
+
+  Thus we have proved that $TT^* : L^p_{t, x} \to L^{p'}_{t, x}$, where
+  $p = (2d + 4) / (d + 4)$. Now
+  \[
+    \|T^* G\|^2_{L^2_x} = \langle T^* G, T^* G \rangle_{L^2_x}
+    = \langle TT^* G, G \rangle_{L^2_{t, x}}
+    \le \|TT^* G\|_{L^{p'}_{t, x}} \|G\|_{L^p_{t, x}}
+    \le C \|G\|_{L^p_{t, x}}^2,
+  \]
+  where the first inequality follows by H\"older's inequality
+  and the second follows from the goal we just proved.
+  Thus we conclude that $T^* : L^p_{t, x} \to L^2_x$, and
+  that $T : L^2_x \to L^{p'}_{t, x}$ by duality.
+  Therefore,
+  \[
+    \|T \psi_0\|_{L^{p'}_{t, x}}
+    = \|e^{it \Delta / 2} \psi_0\|_{L^{p'}_{t, x}}
+    \le C\|\psi_0\|_{L^2_x},
+  \]
+  so we have proved the Strichartz estimates when
+  $F = 0$.
+
+  In the case when $F \ne 0$, by Duhamel's formula
+  we have
+  \[
+    \psi(t) = e^{it \Delta / 2} \psi_0
+    - i \int_0^t e^{i(t - s) \Delta / 2} F(s)\, ds,
+  \]
+  so by the triangle inequality we find that
+  \[
+    \|\psi\|_{L^{p'}_{t, x}}
+    \le \|e^{it \Delta / 2} \psi_0\|_{L^{p'}_{t, x}}
+    + \left\|
+    \int_0^t e^{i(t - s) \Delta / 2} F(s)\, ds
+    \right\|
+    \le C \|\psi_0\|_{L^2_x}
+    + \left\| \int_0^t \|e^{i(t - s)\Delta / 2} F(s)\|_{L^{p'}_x}\, ds \right\|_{L^{p'}_t},
+  \]
+  where the last inequality on the second term
+  follows by Minkowski's inequality. Then using
+  Lemma \ref{lem:decay} and Lemma \ref{lem:hardy-littlewood-sobolev} in the same fashion as before, we can bound
+  the latter term by
+  \[
+    \left\| \int_0^t \|e^{i(t - s)\Delta / 2} F(s)\|_{L^{p'}_x}\, ds \right\|_{L^{p'}_t}
+    \le
+    C \left\| \int_{-\infty}^\infty |t - s|^{-d (1 / p - 1 / 2)} \|F(s)\|_{L^{p'}_x}\, ds \right\|_{L^{p'}_t}
+    \le C \|F\|_{L^p_{t, x}}.
+  \]
+  Plugging this bound back in gives the desired
+  inequality $\|\psi\|_{L^{p'}_{t, x}} \le C \|\psi_0\|_{L^2_x} + C \|F\|_{L^p_{t, x}}$.
+\end{proof}
+
+\begin{remark}
+  Note that the term
+  \[
+    TT^* G = \int_{-\infty}^\infty e^{i(t - s) \Delta / 2} G(s)\, ds
+  \]
+  looks similar to term from the Duhamel formula
+  \[
+    \int_0^t e^{i(t - s) \Delta / 2} F(s)\, ds.
+  \]
+  However, it is possible that these two have
+  different estimates, which is why we had to
+  argue separately.
+\end{remark}
+
+\section{Strichartz Estimates and Harmonic Analysis}
+\begin{remark}
+  The original intention of Strichartz for these
+  estimates was for use in harmonic analysis.
+  The Strichartz estimates can actually be derived
+  from the \emph{Stein-Tomas restriction theorem}.
+
+  Let $S \subseteq \R^n$ with $n = d + 1$, where
+  $S$ is a hypersurface.
+  If $f \in L^1$, then one can show (e.g.
+  using the Riemann-Lebesgue lemma) that
+  $\widehat{f} \in L^\infty$. So we can conclude that
+  $\widehat{f}$ has pointwise meaning, i.e.
+  $\widehat{f}(\xi)$ makes sense pointwise. In
+  particular, we can make sense of $\widehat{f}(\xi)$
+  on the hypersurface $S$.
+
+  On the other hand, if $f \in L^2$, then by Plancherel's theorem,
+  $\widehat{f} \in L^2$ as well. But
+  an $L^2$ function has no pointwise interpretation,
+  i.e. we can modify it on a set of measure zero without
+  changing the function.
+  In particular, it is meaningless to restrict
+  the function $\widehat{f}$ to $S$, since $S$ is a set
+  of measure zero in $\R^n$.
+
+  In general, what about $f \in L^p$ for
+  $1 < p < 2$? This is the topic of the
+  \emph{restriction theorems} in harmonic analysis.
+  It turns out that the choice of which $p$ work
+  depends on the ``curvature'' of $S$.
+\end{remark}
+
+\begin{theorem}[Stein-Tomas restriction theorem]
+  Let $n = d + 1$ and $S \subseteq \R^n$ be a
+  hypersurface with non-vanishing Gaussian curvature.
+  Let $\sigma_S$ be the corresponding surface measure,
+  and let $\phi$ be a compactly supported  on $S$.
+  Then we have
+  \[
+    \|(\phi \sigma_S)^\vee\|_{L^r(\R^n)} \le
+    C \|\phi\|_{L^2(\sigma_S)},
+  \]
+  where $r = (2n + 2) / (n - 1)$.
+\end{theorem}
+
+\begin{remark}
+  Now recall the explicit formula for a solution $\psi$
+  to the Schr\"odinger equation:
+  \[
+    \psi(t, s) = \int e^{i(x \cdot \xi - t |\xi|^2 / 2)} \widehat{\psi}_0(\xi)\, d\xi.
+  \]
+  Also define the hypersurface
+  $S = \{(\xi, \tau) : \tau = -|\xi|^2 / 2, \xi \in \R^d\}$.\footnote{This particular hypersurface is called the \emph{characteristic surface} of the Schr\"odinger equation.}
+  Then
+  \[
+    \psi(t, x) = (\phi \sigma_S)^\vee (t, x), \quad
+    \phi(\xi, \tau) = \widehat{\psi}_0(\xi), \quad
+    \sigma_S(d \xi, d \tau) = (2 \pi)^d d\xi.
+  \]
+  Indeed, we can see that
+  \[
+    \psi(t, x) = (2\pi)^{-d} \int e^{i(x \cdot \xi + t \tau)} \phi(\xi, \tau)\, \sigma_S(d \xi, d \tau)
+    = \int e^{i(x \cdot \xi - t |\xi|^2 / 2)} \widehat{\psi}_0(\xi)\, d\xi.
+  \]
+  Then, the Stein-Tomas restriction theorem tells us
+  that
+  $\|(\phi \sigma_S)^\vee\|_{L^r(\R^n)} \le C \|\phi\|_{L^2(\sigma_S)}$,
+  which implies
+  \[
+    \|\psi\|_{L^{2 + 4 / d}_{t, x}(\R \times \R^d)}
+    \le C \|\widehat{\psi}_0\|_{L^2_\xi}
+    \le C \|\psi_0\|_{L^2_x},
+  \]
+  where the last inequality follows by
+  Plancherel's theorem. Note that the estimate
+  above technically only holds for those $\psi$
+  for which $\widehat{\psi}_0$ is compactly supported,
+  but one can extend this by a density argument.
+\end{remark}
