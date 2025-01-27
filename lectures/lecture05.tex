@@ -1,0 +1,157 @@
+\chapter{Jan.~27 --- Kato Smoothing}
+
+\section{Kato Smoothing}
+
+\begin{theorem}[Kato $1 / 2$ smoothing estimate]
+  Let $d \ge 2$ and $\chi \ge 0$ be a smooth
+  cutoff function such that $\widehat{\chi}$ is
+  compactly supported. Then we have the estimate
+  \[
+    \|\chi(x) (-\Delta)^{1 / 4} e^{i t \Delta / 2} f\|_{L^2_{x, t}} \le C\|f\|_{L^2}.
+  \]
+\end{theorem}
+
+\begin{remark}
+  The above theorem says that when we localize, we
+  gain a smoothing effect ($1 / 2$ derivatives).
+  Also note that this effect is not pointwise, but rather
+  after integrating in time.
+\end{remark}
+
+\begin{remark}
+  Let $f(t) = e^{it \Delta / 2} f_0$, where
+  $f_0 = e^{-|x|^2 / 2} e^{-ix v}$. Think of this
+  as a quantum particle at the origin with an initial
+  velocity $v$, so
+  that the particle will stay in
+  $B(0, 1)$ for a period of order $O(1 / |v|)$. Then
+  \[
+    \left(\int_0^{1 / |v|} \int_{B(0, 1)} |f|^2\, dx dt\right)^{1 / 2}
+    \sim \left(\frac{1}{|v|}\right)^{1 / 2}
+    = \frac{1}{|v|^{1 / 2}}.
+  \]
+  Now $(-\Delta)^{1 / 2} f \sim |v|^{1 / 2}$, so these
+  factors cancel each other out.
+  This matches the above estimate.
+\end{remark}
+
+\begin{theorem}[1-D Kato smoothing estimate]
+  For $d = 1$, we have
+  \[
+    \sup_x \|(-\Delta)^{1 / 4} e^{it \Delta / 2} f\|_{L^2_t}
+    \le C \|f\|_{L^2}.
+  \]
+\end{theorem}
+
+\begin{proof}
+  For $d = 1$, by the Fourier transform we have
+  \begin{align*}
+    (-\Delta)^{1 / 4} e^{it \Delta / 2} f
+    &= \frac{1}{2\pi} \int_\R e^{ix \xi} |\xi|^{1 / 2} e^{-it \xi^2 / 2} \widehat{f}(\xi)\, d\xi \\
+    &= \frac{1}{2\pi} \int_{-\infty}^0 e^{ix \xi} |\xi|^{1 / 2} e^{-it \xi^2 / 2} \widehat{f}(\xi)\, d\xi
+    + \frac{1}{2\pi} \int_{0}^\infty e^{ix \xi} |\xi|^{1 / 2} e^{-it \xi^2 / 2} \widehat{f}(\xi)\, d\xi.
+  \end{align*}
+  Since we want an $L^2_t$ bound, it indicates
+  that we should apply Plancherel's theorem in time.
+  We will prove the estimate for the latter integral, and
+  the former integral is left as an exercise.
+  Set $\eta = \xi^2$ with $d\eta = 2\xi\, d\xi = 2 \sqrt{\eta}\, d\xi$.
+  Applying this change of variables, we obtain
+  \[
+    (-\Delta)^{1 / 4} e^{it \Delta / 2} f
+    = \frac{1}{2\pi} \int_0^\infty e^{ix \sqrt{\eta}} |\eta|^{1 / 4} e^{-it \eta / 2} \widehat{f}(\sqrt{\eta}) \frac{1}{2\sqrt{\eta}} \, d\eta
+    = \frac{1}{4\pi} \int_0^\infty e^{ix \sqrt{\eta}}
+    |\eta|^{-1 / 4} e^{-it\eta / 2} \widehat{f}(\sqrt{\eta})\, d\eta.
+  \]
+  Fix $x$ and denote $h(\eta) = e^{ix \sqrt{\eta}} |\eta|^{-1 / 4} \widehat{f}(\sqrt{\eta})$. Then we have
+  \[
+    (-\Delta)^{1 / 4} e^{it \Delta / 2} f
+    = \frac{1}{4\pi} \int_0^\infty e^{-it \eta / 2} h(\eta)\, d\eta = (\star).
+  \]
+  By Plancherel's theorem in time, we see that
+  \[
+    \| (\star) \|_{L^2_t}
+    \le \|h(\eta)\|_{L^2_\eta}.
+  \]
+  Then we can estimate (setting $z = \sqrt{\eta}$ with
+  $dz = d\eta / (2\sqrt{\eta})$)
+  \[
+    \int_0^\infty |h(\eta)|^2\, d\eta
+    = \int_0^\infty |\eta|^{-1 / 2} |\widehat{f}(\sqrt{\eta})|^2\, d\eta
+    = 2 \int_0^\infty |\widehat{f}(z)|^2\, dz
+    = C \|f\|_{L^2}^2,
+  \]
+  where the last inequality follows by Plancherel's
+  theorem in $z$. This yields
+  $\|(\star)\|_{L^2_t} \le C \|f\|_{L^2}$, and since
+  these estimates are all independent
+  of $x$, we get that $\sup_x \|(\star)\|_{L^2_t} \le C\|f\|_{L^2}$.
+  Putting this together with an identical estimate
+  for the other integral, we obtain the desired
+  bound.
+\end{proof}
+
+\begin{remark}
+  The above 1-D version is stronger and implies the
+  statement
+  \[
+    \| \chi (-\Delta)^{1 / 4} e^{it \Delta / 2} f\|_{L^2_{x, t}}
+    \le C \|f\|_{L^2}
+  \]
+  for the 1-D case. Check this as an exercise.
+\end{remark}
+
+\section{Coarea Formula}
+
+\begin{remark}
+  In dimension $d$, suppose we have two nice functions
+  $g$ and $u$ such that $u^{-1}(t)$ is a
+  $(d - 1)$-dimension hypersurface. Then the
+  \emph{coarea formula} says that
+  \[
+    \int_{\R^d} g(x) |\nabla u(x)|\, dx
+    = \int_\R \int_{\{u(x) = t\}} g(x)\, d\sigma(x) dt,
+  \]
+  where $\sigma(x)$ is the surface measure on
+  $\{u(x) = t\}$.
+
+  Note that for $d = 1$, this says that
+  \[
+    \int g(x) |\partial_x u|\, dx
+    = \int_\R \left(\int_{\{u(x) = t\}} g(x)\, dx\right) dt
+    = \int_\R g(u^{-1}(t))\, dt.
+  \]
+  In particular, this is the change of
+  variables formula where $\eta = u^{-1}(t)$ (so
+  $u(\eta) = t$ and $dt = \partial_\eta u\, d \eta$).
+\end{remark}
+
+\begin{lemma}
+  Let $F \in C_0^\infty$ and $\phi$ be smooth. Then
+  one has
+  \[
+    \int_\R \int_{\R^d} e^{i \lambda \phi(x)} F(x)\, dx d\lambda
+    = (2\pi)^d \int_{\{\phi = 0\}} \frac{F(x)}{|\nabla \phi(x)|}\, d\sigma(x).
+  \]
+\end{lemma}
+
+\begin{proof}
+  By the coarea formula (using $g(x) = e^{i \lambda \phi(x)} F(x) / |\nabla \phi(x)|$ and $u = \phi$), we have
+  \[
+    \int_\R \int_{\R^d} e^{i\lambda \phi(x)} F(x)\, dx d\lambda
+    = \int_\R \int_\R e^{i \lambda y} \int_{\{\phi = y\}} \frac{F(x)}{|\nabla \phi(x)|}\, d\sigma(x) dy d\lambda.
+  \]
+  Denote by $h(y)$ the integral
+  \[
+    h(y) = \int_{\{\phi = y\}} \frac{F(x)}{|\nabla \phi(x)|}\, d\sigma(x).
+  \]
+  Then we can see that
+  \[
+    \int_\R \int_\R e^{i \lambda y} \int_{\{\phi = y\}} \frac{F(x)}{|\nabla \phi(x)|}\, d\sigma(x) dy d\lambda
+    = \int_\R \int_\R e^{i \lambda y} h(y)\, dy d\lambda
+    = \int_\R \widehat{h}(\lambda)\, d\lambda
+    = (2\pi)^d h(0).
+  \]
+  This gives the desired equality after plugging
+  in the definition of $h(0)$.
+\end{proof}
