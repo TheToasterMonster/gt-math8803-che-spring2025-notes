@@ -1,0 +1,160 @@
+\chapter{Jan.~29 --- Kato Smoothing, Part 2}
+
+\section{Proof of Kato Smoothing}
+
+\begin{proof}[Proof of Theorem \ref{thm:kato-smoothing}]
+  Note that we have
+  (let $G = \chi^2$)
+  \[
+    (*) \int_\R \int_{\R^d}
+    \chi^2 |(-\Delta)^{1 / 4} e^{it \Delta / 2} f|^2\, dx dt
+    = \int_\R \langle (-\Delta)^{1 / 4} e^{i t \Delta / 2} f, G (-\Delta)^{1 / 4} e^{it \Delta / 2} f \rangle_{L^2_x} \, dt,
+  \]
+  so by Plancherel's theorem in $x \mapsto \xi$, we have
+  \[
+    (*)
+    = \int_\R \langle |\xi|^{1 / 2} e^{-i |\xi|^2 / 2} \widehat{f}(\xi), H(\xi) \rangle_{L^2_\xi} \, dt,
+  \]
+  where $H$ is defined via (since the Fourier
+  transform turns multiplication into convolution)
+  \[
+    H(\xi) = \int_\R \widehat{G}(\xi - \eta) |\eta|^{1 / 2} e^{-i t |\eta|^2 / 2} \widehat{f}(\eta)\, d\eta.
+  \]
+  Thus we have
+  \[
+    (*)
+    = \int_{\R} \int_{\R^d} \int_{\R^d}
+    |\xi|^{1 / 2} |\eta|^{1 / 2} \widehat{G}(\xi - \eta)
+    \widehat{f}(\xi) \overline{\widehat{f}}(\eta)
+    e^{-it(|\xi|^2 - |\eta|^2) / 2}\, d\xi d\eta dt
+  .\]
+  Applying Lemma \ref{lem:coarea-bound} with
+  ($\lambda = t$)
+  \[
+    \phi = - \frac{|\xi|^2 + |\eta|^2}{2}, \quad
+    F = |\xi|^{1 / 2} |\eta|^{1 / 2} \widehat{G}(\xi - \eta) \widehat{f}(\xi) \overline{\widehat{f}}(\eta),
+  \]
+  we have (since $\phi = 0$ implies
+  $|\xi| = |\eta|$ and $|\nabla \phi| = \sqrt{|\xi|^2 + |\eta|^2}$)
+  \[
+    (*) = \int_{\{\phi = 0\}} \frac{F}{|\nabla \phi|}\, d\sigma
+    = \int_{|\xi| = |\eta|} \frac{|\xi|^{1 / 2} |\eta|^{1 / 2}}{\sqrt{|\xi|^2 + |\eta|^2}} \widehat{G}(\xi - \eta) \widehat{f}(\xi) \overline{\widehat{f}}(\eta)\, d\sigma.
+  \]
+  Since $|\xi| = |\eta|$ on the region of integration,
+  we have
+  \begin{align*}
+    (*) = \int_{|\xi| = |\eta|}
+    \frac{|\xi|}{\sqrt{2}\xi} \widehat{G}(\xi - \eta) \widehat{f}(\xi) \overline{\widehat{f}}(\eta)\, d\sigma
+    &\sim \int_{|\xi| = |\eta|}
+    \widehat{G}(\xi - \eta) \widehat{f}(\xi) \overline{\widehat{f}}(\eta)\, d\sigma \\
+    &\sim
+    \int_{\R^d} |\widehat{G}(\xi - \eta)| (|\widehat{f}(\xi)|^2 + |\widehat{f}(\eta)|^2) \, d\sigma \\
+    &\le \int_{\R^d} |\widehat{f}(\xi)|^2
+    \int_{|\eta| = |\xi} |\widehat{G}(\xi - \eta)|\, d\sigma(\eta) \, d\xi
+    \lesssim \int_{\R^d} |\widehat{f}(\xi)|^2 \, d\xi,
+  \end{align*}
+  where the last inequality is since (we claim the
+  following)
+  \[
+    K(\xi) = \int_{|\eta| = |\xi|} |\widehat{G}(\xi - \eta)|\, d\sigma(\eta)
+  \]
+  satisfies $|K(\xi)| \le C$ for some constant $C$.
+  For the claim, note that $\widehat{G}(z)$
+  decays faster than $z^{-N}$ as $z \to \infty$ for
+  every $N$. Then setting $z = \xi - \eta$, we have
+  \[
+    K(\xi) = \int_{|\eta| = |\xi|} |\widehat{G}(\xi - \eta)|\, d\sigma(\eta)
+    = \int_{|\xi - z| = |\xi|} \widehat{G}(z)\, d\sigma(z).
+  \]
+  Note that this is an integral on a sphere. The
+  integral will be bounded on a compact subset of the
+  sphere and decays rapidly on the rest of the sphere,
+  so we have $|K(\xi)| \le C$ for all $\xi \in \R^d$.
+  This gives
+  \[
+    \|\chi^2 (-\Delta)^{1 / 4} e^{it \Delta / 2} f\|_{L^2_{x, t}}^2
+    = 
+    \int_\R \int_{\R^d} \chi^2 |(-\Delta)^{1 / 4} e^{it \Delta / 2} f|^2\, dx dt
+    \lesssim \int_{\R^d} |\widehat{f}(\xi)|^2 \, d\xi
+    \sim \|f\|_{L^2_x}^2,
+  \]
+  which is the desired estimate.
+\end{proof}
+
+\begin{remark}
+  An alternative approach to prove the Kato smoothing
+  estimate is the following: Take $\eta$ a
+  Schwartz function such that
+  $\supp \widehat{\eta} \in (-1, 1)$. Then it suffices
+  to show estimates for
+  \[
+    (*) = \int_\R \int_{\R^d}
+    |\eta(\epsilon t) \chi(x) (-\Delta)^{1 / 4} e^{it \Delta / 2} f|^2\, dx dt
+  \]
+  and then take $\epsilon \to 0$. By Plancherel's
+  theorem in $x \mapsto \xi$, we have
+  \[
+    (*) = \int_\R \int_{\R^d}
+    \left| \int \eta(\epsilon t) \widehat{\chi}(\xi - \xi') |\xi'|^{1 / 2} e^{it|\xi'|^2 / 2} \widehat{f}(\xi')\, d\xi' \right|^2 d\xi dt
+  \]
+  Next Plancherel's theorem in $t \mapsto \tau$
+  implies that
+  \[
+    (*) = \int_\R \int_{\R^d}
+    \left|
+    \int_{\R^d} \widehat{\chi}(\xi - \xi')
+    \frac{1}{\epsilon} \widehat{\eta}\left(\frac{\tau - |\xi'|^2 / 2}{\epsilon}\right) |\xi'|^{1 / 2} \widehat{f}(\xi')\, d\xi'
+    \right|^2 d\xi d\tau.
+  \]
+  Cauchy-Schwarz in $\xi'$ implies that
+  \[
+    (*) \le
+    \int_\R \int_{\R^d}
+    \left[\left(\int \widehat{\chi}(\xi - \xi') \frac{1}{\epsilon} \widehat{\eta}\left(\frac{\tau - |\xi'|^2 / 2}{\epsilon}\right) d\xi'\right)
+    \left(\int \widehat{\chi}(\xi - \xi') \frac{1}{\epsilon} \widehat{\eta} \left(\frac{\tau - |\xi'|^2}{\epsilon}\right) |\xi'| |\widehat{f}(\xi)|^2\, d\xi'\right)\right]
+    d\xi d\tau
+  .\]
+  Now we count the area of the domain of integration:
+  \[
+    \begin{cases}
+      -\epsilon < \tau - |\xi'|^2 / 2 < \epsilon & (1) \\
+      |\xi - \xi'| \le 1 & (2)
+    \end{cases}
+  \]
+  Then (2) implies that
+  $||\xi| - |\xi'|| \le 1 \sim O(1)$, so
+  \[
+    ||\xi|^2 - |\xi'|^2|
+    = ||\xi| - |\xi'|| \cdot ||\xi| + |\xi'||
+    \sim O(1 + |\xi|),
+  \]
+  and thus $\tau \sim |\xi'|^2$. Fix $\xi$, then
+  the size of the interval in which $\tau$ can vary
+  is of order $O(1 + |\xi|)$. For $\xi'$,
+  notice that $(1)$ implies
+  \[
+    |\sqrt{2\tau} - |\xi'|
+    \sim O\left(\frac{\epsilon}{\sqrt{2\tau} + |\xi'|}\right)
+    \sim O\left(\frac{\epsilon}{|\xi| + 1}\right).
+  \]
+  So the size of the interval in which
+  $|\xi'|$ can vary is of order
+  $O(\epsilon / (|\xi| + 1))$.  Then we have
+  \[
+    (*) \lesssim \iint \left(\frac{1}{\epsilon} \frac{\epsilon}{|\xi| + 1}\right)\left(\frac{1}{\epsilon} \frac{\epsilon}{|\xi| + 1}|\xi| |\widehat{f}(\xi')|^2\right) d\tau d\xi
+    \lesssim \int \frac{1+ |\xi|}{|\xi| + 1} \frac{|\xi|}{|\xi| + 1} |\widehat{f}(\xi)|^2 \, d\xi
+    \lesssim \int |\widehat{f}(\xi)|^2 \, d\xi.
+  \]
+\end{remark}
+
+\section{Sharpness of Kato Smoothing}
+
+\begin{lemma}[Kato smoothing is sharp]
+  We have
+  \[
+    \|\chi(x) (-\Delta)^{1 / 4} e^{i t \Delta / 2} (e^{-|x|^2 / 2} e^{ixv})\|_{L^2_{x, t}} \sim 1
+    \quad \text{and} \quad
+    \sup_{v} \| \chi (-\Delta)^{1 / 4 + \delta} e^{it\Delta / 2} (e^{-|x|^2 / 2} e^{ixv}) \|_{L^2_{x, t}} = \infty.
+  \]
+  for any $\delta > 0$.
+\end{lemma}
