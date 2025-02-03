@@ -1,0 +1,226 @@
+\chapter{Feb.~3 --- hi}
+
+\section{Sharpness of Kato Smoothing}
+
+\begin{lemma}[Kato smoothing is sharp]
+  We have
+  \[
+    \|\chi(x) (-\Delta)^{1 / 4} e^{i t \Delta / 2} (e^{-|x|^2 / 2} e^{ixv})\|_{L^2_{x, t}} \sim 1
+    \quad \text{and} \quad
+    \sup_{v} \| \chi (-\Delta)^{1 / 4 + \delta} e^{it\Delta / 2} (e^{-|x|^2 / 2} e^{ixv}) \|_{L^2_{x, t}} = \infty.
+  \]
+  for any $\delta > 0$.
+\end{lemma}
+
+\begin{proof}
+  Let $\supp \widehat{\chi} \subseteq B(0, 1)$ and
+  $f_0 = e^{-|x|^2 / 2} e^{ixv}$. Choose
+  $\eta$ smooth with $\widehat{\eta}$ compactly supported.
+  Then
+  \begin{align*}
+    \int_{\R} \int_{\R^d}
+    |\chi(x) \eta(\epsilon t) (-\Delta)^{1 / 4} e^{it \Delta / 2} f_0|^2\, dxdt
+    &= \iint\left|\int \widehat{\chi}(\xi - \xi') \eta(\epsilon t) |\epsilon|^{1 / 2} e^{it|\xi|^2 / 2} \widehat{f}_0(\xi)\, d\xi\right|^2\, d\xi dt \\
+    &= \iint \left| \int \widehat{\chi}(\xi - \xi') \frac{1}{\epsilon} \widehat{\eta}\left(\frac{\tau - |\xi|^2 / 2}{\epsilon}\right)|\xi|^{1 / 2} e^{-|\xi - v|^2 / 2}\, d\xi\right|^2\, d\xi' d\tau
+  \end{align*}
+  by Plancherel's theorem first in $x \mapsto \xi$
+  and then in $t \mapsto \tau$, since
+  $\widehat{\eta}$ and $\widehat{\chi}$ are compactly
+  supported. Now, $-\epsilon < \tau - |\xi|^2 / 2 < \epsilon$
+  implies
+  \[
+    ||\xi| - \sqrt{2\tau}| < \frac{2\epsilon}{|\xi| + \sqrt{2\tau}}.
+  \]
+  So the region of integration  for $|\xi|$ is an
+  annulus-shaped area between $\sqrt{2\tau}$ and
+  $2\epsilon / (|\xi| + \sqrt{2\tau})$ (plot the
+  above inequality to see the region).
+  Thus for fixed $\tau$, as $\epsilon \to 0$,
+  we have
+  \begin{align*}
+    &\iint \left| \int \widehat{\chi}(\xi - \xi') \frac{1}{\epsilon} \widehat{\eta}\left(\frac{\tau - |\xi|^2 / 2}{\epsilon}\right)|\xi|^{1 / 2} e^{-|\xi - v|^2 / 2}\, d\xi\right|^2\, d\xi' d\tau \\
+    &\quad \quad \sim \int_{\R} \int_{\R^d}
+    \left| \int_{\sqrt{2\tau} \mathbb{S}^{d - 1}} \widehat{\chi}(\xi - \xi') e^{-|\xi - v|^2 / 2} |\xi|^{1 / 2} \frac{2\epsilon}{|\xi| + \sqrt{2\tau}} \frac{1}{\epsilon}\, d\sigma(\xi)\right|^2\, d\xi' d\tau \\
+    & \quad \quad = \int_{\R} \int_{\R^d} \left| \int_{\sqrt{2\tau} \mathbb{S}^{d - 1}} \widehat{\chi}(\xi - \xi') e^{-|\xi - v|^2 / 2} |\xi|^{1 / 2} \frac{2}{|\xi| + \sqrt{2\tau}} \, d\sigma(\xi)\right|^2\, d\xi' d\tau.
+  \end{align*}
+  Since $\widehat{\chi}$ is supported in $B(0, 1)$, for
+  fixed $\xi$ the range of values for $\xi'$ is $O(1)$
+  (as $|\xi - \xi'| \le 1$). Since
+  \[
+    -\epsilon < \tau - \frac{1}{2} |\xi|^2 < \epsilon
+    \implies -\epsilon + \frac{1}{2} |\xi|^2 < \tau < \epsilon + \frac{1}{2} |\xi|^2
+  \]
+  and $|\xi - v| \le O(1)$, we get
+  \[
+    -\epsilon + \frac{1}{2} ||v| - 1|^2
+    < \tau < \epsilon + \frac{1}{2} ||v| + 1|^2.
+  \]
+  Expanding $||v| - 1|^2$ and $||v| + 1|^2$, we see
+  that as $\epsilon \to 0$,
+  we have $|2\tau - |v|^2| \lesssim |v| + 1$. Then
+  \begin{align*}
+    &\int_{\R} \int_{\R^d} \left| \int_{\sqrt{2\tau} \mathbb{S}^{d - 1}} \widehat{\chi}(\xi - \xi') e^{-|\xi - v|^2 / 2} |\xi|^{1 / 2} \frac{1}{|\xi| + \sqrt{2\tau}} \, d\sigma(\xi)\right|^2\, d\xi' d\tau \\
+    & \quad \quad \lesssim \int_{\R} \left|\int_{\sqrt{2\tau} \mathbb{S}^{d - 1}} e^{-|\xi - v|^2 / 2} |\xi|^{1 / 2} \frac{1}{|\xi| + \sqrt{2\tau}}\, d\sigma(\xi)\right|^2\, d\tau \\
+    & \quad \quad \lesssim \int_{\R} \left|\frac{|\sqrt{\tau}|^{1 / 2}}{\sqrt{2\tau}}\right|^2\, d\tau
+    \approx \int_{|2\tau - |v|^2| \lesssim |v| + 1}
+    \left|\frac{|\sqrt{\tau}|^{1 / 2}}{\sqrt{2\tau}}\right|^2\, d\tau
+    \approx \frac{1}{v} \int_{|2\tau - |v|^2| \lesssim |v| + 1}\, d\tau
+    \approx \frac{1}{v} \cdot v \approx O(1)
+  \end{align*}
+  uniformly in $v$. We can also see that if
+  $|\xi|^{1 / 2}$ is replaced by $|\xi|^{1 / 2 + \delta}$,
+  then $1 / |v|$ will become $1 / |v|^{1 - 4 \delta}$,
+  so the above becomes $O(|v|^{4\delta})$, which
+  goes to $\infty$ as $v \to \infty$.
+\end{proof}
+
+\begin{corollary}
+  When $d \ge 2$, for $\epsilon > 0$, we have
+  \[
+    \|(1 + |x|)^{-1 / 2 -\epsilon} (-\Delta)^{1 / 4} e^{it\Delta / 2} f\|_{L^2_{x, t}} \le C_\epsilon \|f\|_{L^2_x}.
+  \]
+  This is the sharp Kato smoothing estimate for
+  $d \ge 2$.
+\end{corollary}
+
+\section{Schr\"odinger Equation with Potential}
+\begin{remark}
+  Now we will consider the Schr\"odinger equation with
+  a potential:
+  \[
+  \begin{cases}
+    i\psi_t + \frac{1}{2} \Delta \psi + V(t, x) \psi = 0, \\
+    \psi|_{t = 0} = \psi_0 \in H^\gamma(\R^d).
+  \end{cases}
+  \]
+\end{remark}
+
+\begin{lemma}
+  If $\psi_0 \in H^\gamma(\R^d)$, then
+  $e^{it\Delta / 2} \psi_0 \in C^0(\R, H^\gamma(\R^d)) \cap C^1(\R, H^{\gamma - 2}(\R^d))$.
+\end{lemma}
+
+\begin{proof}
+  For each $t, s \in \R$, we can write (since
+  $e^{is\Delta / 2}$ preserves each $H^\gamma$ norm)
+  \[
+    \|e^{it\Delta / 2} \psi_0 - e^{is\Delta / 2} \psi_0\|_{H^\gamma}^2
+    = \|e^{i(t - s)\Delta} \psi_0 - \psi_0\|_{H^\gamma}^2
+    = \int (1 + |\xi|^2)^{\gamma} |e^{i(t - s)|\xi|^2 / 2} - 1| |\widehat{\psi}_0(\xi)|^2\, d\xi.
+  \]
+  Since $\psi_0 \in H^\gamma(\R^d)$,
+  as $t \to s$, the above quantity goes to $0$
+  by the dominated convergence theorem. This shows that
+  $e^{it\Delta / 2 \psi_0} \in C^0(\R, H^\gamma(\R^d)$.
+  To check that $e^{it\Delta / 2} \psi_0 \in C^1(\R, H^{\gamma - 2}(\R^d))$, note
+  \[
+    \frac{d}{dt} e^{it\Delta / 2} \psi_0
+    = \frac{i}{2} \Delta e^{it\Delta / 2} \psi_0.
+  \]
+  Thus it suffices to see that $\Delta e^{it\Delta / 2} \psi_0$ is continuous, i.e.
+  \[
+    \|\Delta e^{it / 2} \psi_0 - \Delta e^{is / 2} \psi_0\|_{H^{\gamma - 2}}^2 \to 0
+  \]
+  as $t \to s$, which follows by the dominated
+  convergence theorem.
+\end{proof}
+
+\begin{theorem}
+  Assume $V$ is real and that
+  \[
+    \sup_{t} \|\nabla_x^\alpha V(t, x) \|_{L^2_x} \le C_\alpha
+    \quad \text{and} \quad
+    \|\nabla_x^\alpha V(t, x) - \nabla_x^\alpha V(s, x)\|_{L^\infty_x} \to 0
+  \]
+  as $t \to s$ for every multi-index $\alpha$.
+  Then for all $k \ge 0$, if $\psi_0 \in H^k(\R^d)$,
+  there exists a unique solution
+  $\psi \in C^0(\R, H^k(\R^d)) \cap C^1(\R, H^{k - 2}(\R^d))$
+  to the Schr\"odinger equation with potential $V$,
+  given by
+  \[
+    \psi(t) = e^{it\Delta / 2} \psi_0 - i \int_0^t e^{i(t - s)\Delta / 2} V(s) \psi(s)\, ds.
+  \]
+  Moreover, $\|\psi\|_{H^k(\R^d)} \le C_{k, V} (1 + |t|)^k$.
+\end{theorem}
+
+\begin{proof}
+  Define the operator $A$ by the formula
+  \[
+    A(\phi) = e^{it \Delta / 2} \psi_0 - i\int_0^t e^{i(t - s)\Delta / 2} V(s) \phi(s)\, ds.
+  \]
+  Let $X = (C^0[0, T], H^k)$, and we want to find
+  $T$ such that $A$ is a contraction in $X$ (do this
+  as an exercise). Repeating this
+  on $[T, 2T]$, $[2T, 3T]$, \dots, gives
+  existence. Uniqueness follows by Gronwall's inequality.
+
+  Now we prove the upper bound for the growth.
+  Gronwall's inequality gives us
+  \[
+    \|\psi(t)\|_{H^k} \le c_1 e^{c_2|t|} \|\psi_0\|_{H^k}.
+  \]
+  Since $V$ is real (the argument before this step
+  works even when $V$ is not real),
+  \begin{align*}
+    \frac{d}{dt} \|\psi(t)\|_{L^2}^2
+    &= \frac{d}{dt} \langle \psi(t), \psi(t) \rangle
+    = \frac{d}{dt}
+    = \langle \frac{d}{dt} \psi, \psi \rangle
+    + \langle \psi, \frac{d}{dt} \psi \rangle
+    = 2 \re \langle \frac{d}{dt} \psi, \psi \rangle \\
+    &= 2 \re \langle \frac{i}{2} \Delta \psi + iV(t, x) \psi, \psi \rangle
+    = 2\re i \int \left(-\frac{1}{2} |\nabla \phi|^2 + V(t, x)|\psi|^2\right)\, dx = 0
+  \end{align*}
+  since the integral is real, so that $i$ times the
+  integral is purely imaginary. So
+  $\|\psi\|_{L^2}$ is conserved.
+  Now let $\phi = \partial_{x_j} \psi(t, x)$, so that
+  \[
+    i\phi_t + \frac{1}{2} \Delta \phi + V \phi = -\partial_{x_j} V\psi. \tag{$*$}
+  \]
+  From the existence and uniqueness of the solution,
+  we can use $V(t, 0) \psi_0$ to denote the solution
+  to
+  \[
+    \begin{cases}
+      i\partial_t + \frac{1}{2} \Delta \psi + V \psi = 0, \\
+      \psi|_{t = 0} = \psi_0,
+    \end{cases}
+  \]
+  and use $V(t, s) \psi_0$ denote the solution
+  for initial condition $\psi(s) = \psi_0$. Then
+  $(*)$ can be solved as
+  \[
+    \phi(t) = V(t, 0) \partial_{x_j} \psi_0
+    + \int_0^t V(t, s) \partial_{x_j} V(s) \psi(s)\, ds.
+  \]
+  This gives
+  \[
+    \|\phi(t)\|_{L^2} \le
+    \|V(t, 0) \partial_{x_j} \psi_0\|_{L^2}
+    + \int_0^t \|V(t, s) \partial_{x_j} V(s) \psi(s)\|_{L^2}\, ds
+  \]
+  by Minkowski's inequality.  By the
+  conservation of the $L^2$ norm,
+  $\|V(t, 0) \partial_{x_j} \psi_0\|_{L^2} = \|\partial_{x_j} \psi_0 \|_{L^2}$, so
+  \[
+    \|V(t, s) \partial_{x_j} V(s) \psi(s)\|_{L^2}
+    = \|\partial_{x_j} V(s) \psi(s)\|_{L^2}
+    \lesssim \|\psi(s)\|_{L^2} = \|\psi(0)\|_{L^2}.
+  \]
+  Then we obtain
+  \[
+    \|\phi\|_{L^2} \lesssim
+    \|\partial_{x_j} \psi_0\|_{L^2}
+    + \int_0^t \|\psi(s)\|_{L^2}\, ds
+    \le C_{v, 1} (1 + |t|) \|\psi(0)\|_{H^1},
+  \]
+  and inducting on $k$ gives the desired result.
+\end{proof}
+
+\begin{remark}
+  Note that in the above theorem, we need a suitable
+  integral (e.g. the Bochner integral) to be able to
+  interpret the Duhamel formula in a Banach space.
+\end{remark}
