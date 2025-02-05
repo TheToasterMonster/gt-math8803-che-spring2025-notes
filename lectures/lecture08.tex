@@ -1,0 +1,190 @@
+\chapter{Feb.~5 --- Schr\"odinger Equation with Potential}
+
+\section{Schr\"odinger Equation with Potential, Continued}
+
+\begin{theorem}[Bourgain]
+  Assume $d \ge 3$ and that $V$ is real. Suppose that
+  \[
+    \sup_{t} \| \nabla_x^\alpha V(t, x) \|_{L^\infty_x} \le C_\alpha
+  \]
+  for every multi-index $\alpha$ and that
+  $\sup_{|t - t_0| \le 1} |V(t, x)|$ is compactly
+  supported in $x$ with the diameter of the support
+  independent of $t_0$ (e.g. $V(t, x) = V(x - ct)$).
+  Then
+  \[
+    \|\psi(t)\| \le C_\epsilon (1 + |t|)^{\epsilon} \|\psi_0\|_{H^k}
+  \]
+  for every $\epsilon > 0$.
+\end{theorem}
+
+\begin{proof}
+  Define (note that $\seminorm{f} = \|f\|_{L^\infty + L^2}$, the dual space of $\|g\|_{L^1 \cap  L^2}$)
+  \[
+    \seminorm{f} = \inf_{f = f_1 + f_2} (\|f_1\|_{L^2} + \|f_2\|_{L^\infty}).
+  \]
+  Then we can write
+  \[
+    \psi(t) = e^{it\Delta / 2} \psi_0 + i \int_0^t e^{i(t - s)\Delta / 2} V(s) \psi(s)\, ds.
+  \]
+  Taking the derivative and splitting the integral, we obtain
+  \[
+    \nabla^\alpha \psi(t) = e^{it \Delta / 2} \nabla^\alpha \psi_0
+    + i \int_0^{t - A} e^{i(t - s)\Delta / 2} \nabla^\alpha (V\psi) \, ds
+    + i \int_{t - A}^t e^{i(t - s)\Delta / 2} \nabla^\alpha (V\psi) \, ds,
+  \]
+  where $A > 0$ is a constant to be chosen later.
+  We will measure the first integral in $L^\infty$ and
+  the second integral in $L^2$. Taking norms, we
+  find that
+  \[
+    \seminorm{\nabla^\alpha \psi(t)}
+    \le \seminorm{e^{it\Delta / 2} \nabla^\alpha \psi_0}
+    + \left\|\int_0^{t - A} e^{i(t - s)\Delta / 2} \nabla^\alpha (V\psi) \, ds\right\|_{L^\infty}
+    + \left\|\int_{t - A}^t e^{i(t - s)\Delta / 2} \nabla^\alpha (V\psi) \, ds\right\|_{L^2}.
+  \]
+  We can estimate the first integral by
+  \begin{align*}
+    \left\|\int_0^{t - A} e^{i(t - s) \Delta / 2} \nabla^\alpha(V \psi)\, ds \right\|_{L^\infty}
+    &\le \int_0^{t - A} \left\|e^{i(t - s)\Delta / 2} \nabla^\alpha(V \psi)\right\|_{L^\infty}\, ds \\
+    &\lesssim \int_0^{t - A} |t - s|^{-d / 2} \|\nabla^\alpha(V \psi)\|_{L^1}\, ds
+    \lesssim A^{-d / 2 + 1} \sup_{0 \le s \le t} \|\nabla^\alpha(V \psi)\|_{L^1},
+  \end{align*}
+  where the first inequality is by Minkowski's
+  inequality, the second inequality is by the dispersive
+  estimate, and the third is by explicit integration.
+  Note that we needed the cutoff at $t - A$ here since
+  $|t - s|^{-d / 2}$ is not integrable at $t = s$.
+  Then by the product rule and Cauchy-Schwarz, we have
+  \[
+    \left\|\int_0^{t - A} e^{i(t - s) \Delta / 2} \nabla^\alpha(V \psi)\, ds \right\|_{L^\infty}
+    \lesssim A^{-d / 2 + 1} \sup_{\substack{0 \le \beta \le \alpha \\ 0 \le s \le t}} \|\nabla^{\beta} V \nabla^{\alpha - \beta} \psi\|_{L^1}
+    \lesssim A^{-d / 2 + 1} \sup_{\substack{0 \le \beta \le \alpha \\ 0 \le s \le t}} \|\nabla^{\beta} \psi\|_{L^2}.
+  \]
+  Note here that $d \ge 3$ implies $-d / 2 + 1 < 0$,
+  so if $A$ is large, then $A^{-d / 2 + 1}$ is small.
+  The above implies
+  \[
+    \left\|\int_0^{t - A} e^{i(t - s) \Delta / 2} \nabla^\alpha(V \psi)\, ds \right\|_{L^\infty}
+    \lesssim A^{-d / 2 + 1} \sup_{\substack{0 \le \beta \le \alpha \\ 0 \le s \le t}} \seminorm{\nabla^{\beta} \psi}.
+  \]
+  For the second integral, we can write
+  \begin{align*}
+    \left\| \int_{t - A}^t e^{i(t - s) \Delta / 2} \nabla^\alpha (V \psi)\, ds \right\|_{L^2}
+    &= \sup_{\|\phi\|_{L^2} = 1} \int_{t - A}^t \langle \phi, e^{i(t - s) \Delta / 2} \nabla^\alpha (V \psi) \rangle\, ds \\
+    &= \sup_{\|\phi\|_{L^2 = 1}} \int_{t - A}^t
+    \langle \phi e^{i(t - s) \Delta / 2} \chi \nabla^\alpha (V \psi) \rangle\, ds,
+  \end{align*}
+  where $\chi$ is a smooth cutoff function such that
+  $\chi \equiv 1$ in the support of $V$. Then
+  \[
+    \left\| \int_{t - A}^t e^{i(t - s) \Delta / 2} \nabla^\alpha (V \psi)\, ds \right\|_{L^2}
+    = \sup_{\|\phi\|_{L^2 = 1}}
+    \int_{t - A}^t \langle (1 - \Delta)^{1 / 4} \chi e^{-i(t - s)\Delta / 2} \phi, (1 - \Delta)^{-1 / 4} \nabla^{\alpha} (V \psi) \rangle\, ds.
+  \]
+  By Cauchy-Schwarz in $x$ and $t$ and Kato
+  $1 / 2$ smoothing, we obtain
+  \begin{align*}
+    &\left\| \int_{t - A}^t e^{i(t - s) \Delta / 2} \nabla^\alpha (V \psi)\, ds \right\|_{L^2} \\
+    & \quad \quad \le \sup_{\|\phi\|_{L^2 = 1}}
+    \left(\int_{t - A}^t \|(1 - \Delta)^{1 / 4} \chi e^{-i(t - s) \Delta / 2} \phi\|_{L^2_x}^2 \, ds\right)^{1 / 2} 
+    \left(\int_{t - A}^t \|(1 - \Delta)^{-1 / 4} \nabla^\alpha(V\psi)\|_{L^2_x}^2 \, ds\right)^{1 / 2} \\
+    & \quad \quad \lesssim \|\phi\|_{L^2}
+    + \sqrt{A} \sup_{t - A \le s \le t} \|(1 - \Delta)^{-1 / 4} \nabla^\alpha(V\psi)\|_{L^2_x}.
+  \end{align*}
+  To deal with the last term, note that by Sobolev's
+  inequality, we have
+  \[
+    \|f\|_{H^{k - 1 / 2}} \le C_k \|f\|_{H^k}^{1 - \delta} \|f\|_{L^2}^{\delta}
+  \]
+  for some $\delta = \delta(k)$. From this we get
+  \[
+    \sup_{|\alpha| = k}
+    \|(1 - \Delta)^{-1 / 4} \nabla^\alpha(V\psi)\|_{L^2}
+    \le C_k \|V\psi\|_{L^2}^\delta \sup_{|\beta| \le k} \|\nabla^\beta (V\psi)\|_{L^2}^{1 - \delta}
+    \le C_k \|\psi_0\|_{L^2}^\delta \sup_{|\beta| \le k} \seminorm{\nabla^\beta (V\psi)}^{1 - \delta},
+  \]
+  where the second inequality is since the $L^2$
+  norm is conserved. This means that
+  \[
+    \seminorm{\nabla^\alpha \psi}
+    \lesssim \|\nabla^\alpha \psi_0\|_{L^2}
+    + A^{1 - d / 2} \sup_{\substack{0 \le |\beta| \le |\alpha| \\ 0 \le s \le t}} \seminorm{\nabla^\beta \psi}
+    + \sqrt{A} \cdot \|\psi_0\|_{L^2}^\delta \sup_{\substack{0 \le |\beta| \le |\alpha| \\ 0 \le s \le t}} \seminorm{\nabla^\beta \psi}^{1 - \delta}.
+  \]
+  For the last term, observe that
+  \[
+    x^{1 - \delta} y^\delta \le \frac{1}{1 - \delta} x + \frac{1}{\delta} y
+  \]
+  by Young's inequality, and we can also use that
+  for $\eta > 0$,
+  \[
+  \left(\eta^{1 / (1 - \delta)} x\right)^{1 - \delta}
+  \left(n^{-1 / \delta} y\right)^\delta
+  \le \frac{\eta^{1 / (1 - \delta)}}{1 - \delta} x + 
+  \frac{n^{-1 / \delta}}{\delta} y.
+  \]
+  Applying this to the last term, we obtain
+  \[
+    \|\psi_0\|_{L^2}^\delta \sup_{\substack{0 \le |\beta| \le |\alpha| \\ 0 \le s \le t}} \seminorm{\nabla^\beta \psi}^{1 - \delta}
+    \le \frac{\eta^{-1 / \delta}}{\delta} \|\psi_0\|_{L^2}
+    + \frac{\eta^{1 / (1 - \delta)}}{1 - \delta}
+    \sup_{\substack{0 \le |\beta| \le |\alpha| \\ 0 \le s \le t}} \seminorm{\nabla^\beta \psi}.
+  \]
+  Putting everything together, we obtain
+  \[
+    \sup_{\substack{|\alpha| = k \\ 0 \le s \le t}}
+    \seminorm{\nabla^\alpha \psi}
+    \le \|\psi_0\|_{H^k} + A^{1 - d / 2} \sup_{\substack{0 \le s \le t \\ |\alpha| \le k}} \seminorm{\psi}
+    + \frac{\sqrt{A} \cdot \eta^{-1 / \delta}}{\delta} \|\psi_0\|_{L^2}
+    + \frac{\sqrt{A} \cdot \eta^{1 / (1 - \delta)}}{1 - \delta} \sup_{\substack{0 \le s \le t \\ |\alpha| \le k}} \seminorm{\psi}.
+  \]
+  Now take $A$ large, so that $A^{1 - d / 2}$ is very
+  small (note that since $A \le t$, we also take
+  $t$ to be large enough; for $t$ small,
+  apply Gronwall). Take $\eta$ small, so that $\sqrt{A} \cdot \eta^{1 / (1 - \delta)}$
+  is very small. Then we have
+  \[
+    \sup_{\substack{|\alpha| = k \\ 0 \le s \le t}}
+    \seminorm{\nabla^\alpha \psi}
+    \le C_{\alpha, \eta} \|\psi_0\|_{H^k}.
+  \]
+  Thus we obtain (since the Schr\"odinger evolution
+  conserves the $H^k$ norms)
+  \[
+    \|\psi(t)\|_{H^k}
+    \le \|\psi_0\|_{H^k} + \int_0^t \|V(s) \psi(s)\|_{H^k}\, ds.
+  \]
+  Now we have
+  \[
+    \|V\psi\|_{H^k} \lesssim
+    \sup_{|\alpha| \le k} \|\nabla^\alpha (V\psi)\|_{L^2}
+    \lesssim \sup_{|\alpha| \le k} \seminorm{\nabla^\alpha \psi}
+    \lesssim \|\psi_0\|_{H^k},
+  \]
+  and so we get
+  \[
+    \|\psi(t)\|_{H^k}
+    \le \|\psi_0\|_H^k + \int_0^t \|\psi_0 \|_{H^k}|, ds
+    \lesssim (1 + |t|) \|\psi_0\|_{H^k}.
+  \]
+  Note that the growth of the norm is independent of
+  $k$.
+  To get $(1 + |t|)^\epsilon$, note that the
+  $L^2$ norm is conserved. So for any $k$, take
+  $k_1$ to be large enough such that $k / k_1 < \epsilon$.
+  Then
+  \begin{align*}
+    \|\psi\|_H^k
+    \le \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
+    &\le (1 + |t|)^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
+    &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^k}
+    \le C_\epsilon (1 + |t|)^\epsilon \|\psi_0\|_{H^k},
+  \end{align*}
+  which is the desired result.
+\end{proof}
+
+\begin{remark}
+  The compact support assumption could be replaced
+  by rapid decay in the above theorem.
+\end{remark}

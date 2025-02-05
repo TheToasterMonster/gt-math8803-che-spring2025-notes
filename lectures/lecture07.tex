@@ -139,7 +139,7 @@
   to the Schr\"odinger equation with potential $V$,
   given by
   \[
-    \psi(t) = e^{it\Delta / 2} \psi_0 - i \int_0^t e^{i(t - s)\Delta / 2} V(s) \psi(s)\, ds.
+    \psi(t) = e^{it\Delta / 2} \psi_0 + i \int_0^t e^{i(t - s)\Delta / 2} V(s) \psi(s)\, ds.
   \]
   Moreover, $\|\psi\|_{H^k(\R^d)} \le C_{k, V} (1 + |t|)^k$.
 \end{theorem}
@@ -214,7 +214,7 @@
     \|\phi\|_{L^2} \lesssim
     \|\partial_{x_j} \psi_0\|_{L^2}
     + \int_0^t \|\psi(s)\|_{L^2}\, ds
-    \le C_{v, 1} (1 + |t|) \|\psi(0)\|_{H^1},
+    \le C_{1, V} (1 + |t|) \|\psi(0)\|_{H^1},
   \]
   and inducting on $k$ gives the desired result.
 \end{proof}
