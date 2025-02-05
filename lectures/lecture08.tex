@@ -149,23 +149,23 @@
     \seminorm{\nabla^\alpha \psi}
     \le C_{\alpha, \eta} \|\psi_0\|_{H^k}.
   \]
-  Thus we obtain (since the Schr\"odinger evolution
+  Now recall that (since the Schr\"odinger evolution
   conserves the $H^k$ norms)
   \[
     \|\psi(t)\|_{H^k}
     \le \|\psi_0\|_{H^k} + \int_0^t \|V(s) \psi(s)\|_{H^k}\, ds.
   \]
-  Now we have
+  The above calculations show that
   \[
     \|V\psi\|_{H^k} \lesssim
     \sup_{|\alpha| \le k} \|\nabla^\alpha (V\psi)\|_{L^2}
     \lesssim \sup_{|\alpha| \le k} \seminorm{\nabla^\alpha \psi}
     \lesssim \|\psi_0\|_{H^k},
   \]
-  and so we get
+  and so we have
   \[
     \|\psi(t)\|_{H^k}
-    \le \|\psi_0\|_H^k + \int_0^t \|\psi_0 \|_{H^k}|, ds
+    \le \|\psi_0\|_H^k + \int_0^t \|\psi_0 \|_{H^k}\, ds
     \lesssim (1 + |t|) \|\psi_0\|_{H^k}.
   \]
   Note that the growth of the norm is independent of
@@ -175,9 +175,9 @@
   $k_1$ to be large enough such that $k / k_1 < \epsilon$.
   Then
   \begin{align*}
-    \|\psi\|_H^k
-    \le \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
-    &\le (1 + |t|)^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
+    \|\psi\|_{H^k}
+    \le C_\epsilon \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
+    &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^{k_1}}^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
     &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^k}
     \le C_\epsilon (1 + |t|)^\epsilon \|\psi_0\|_{H^k},
   \end{align*}
