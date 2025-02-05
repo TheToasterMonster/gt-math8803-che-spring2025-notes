@@ -165,7 +165,7 @@
   and so we have
   \[
     \|\psi(t)\|_{H^k}
-    \le \|\psi_0\|_H^k + \int_0^t \|\psi_0 \|_{H^k}\, ds
+    \lesssim \|\psi_0\|_{H^k} + \int_0^t \|\psi_0 \|_{H^k}\, ds
     \lesssim (1 + |t|) \|\psi_0\|_{H^k}.
   \]
   Note that the growth of the norm is independent of
@@ -176,8 +176,8 @@
   Then
   \begin{align*}
     \|\psi\|_{H^k}
-    \le C_\epsilon \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
-    &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^{k_1}}^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
+    \lesssim \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
+    &\lesssim (1 + |t|)^{k / k_1} \|\psi_0\|_{H^{k_1}}^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
     &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^k}
     \le C_\epsilon (1 + |t|)^\epsilon \|\psi_0\|_{H^k},
   \end{align*}
