@@ -1,0 +1,209 @@
+\chapter{Feb.~10 --- Spectral Theory}
+
+\section{Review of Functional Analysis}
+
+\begin{remark}
+  Our goal now is to study the decay of a solution $\psi$ to
+  \[
+    i\psi_t - \frac{1}{2} \Delta \psi + V(x) \psi = 0, \quad \text{$V$ real}.
+  \]
+  We will study $e^{iHt} \psi_0$, where
+  $H = -\frac{1}{2} \Delta + V$, in particular the
+  spectral theory for $H$ in $L^2(\R^d)$.
+\end{remark}
+
+\begin{definition}
+  Let $\mathcal{H}$ be a Hilbert space, with inner product
+  $\langle \cdot, \cdot \rangle$. We will
+  use $\mathcal{H} = L^2(\R^d)$ with
+  \[
+    \langle f, g \rangle
+    = \int_{\R^d} f \overline{g}\, dx.
+  \]
+  Let $T$ be a linear operator which is densely defined
+  on $\mathcal{H}$.
+  Let $D(T)$ denote the domain of $T$. We say that
+  $T$ is \emph{symmetric} if
+  $\langle Tx, y \rangle = \langle x, Ty \rangle$.
+  The \emph{adjoint} $T^*$ of $T$ is defined as
+  \[
+    D(T^*) =
+    \{
+      f \in \mathcal{H} : \text{there exists $h \in \mathcal{H}$ such that } \langle T \phi, f \rangle = \langle \phi, h \rangle \text{ for all $\phi \in D(T)$}
+    \},
+  \]
+  and we set $T^* f = h$. We say
+  $T$ is \emph{closed} provided that the graph
+  of $T$ is a closed subset of $\mathcal{H} \times \mathcal{H}$,
+  i.e. if $f_n \to f$ in $\mathcal{H}$ with $f_n \in D(T)$
+  and $Tf_n \to g$ in $\mathcal{H}$, then
+  $f \in D(T)$ and $Tf = g$.
+\end{definition}
+
+\begin{definition}
+  We say that a linear operator $T$ is \emph{self-adjoint} if
+  $(T, D(T)) = (T^*, D(T^*))$.
+\end{definition}
+
+\begin{example}
+  Let $T = i \partial_x$. For $\mathcal{H} = L^2(\R)$ and
+  $D(T) = C^1_c(\R)$, one can check that $T$ is self-adjoint.
+  But if we take $\mathcal{H} = L^2([0, \infty))$ and
+  $D(T) = C^1_c([0, \infty))$, then $T$ is not self-adjoint
+  (but $T$ is symmetric).
+\end{example}
+
+\begin{example}
+  Let $T = - \partial_x^2$
+  on $L^2([0, 1])$. Then for
+  \[
+    D(T) = \{f \in H^2([0, 1]) : f(0) = f(1) = f'(0) = f'(1) = 0\},
+  \]
+  $T$ is symmetric but not self-adjoint. One can check that
+  $D(T^*) = H^2([0, 1])$.
+\end{example}
+
+\begin{lemma}
+  Let $T$ be a densely defined linear operator on
+  $\mathcal{H}$. Then:
+  \begin{enumerate}
+    \item If $T$ is symmetric, then
+      $D(T^*) \supseteq D(T)$ (so $T^*$ is 
+      densely defined) and all eigenvalues of $T$ are
+      real.
+    \item For every $T$, its adjoint $T^*$ is closed.
+    \item We have $(\ker T)^\perp = \overline{\Ran(T^*)}$
+      and $(\ker T^*)^\perp = \overline{\Ran(T)}$.
+    \item If $T$ is self-adjoint, i.e. $(T, D(T)) = (T^*, D(T^*))$, then \[\Spec T = \C \setminus \{z \in \C : \text{$(T - z)^{-1}$ exists as a bounded linear operator}\} \subseteq \R\]
+      and $\|(T - z)^{-1}\|_{\mathcal{L}(\mathcal{H}, \mathcal{H})} \lesssim |{\im z}|^{-1}$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  (1) One can check this by definition.
+
+  (2) Take a sequence $f_n \in D(T^*)$ with
+  $f_n \to f$, and suppose that $T^* f_n \to g$. By
+  definition,
+  \[
+    \langle T \phi, f_n \rangle
+    = \langle \phi, T^* f_n \rangle
+    \quad \text{for every $\phi \in D(T)$}.
+  \]
+  Then $f_n \to f$ implies that
+  $\langle T \phi, f_n \rangle \to \langle T \phi, f \rangle$,
+  and $T^* f_n \to g$ implies that $\langle \phi, T^* f_n \rangle \to \langle \phi, g \rangle$.
+  Then we have
+  $\langle T \phi, f \rangle = \langle \phi, g \rangle$
+  for every $\phi \in D(T)$, so
+  $f \in D(T^*)$ and $T^* f = g$ by definition.
+
+  (3) Look this part up.
+
+  (4 Let $T = T^*$ and $z = x + iy$. Then we can write
+  \[
+    |\langle (T - z) f, f \rangle|
+    = |\langle (T - (x + iy)) f, f \rangle|
+    = |\langle (T - x) f, f \rangle
+    - iy \langle f, f \rangle|
+    \ge |y| \|f\|_{\mathcal{H}}^2,
+  \]
+  since $\langle (T - x) f, f \rangle$ is real and
+  $iy \langle f, f \rangle$ is purely imaginary. On the
+  other hand,
+  \[
+    \langle (T - z) f, f \rangle
+    \le \|f\|_{\mathcal{H}} \|(T - z) f\|_{\mathcal{H}},
+  \]
+  by Cauchy-Schwarz, so $\|(T - z) f\|_{\mathcal{H}} \ge |y| \|f\|_{\mathcal{H}}$
+  where $y = \im Z$. So $\ker(T - z) = 0$ if $|y| \ne 0$.
+  Now
+  \[
+    \overline{\Ran(T - z)} = (\ker (T^* - \overline{z}))^\perp
+    = (\ker (T - \overline{z}))^\perp
+    = \mathcal{H}
+  \]
+  if $|y| \ne 0$ by $(3)$, so we just need to show that
+  $\Ran(T - z)$ is closed. Assume $(T - z) f_n \to g$.
+  Note that
+  \[
+    \|(T - z) f_n - (T - z) f_m\|_{\mathcal{H}}
+    \ge |y| \|f_n - f_m \|_{\mathcal{H}},
+  \]
+  so $(T - z) f_n$  being Cauchy implies that
+  $\{f_n\}$ is also Cauchy. So $f_n \to f$ for some
+  $f \in \mathcal{H}$, i.e. $T = T^*$ is closed.
+  This then implies that $T - z$ is closed, from which it
+  follows that $f \in D(T - z)$ and $(T - z)f = g$, so
+  $\Ran(T - z)$ is closed if $|y| \ne 0$. So
+  $\ker(T - z) = \{0\}$ and $\Ran(T - z) = \mathcal{H}$
+  if $|y| \ne 0$. So $T - z$ is invertible, hence
+  $\Spec T \subseteq \R$ and
+  $\|(T - z)^{-1}\|_{\mathcal{L}(\mathcal{H}, \mathcal{H})} \lesssim |{\im z}|^{-1}$.
+\end{proof}
+
+\section{Spectral Theory}
+
+\begin{definition}
+  The \emph{resolvent} of $T$, denoted $\rho(T) \subseteq \C$
+  is defined as follows: We
+  have $\lambda \in \rho(T)$ if we can find a bounded
+  linear operator $R(\lambda)$ from $\mathcal{H}$ to
+  $\mathcal{H}$ such that
+  \[
+    (T - \lambda) R(\lambda) = R(\lambda)(T - \lambda) = I.
+  \]
+  The \emph{spectrum} of $T$ is $\sigma(T) = \C \setminus \rho(T)$.
+\end{definition}
+
+\begin{definition}
+  Let $\mathcal{B}$ be the Borel sets in $\R$.
+  A \emph{spectral measure} $E$ on $\R$ is an orthogonal
+  projection valued measure on $\mathcal{B}$, i.e.
+  a map $E$ such that $E(A)$ is an orthogonal projection
+  for every $A \in \mathcal{B}$, and
+  \begin{enumerate}
+    \item $E(\varnothing) = 0$ and $E(\R) = I$;
+    \item for $A, B \in \mathcal{B}$, we have
+      $E(A) E(B) = E(A \cap B)$;
+    \item for disjoint $A_j \in \mathcal{B}$, we have
+      $E(\bigcup_{j = 1}^\infty A_j) = \sum_{j = 1}^\infty E(A_j)$.
+  \end{enumerate}
+\end{definition}
+
+\begin{remark}
+  Given a spectral measure $E$, for $x, y \in \mathcal{H}$,
+  we can define
+  \[
+    E_{x, y}(A) = \langle E(A) x, y \rangle \quad
+    \text{for $A \in \mathcal{B}$}.
+  \]
+  For fixed $x, y$,
+  $E_{x, y}$ is a complex-valued Borel measure. In particular,
+  $E_{x, x}$ is a positive Borel measure.
+\end{remark}
+
+\begin{theorem}[Spectral theorem]
+  Let $(T, D(T))$ be self-adjoint on $\mathcal{H}$. Then
+  there is a unique spectral measure $E$ such that
+  \[
+    \langle Tx, y \rangle
+    = \int \lambda \, dE_{x, y}(\lambda)
+    \quad \text{for all $x \in D(T)$, $y \in \mathcal{H}$}.
+  \]
+\end{theorem}
+
+\begin{remark}
+  We make the following remarks:
+  \begin{enumerate}
+    \item We have $\supp E_{x, y} \subseteq \sigma(T)$.
+    \item If $f$ is a Borel measurable function, then
+      we can interpret
+      \[
+        \langle f(T) x, y \rangle
+        = \int f(\lambda) \, dE_{x, y}(\lambda).
+      \]
+      In particular, we have a map
+      $f \mapsto f(T)$.
+  \end{enumerate}
+\end{remark}

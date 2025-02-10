@@ -170,18 +170,31 @@
   \]
   Note that the growth of the norm is independent of
   $k$.
-  To get $(1 + |t|)^\epsilon$, note that the
-  $L^2$ norm is conserved. So for any $k$, take
-  $k_1$ to be large enough such that $k / k_1 < \epsilon$.
-  Then
-  \begin{align*}
-    \|\psi\|_{H^k}
-    \lesssim \|\psi\|^{k / k_1}_{H^{k_1}} \|\psi\|_{L^2}^{1 - k / k_1}
-    &\lesssim (1 + |t|)^{k / k_1} \|\psi_0\|_{H^{k_1}}^{k / k_1} \|\psi_0\|_{L^2}^{1 - k / k_1} \\
-    &\le C_\epsilon (1 + |t|)^{k / k_1} \|\psi_0\|_{H^k}
-    \le C_\epsilon (1 + |t|)^\epsilon \|\psi_0\|_{H^k},
-  \end{align*}
-  which is the desired result.
+  To get $(1 + |t|)^\epsilon$, first note that the
+  $L^2$ norm is conserved.
+  So if $S(t)$ is the solution operator, then we have
+  \[
+    \|S(t) \psi_0\|_{L^2} = \|\psi_0\|_{L^2}
+    \quad \text{and} \quad
+    \|S(t) \psi_0\|_{H^{k_1}} \le C_{k_1} (1 + |t|) \|\psi_0\|_{H^{k_1}}
+  \]
+  for every $k_1 \in \N$.  Since $S(t)$ is a linear operator,
+  by interpolation we have
+  \[
+    \|S(t)\|_{\mathcal{L}(H^k, H^k)} \le \|S(t)\|_{\mathcal{L}(L^2, L^2)}^{1 - k / k_1} \|S(t)\|_{\mathcal{L}(H^{k_1}, H^{k_1})}^{k / k_1}
+    \le C_{k, k_1} (1 + |t|)^{k / k_1}
+  \]
+  for every $0 \le k \le k_1$ (since
+  $\|S(t)\|_{\mathcal{L}(L^2, L^2)}$ is bounded). For any
+  $\epsilon > 0$,
+  for fixed $k$ take $k_1$ large enough so that
+  $k / k_1 \le \epsilon$. Then
+  \[
+    \|S(t)\|_{\mathcal{L}(H^k, H^k)}
+    \le C_{k, k_1} (1 + |t|)^{k / k_1}
+    \le C_{\epsilon} (1 + |t|)^\epsilon,
+  \]
+  which implies the desired result.
 \end{proof}
 
 \begin{remark}
