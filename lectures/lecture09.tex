@@ -8,7 +8,7 @@
     i\psi_t - \frac{1}{2} \Delta \psi + V(x) \psi = 0, \quad \text{$V$ real}.
   \]
   We will study $e^{iHt} \psi_0$, where
-  $H = -\frac{1}{2} \Delta + V$, in particular the
+  $H = -\Delta / 2 + V$, in particular the
   spectral theory for $H$ in $L^2(\R^d)$.
 \end{remark}
 
@@ -98,9 +98,45 @@
   for every $\phi \in D(T)$, so
   $f \in D(T^*)$ and $T^* f = g$ by definition.
 
-  (3) Look this part up.
+  (3) Note that in general, if $A \subseteq \mathcal{H}$, then
+  $A^\perp$ is closed. To see this, let $f_n \in A^\perp$
+  and $f_n \to f$ in $\mathcal{H}$. Then
+  $\langle f_n, a \rangle = 0$ for every $a \in A$
+  since $f_n \in A^\perp$. So letting
+  $n \to \infty$, we have $\langle f, a \rangle = 0$,
+  i.e. $f \in A^\perp$.
 
-  (4 Let $T = T^*$ and $z = x + iy$. Then we can write
+  We first show that $\overline{\Ran(T)} \subseteq (\ker T^*)^\perp$.
+  For any $h \in \Ran(T)$, there exists $f$ such that
+  $h = Tf$. Then for any $g \in \ker T^* \subseteq D(T^*)$,
+  we have
+  \[
+    \langle Tf, g \rangle
+    = \langle f, T^* g \rangle = 0,
+  \]
+  so $f \in (\ker T^*)^\perp$.
+  Thus $\Ran(T) \subseteq (\ker T^*)^\perp$, and taking
+  closures,
+  $\overline{\Ran(T)} \subseteq \overline{(\ker T^*)^\perp} = (\ker T^*)^\perp$.
+
+  Now we show that $(\ker T^*)^\perp \subseteq \overline{\Ran(T)}$.
+  Let $f \in (\overline{\Ran(T)})^\perp$, so
+  $f \in (\Ran(T))^\perp$. So
+  \[
+    \langle T^* f, g \rangle = \langle f, Tg \rangle = 0, \quad \text{for all $g \in D(T)$},
+  \]
+  so $T^* f = 0$. This gives $f \in \ker(T^*)$.
+  So $(\overline{\Ran(T)})^\perp \subseteq \ker(T^*)$.
+  Then taking orthogonal complements,
+  \[
+    (\ker T^*)^\perp \subseteq ((\overline{\Ran(T)})^\perp)^\perp
+    = \overline{\Ran(T)}
+  \]
+  since $\overline{\Ran(T)}$ is closed. This
+  gives $(\ker T^*)^\perp = \overline{\Ran(T)}$, and
+  the other equality follows by duality.
+
+  (4) Let $T = T^*$ and $z = x + iy$. Then we can write
   \[
     |\langle (T - z) f, f \rangle|
     = |\langle (T - (x + iy)) f, f \rangle|

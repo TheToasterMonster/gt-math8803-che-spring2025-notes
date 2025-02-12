@@ -1,0 +1,197 @@
+\chapter{Feb.~12 --- Spectral Theory, Part 2}
+
+\section{Examples for Spectral Theory}
+
+\begin{example}
+  Let $\mathcal{H} = \R^n$ with the standard inner product, and
+  let $T$ be a Hermitian matrix. Then $T$ is self-adjoint, and
+  the corresponding spectral measure $E$ is given by
+  \[
+    E(I) = \sum_{j : \lambda_j \in I} P_{L_j},
+  \]
+  where $\lambda_1 \le \lambda_2 \le \dots \le \lambda_k$ are 
+  the eigenvalues of $T$ without multiplicity and
+  $L_1, \dots, L_k$ are eigenspaces.
+\end{example}
+
+\begin{example}
+  Let $T$ be a self-adjoint operator. Then
+  \[
+    e^{itA} f = \left(\int e^{it\lambda)}\, E(d\lambda)\right) f.
+  \]
+  From this we have
+  \[
+    \|e^{itA} f\|_{L^2}^2
+    = \langle \int e^{it\lambda}\, E(d\lambda) f, \int e^{it\lambda}\, E(d\lambda) f\rangle
+    = \iint e^{it \lambda} e^{-it\mu}\, \langle E(d\lambda) E(d\mu) f, f \rangle.
+  \]
+  Fixing $\lambda$ and integrating over $\mu$, the
+  only point that survives is $\mu = \lambda$, so
+  \[
+    \|e^{itA} f\|_{L^2}^2
+    = \int \langle Ed(\lambda) f, f \rangle
+    = \langle E(\R) f, f \rangle
+    = \|f\|_{L^2}^2.
+  \]
+  since $E(\R) = I$. Thus if $T$ is self-adjoint, then
+  $\|e^{itT} f\|_{L^2} = \|f\|_{L^2}$, i.e. $e^{itT}$ is
+  unitary. Also,
+  \[
+    e^{itT} e^{isT} f = e^{i(t+s)T} f \quad \text{and} \quad
+    e^{-itT} e^{itT} = I = e^{itT} e^{-itT}.
+  \]
+  The above are group properties for $e^{itT}$ as
+  $t$ varies.
+\end{example}
+
+\begin{example}
+  Let $\mathcal{H} = L^2(X, \mu)$, where $\mu$ is a positive
+  probability measure. Define $T = M_\phi$ to be the
+  multiplication operator by $\phi$, i.e.
+  $Tf = \phi f$ for $\phi : X \to \R$. We have
+  \[
+    D(T) = \{f \in L^2 : \phi f \in L^2\},
+  \]
+  which is dense in $\mathcal{H}$ since
+  $\mu(|\phi| > M) \to 0$ as $M \to \infty$. So $T$ is
+  densely defined. Then
+  \[
+    \langle Tf, g \rangle
+    = \int \phi f \overline{g}\, \mu(dx)
+    = \int f \overline{\phi g}\, \mu(dx)
+    = \langle f, Tg \rangle
+  \]
+  since $\phi$ is real. So $T$ is symmetric, which implies
+  $D(T) \subseteq D(T^*)$. To get the
+  reverse inclusion, notice that for $g \in D(T^*)$, we have
+  $\langle Tf, g \rangle = \langle f, h \rangle$ for
+  some $h \in \mathcal{H}$, for all $f \in D(T)$. Then
+  \[
+    \int f \overline{\phi g}\, \mu(dx)
+    \int \phi f \overline{g}\, \mu(dx)
+    = \langle Tf, g \rangle
+    = \langle f, h \rangle
+    = \int f\overline{h} \mu(dx).
+  \]
+  Since $D(T)$ is dense, we get $\phi g = h \in \mathcal{H} = L^2(X, \mu)$, so
+  $g \in D(T)$.
+  This gives $D(T^*) \subseteq D(T)$, so we see that
+  $D(T^*) = D(T)$ and $T$ is self-adjoint.
+  The spectral theorem then gives the spectral resolution
+  $E$:
+  \[
+    E(I) f = \chi_{\{\phi \in I\}} f,
+  \]
+  where $\chi$ denotes an indicator function.
+\end{example}
+
+\begin{example}
+  Let $T = -\Delta$ on $L^2(\R^d)$. Clearly
+  $D(T) = H^2(\R^d)$ is dense in $L^2(\R^d)$. Integration
+  by parts shows that $-\Delta$ is symmetric.
+  Now suppose $g \in D(T^*)$. Then
+  \[
+    \langle -\Delta f, g \rangle
+    = \langle f, h \rangle \quad \text{for all $f \in D(T)$ and some $h \in L^2$}.
+  \]
+  Since
+  $\langle -\Delta f, g \rangle = \langle f, -\Delta g \rangle = L f$
+  (note that $-\Delta g \in \mathcal{S}'$, i.e. in the
+  sense of distributions), we have
+  \[
+    |Lf| \le \|f \|_{L^2} \| h \|_{L^2}
+    = C \|f \|_{L^2},
+  \]
+  where $C = \| h \|_{L^2}$. So by the Hahn-Banach
+  theorem, $L$ can be extended to a continuous functional
+  on $L^2$ such that $\|L\|_{B(L^2, L^2)} \le \|h \|_{L^2}$.
+  We can identify  $Lf = \langle f, -\Delta g \rangle$, and thus
+  \[
+    \|\Delta g\|_{L^2} \le \|h \|_{L^2}.
+  \]
+  This implies $\Delta g \in L^2$, so by the elliptic theory,
+  $g \in H^2 = D(T)$. This gives
+  $D(T^*) \subseteq D(T)$ and thus $D(T) = D(T^*)$ (since
+  $D(T) \subseteq D(T^*)$ because $T$ is symmetric), so
+  $T$ is self-adjoint. To understand the spectral
+  resolution, we can use the Fourier transform:
+  $\widehat{Tf} = \xi^2 \widehat{f}$. Writing
+  $\mathcal{F}(f) = \widehat{f}$, we have
+  \[
+    \mathcal{F} T \mathcal{F}^{-1} = M_{\xi^2}.
+  \]
+  Note that $\mathcal{F}$ is unitary on $L^2_x \to L^2_\xi$ by
+  Plancherel's theorem. This says that $\mathcal{F}$
+  diagonalizes $\Delta$. Letting $E_T$ be the
+  spectral resolution for $T$ and $E_{\xi^2}$ be the
+  spectral resolutoin for $M_{\xi^2}$, we have
+  \[
+    \mathcal{F} E_T \mathcal{F}^{-1} = E_{\xi^2}.
+  \]
+  Since $E_{\xi}^2(I) = \chi_{\{\xi^2 \in I\}}$, we can write
+  \[
+    E_T(I) f = (\chi_{\{\xi^2 \in I\}} \widehat{f})^\vee.
+  \]
+\end{example}
+
+\begin{example}
+  Let $\mathcal{H} = L^2(\R^d)$ and
+  $T = - \Delta / 2 + V$, where $V \in L^\infty$ is
+  real. We claim that $T$ is self-adjoint. It is easy to check
+  that $T$ is symmetric, so $D(T) \subseteq D(T^*)$,
+  where $D(T) = H^2(\R^d)$. For the reverse inclusion,
+  take $g \in D(T^*)$, so $\langle Tf, g \rangle = \langle f, h \rangle$
+  for some $h \in \mathcal{H}$. Then
+  \[
+    \langle -\Delta f / 2, g \rangle
+    = \langle f, h \rangle - \langle Vf, g \rangle,
+  \]
+  so we have
+  \[
+    | \langle - \Delta f / 2, g \rangle | 
+    \le (\| h \|_{L^2} + \| V \|_{L^\infty}\| g \|_{L^2}) \| f \|_{L^2}.
+  \]
+  As before, the Hahn-Banach theorem implies that
+  $-\Delta g \in L^2$, and elliptic theory yields
+  $g \in H^2 = D(T)$. Thus $D(T^*) \subseteq D(T)$, so
+  we see that $T$ is self-adjoint.
+\end{example}
+
+\section{More Spectral Theory}
+
+\begin{definition}
+  Define the following parts of $\mathcal{H}$:
+  \begin{align*}
+    \mathcal{H}_{\mathrm{ac}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is absolutely continuous}\}, \\
+    \mathcal{H}_{\mathrm{s}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is singular continuous}\}, \\
+    \mathcal{H}_{\mathrm{pp}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is pure point}\}.
+  \end{align*}
+\end{definition}
+
+\begin{lemma}
+  We have the decomposition
+  $\mathcal{H} = \mathcal{H}_{\mathrm{pp}} \oplus \mathcal{H}_{\mathrm{s}} \oplus \mathcal{H}_{\mathrm{ac}}$.
+\end{lemma}
+
+\begin{proof}
+  We will show this next time.
+\end{proof}
+
+\begin{definition}
+  Define $E_{\mathrm{ac}} = E \circ P_{\mathrm{ac}}$, where
+  $P_{\mathrm{ac}}$ is the projection onto
+  $\mathcal{H}_{\mathrm{ac}}$.
+\end{definition}
+
+\begin{lemma}
+  Let $T$ be a self-adjoint operator and $E$ be its
+  spectral resolution. Then for a.e. $\lambda$,
+  \[
+    \langle E_{\mathrm{ac}}(d\lambda) f, g \rangle
+    = \langle \frac{1}{2\pi i} (R(\lambda + i0) - R(\lambda - i0)) f, g \rangle\, d \lambda,
+  \]
+  where $R(\lambda \pm i0) = \lim_{\epsilon \to 0} R(\lambda \pm i\epsilon)$.
+\end{lemma}
