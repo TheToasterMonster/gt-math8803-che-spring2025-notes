@@ -1,0 +1,242 @@
+\chapter{Feb.~17 --- Spectral Theory, Part 3}
+
+\section{More Spectral Theory}
+
+\begin{definition}
+  Define the following parts of $\mathcal{H}$ (with
+  respect to Lebesgue measure):
+  \begin{align*}
+    \mathcal{H}_{\mathrm{ac}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is absolutely continuous}\}, \\
+    \mathcal{H}_{\mathrm{sc}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is singular continuous}\}, \\
+    \mathcal{H}_{\mathrm{pp}}
+    &= \{x \in \mathcal{H} : E_{x, x} \text{ is pure point}\}.
+  \end{align*}
+\end{definition}
+
+\begin{lemma}
+  Let $T$ be self-adjoint and $E$ its spectral
+  resolution. Then
+  $\mathcal{H} = \mathcal{H}_{\mathrm{ac}} \oplus \mathcal{H}_{\mathrm{sc}} \oplus \mathcal{H}_{\mathrm{pp}}$.
+\end{lemma}
+
+\begin{proof}
+  We first show that $(1)$ $\mathcal{H}_{\mathrm{ac}}, \mathcal{H}_{\mathrm{sc}}, \mathcal{H}_{\mathrm{pp}}$ are closed
+  subspaces, then that $(2)$ they are orthogonal to each
+  other, and finally $(3)$ the decomposition for
+  an arbitrary $f \in \HH$.
+
+  $(1)$ Take $f, g \in \mathcal{H}_{\mathrm{ac}}$,
+  we first show that $f + g \in \mathcal{H}_{\mathrm{ac}}$.
+  If $S$ is a Borel set such that $|S| = 0$ (Lebesgue
+  measure), then we want to show that
+  $E(S)(f + g) = 0$. Since $f, g \in \Hac$, we note that
+  \[
+    E(S)f = E(S)g = 0.
+  \]
+  Indeed, for $f \in \Hac$, we have
+  $\langle E(S) f, f \rangle = E_{f, f}(S) = 0$. Then
+  \[
+    0 = \langle E(S) f, f \rangle = \langle E(S) E(S) f, f \rangle
+    = \langle E(S) f , E(S) f \rangle
+  \]
+  since $E(S)$ is a projection and also
+  self-adjoint. This shows that $E(S)f = 0$ by the
+  definiteness of the inner product, and
+  similarly, $E(S) g = 0$.
+  To check $E_{f + g, f + g}(S) = 0$, we note that
+  \[
+    E_{f + g, f + g}(S) = \langle E(S) (f + g), f + g \rangle
+    = \langle E(S) f, f \rangle + \langle E(S) g, f \rangle
+    + \langle E(S) f, g \rangle + \langle E(S) g, g \rangle
+    = 0
+  \]
+  since $E(S) f = E(S) g = 0$. This implies
+  that $f + g \in \Hac$, which shows that
+  $\Hac$ is a subspace. To see that $\Hac$ is
+  closed,
+  let $f_n \in \Hac$ with $f_n \to f$ in $\HH$.
+  Take any $S$ with $|S| = 0$, so
+  \[
+    \langle E(S)f, f \rangle
+    =
+    \lim_{n \to \infty} \langle E(S) f_n, f_n \rangle =
+    \lim_{n \to \infty} 0 = 0.
+  \]
+  Thus $E(S) f = 0$, so $f \in \Hac$. Thus
+  $\Hac$ is a closed subspace.
+
+  Now let $f, g \in \Hsc$. Let $S_f, S_g$ be the support
+  of $E_{f, f}, E_{g, g}$, respectively. Since
+  $f, g \in \Hsc$, we must have $|S_f| = |S_g| = 0$.
+  We also know $E_{f, f}(S_f^c) = E_{g, g}(S_g^c) = 0$,
+  since $S_f^c, S_g^c$ are outside of the support
+  of $E_{f, f}, E_{g, g}$. Let
+  $S_{f + g} = S_f \cup S_g$, so
+  $|S_{f + g}| = 0$ by the above. Furthermore,
+  \[
+    E(S_{f + g}^c)(f + g)
+    = E(S_f^c \cap S_g^c)(f + g)
+    = E(S_g^c) E(S_f^c) f + E(S_f^c) E(S_g^c) g
+    = 0
+  \]
+  This implies that $\Hsc$ is a subspace.
+  Now take $f_n \in \Hsc$ with $f_n \to f$ in $\HH$.
+  Similarly, let $S_n$ be the support of the $E_{f_n, f_n}$.
+  Let $S_f = \bigcup_{n = 1}^\infty S_{f_n}$, so
+  $|S_f| = 0$ by countable subadditivity. Then
+  \[
+    E(S_f^c) f_n
+    = \left(\prod_j \ne n E(S^c_{f_j})\right) \circ E(S_{f_n}^c) f_n
+    = 0,
+  \]
+  and letting $n \to \infty$ implies that
+  $E(S_f^c) f = 0$. Since the support of $E_{f, f}$ is
+  of measure $0$ in the Lebesgue sense,
+  $f \in \Hsc$.
+  Thus we see that $\Hsc$ is a closed subspace.
+
+  One can verify that $\Hpp$ is a closed subspace
+  in a similar manner, which completes the proof for
+  $(1)$.
+
+  $(2)$ We claim that
+  $\Hac$ is orthogonal to $\Hsc$ and $\Hpp$.
+  Take $f \in \Hac$ and $g \in \Hsc \cup \Hpp$.
+  Let $S_g$ be the support of $E_{g, g}$, so
+  $|S_g| = 0$. Note that $g = E(S_g) g$. Then we can
+  write
+  \[
+    \langle f, g \rangle
+    = \langle f, E(S_g) g \rangle
+    = \langle E(S_g) f, g \rangle = 0
+  \]
+  since $f$ is absolutely continuous with respect
+  to Lebesgue measure. Thus $f \perp g$.
+
+  A similar argument shows that
+  $\Hsc \perp \Hpp$, so which proves $(2)$.
+
+  $(3)$ Given $f \in \HH$, the measure $E_{f, f}$ can be
+  decomposed (with respect to Lebesgue measure)
+  into an absolutely continuous
+  part $E_1$, a singular continuous part $E_2$, and
+  a pure point part $E_3$. Denote the support of
+  $E_1, E_2, E_3$ by $S_1, S_2, S_3$.
+  Thus we can write
+  \[
+    f = E(S_1) f + E(S_2) f + E(S_3) f.
+  \]
+  We have $E(S_1) f \in \Hac$, $E(S_2) f \in \Hsc$,
+  and $E(S_3) f \in \Hpp$, so we get
+  $\HH = \Hac \oplus \Hsc \oplus \Hpp$.
+\end{proof}
+
+\begin{definition}
+  Define $E_{\mathrm{ac}} = E \circ P_{\mathrm{ac}}$, where
+  $P_{\mathrm{ac}}$ is the projection onto
+  $\mathcal{H}_{\mathrm{ac}}$.
+\end{definition}
+
+\begin{lemma}
+  Let $T$ be a self-adjoint operator and $E$ be its
+  spectral resolution. Then for a.e. $\lambda \in \R$,
+  \[
+    \langle E_{\mathrm{ac}}(d\lambda) f, g \rangle
+    = \langle \frac{1}{2\pi i} (R(\lambda + i0) - R(\lambda - i0)) f, g \rangle\, d \lambda,
+  \]
+  where $R(\lambda \pm i0) = \lim_{\epsilon \to 0^+} R(\lambda \pm i\epsilon)$
+  and $R(\lambda \pm i \epsilon) = (T - (\lambda \pm i \epsilon))^{-1}$.
+\end{lemma}
+
+\begin{proof}
+  By spectral theory, we can write
+  \begin{align*}
+    &\langle \frac{1}{2\pi i} ((T - (x + i\epsilon))^{-1} - (T - (x - i\epsilon))^{-1}) f, g \rangle \\
+    & \quad \quad = \frac{1}{2\pi i} \left(\frac{1}{\mu - (\lambda + i\epsilon)} - \frac{1}{\mu - (\lambda - i\epsilon)}\right)
+    \langle E(d\mu) f, g \rangle
+    = \int \frac{1}{\pi} \frac{\epsilon}{(\mu - \lambda)^2 + \epsilon^2}\,  \langle E(d\mu) f, g \rangle.
+  \end{align*}
+  Note that this is the Poisson kernel in the
+  upper half-plane. Letting $\epsilon \to 0^+$, we have
+  \[
+    \int \frac{1}{\pi} \frac{\epsilon}{(\mu - \lambda)^2 + \epsilon^2}\,  \langle E(d\mu) f, g \rangle
+    \to \frac{\langle E_{\mathrm{ac}}(d\lambda) f, g \rangle}{d\lambda}
+  \]
+  for a.e. $\lambda$ (in terms of Lebesgue measure)
+  since the Poisson kernel is an approximate identity.
+\end{proof}
+
+\begin{remark}
+  What can we do with resolvents? We are interested
+  in $- \Delta + V$. Take $V = 0$, then
+  \[
+    R(\lambda + i\epsilon)
+    = (-\Delta - (\lambda + i\epsilon))^{-1}.
+  \]
+  Let $d = 3$, then we have
+  \[
+    ((-\Delta - (\lambda + i\epsilon))^{-1} f)^\wedge
+    = \frac{\widehat{f}(\xi)}{\xi^2 - (\lambda + i\epsilon)}.
+  \]
+  Applying Fourier inversion, we get
+  \[
+    ((-\Delta - (\lambda + i\epsilon))^{-1} f)(x)
+    = \frac{1}{(2\pi)^3} \int \frac{e^{ix\xi} \widehat{f}(\xi)}{\xi^2 - (\lambda + i\epsilon)}\, d\xi.
+  \]
+  Note that we can write
+  \[
+    ((-\Delta - (\lambda + i\epsilon))^{-1} f)(x)
+    = \int K(x - y) f(x)\, dy,
+  \]
+  where the kernel $K$ satisfies
+  \[
+    \widehat{K}(\xi) =
+    \frac{1}{\xi^2 - (\lambda + i\epsilon)}.
+  \]
+  By the inversion formula, this means that
+  \[
+    K = \frac{1}{(2\pi)^3} \int \frac{e^{ix\xi}}{\xi^2 - (\lambda + i\epsilon)}\, d\xi.
+  \]
+
+  Using polar coordinates, set $\xi = r \omega$, and
+  we obtain
+  \[
+    K
+    = \int_0^\infty \int_{\mathbb{S}^2} e^{i r x \cdot \omega}\, d \sigma_{\mathbb{S}^2}(\omega)\,
+    \frac{r^2}{r^2 - (\lambda + i\epsilon)}\, dr. \tag{$*$}
+  \]
+  We can first compute that
+  \[
+    \int_{\mathbb{S}^2} e^{ia \omega \cdot \vec{e}_3}\, d \sigma_{\mathbb{S}^2}(\omega)
+    = 2\pi \int_0^\pi e^{ia \cos \theta}\, \sin \theta\, d\theta
+    = 2\pi \int_{-1}^1 e^{ia u}\, du
+    = 4\pi \frac{\sin(au)}{a}.
+  \]
+  Then we can calculate the inner integral in
+  $(*)$ by symmetry:
+  \[
+    \int_{\mathbb{S}^2} e^{i r x \cdot \omega}\, d \sigma_{\mathbb{S}^2}(\omega)
+    = 4\pi \frac{\sin(r |x|)}{r |x|}.
+  \]
+  Substituting this into $(*)$, we get
+  \begin{align*}
+    K
+    &= \frac{1}{2\pi^2} \int_0^\infty \frac{\sin(r |x|)}{r |x|} \frac{r^2}{r^2 - (\lambda + i\epsilon)}\, dr
+    = \frac{1}{2\pi^2 |x|} \int_0^\infty \frac{\sin(r |x|)}{r^2 - (\lambda + i \epsilon)}\, r\, dr \\
+    &= \frac{1}{4\pi^2 |x|} \int_{-\infty}^\infty \frac{\sin(r |x|)}{r^2 - (\lambda + i \epsilon)}\, r\, dr
+    = \frac{1}{16 \pi^2 |x|} \int_{-\infty}^\infty
+    (e^{i|x|r} - e^{-ir|x|}) \left(\frac{1}{r - \sqrt{\lambda + i\epsilon}} - \frac{1}{r + \sqrt{\lambda + i\epsilon}}\right) dr.
+  \end{align*}
+  By some complex analysis (residue computations),
+  we get
+  $K = e^{i|x| \sqrt{\lambda + i\epsilon}} / 4\pi |x|$,
+  so that
+  \[
+    R(\lambda + i 0) = \lim_{\epsilon \to 0^+} R(\lambda + i\epsilon)
+    = \frac{1}{4\pi |x|} e^{i|x| \sqrt{\lambda}},
+    \quad -\infty < \lambda < \infty,
+  \]
+  where we take the principal branch of the square root.
+\end{remark}
