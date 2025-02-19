@@ -1,0 +1,209 @@
+\chapter{Feb.~19 --- Dispersive Decay with Potential}
+
+\section{More on Computing Resolvents}
+
+\begin{example}
+  We will compute the resolvent for $-\partial_x^2$.
+  For $\epsilon > 0$, we would like to study
+  \[
+    R(\lambda \pm i \epsilon) = (-\partial_x^2 - (\lambda \pm i \epsilon))^{-1}.
+  \]
+  It is reduced to compute the Green's function in
+  $1$ dimension: $G_{\lambda + i\epsilon}(x, y)$ such
+  that
+  \[
+    (-\partial_x^2 - (\lambda + i\epsilon)) G_{\lambda + i\epsilon}(x, y) = \delta(x - y)
+  \]
+  and is normalized by
+  $G_{\lambda + i\epsilon}(-\infty, y) = G_{\lambda + i\epsilon}(\infty, y) = 0$. Note that
+  the function
+  \[
+    g_1 = e^{i\sqrt{\lambda + i\epsilon} x}
+  \]
+  solves the ODE $(-\partial_x^2 - (\lambda + i\epsilon)) g_1 = 0$
+  and satisfies $g_1(x) \to 0$ as $x \to \infty$.
+  The function
+  \[
+    g_2 = e^{-i\sqrt{\lambda + i\epsilon} x}
+  \]
+  also solves $(-\partial_x^2 - (\lambda + i\epsilon)) g_2 = 0$
+  but satisfies $g_2(x) \to 0$ as $x \to -\infty$.
+  If $x < y$, then by the uniqueness of the ODE solution
+  we should expect that $G_{\lambda + i\epsilon}$ is a multiple of $g_2$.
+  Similarly, if $x > y$ we should expect that
+  $G_{\lambda + i\epsilon}$ is a multiple of $g_1$.
+  Stitching the solutions together, we find that
+  \[
+    G_{\lambda + i\epsilon}(x, y)
+    = \frac{1}{W[g_1, g_2]}
+    \begin{cases}
+      g_2(x) g_1(y) & -\infty < x < y, \\
+      g_1(x) g_2(y) & y < x < \infty,
+    \end{cases}
+  \]
+  where $W[g_1, g_2] = g_1 g_2' - g_1' g_2 = -2i \sqrt{\lambda + i\epsilon}$ is the Wronskian.
+  Passing $\epsilon \to 0$,
+  \[
+    R(\lambda + i 0) = \lim_{\epsilon \to 0^+} G_{\lambda + i\epsilon}(x, y)
+    = -\frac{e^{i \sqrt{\lambda}|x - y|}}{2i \sqrt{\lambda}}.
+  \]
+  We can also note that
+  \[
+    R(\lambda - i 0) = \overline{R(\lambda + i 0)}
+    = \frac{e^{-i \sqrt{\lambda}|x - y|}}{2i \sqrt{\lambda}}.
+  \]
+\end{example}
+
+\begin{exercise}
+  By spectral theory, we know that we can write
+  \[
+    e^{t \partial_x^2 t} f = \frac{1}{2\pi i} \int_0^\infty e^{i\lambda t} [R(\lambda + i0) - R(\lambda - i0)] f\, d\lambda.
+  \]
+  We have an explicit formula for
+  $R(\lambda \pm i 0)$ from the above computation, e.g.
+  \[
+    R(\lambda + i 0) f = -\int_{\R} \frac{e^{i \sqrt{\lambda}|x - y|}}{2i \sqrt{\lambda}} f(y)\, dy.
+  \]
+  Check that this is the same formula for
+  $e^{i\partial_x^2 t} f$ that
+  we obtained via Fourier transforms.
+\end{exercise}
+
+\begin{remark}
+  The Fourier transform only works well for
+  standard differential operators and not for
+  perturbed versions such as $-\partial_x^2 + V$.
+  Spectral theory will allow us to
+  better understand such operators.
+\end{remark}
+
+\section{Dispersive Decay with Potential}
+
+\begin{remark}
+  Our next goal is to show the dispersive decay
+  for $e^{iH t} f$, where $H = -\Delta + V$, in
+  $d = 1, 3$. In particular, for $V$ sufficiently
+  nice and $P_{\mathrm{c}} = P_{\mathrm{ac}}$, we will show that
+  \[
+    \| e^{iHt} P_{\mathrm{c}} f \|_{L^\infty} \lesssim t^{-d / 2} \|f\|_{L^1}, \quad d = 1, 3.
+  \]
+  If $V$ is nice, then $\Hsc = \varnothing$, so
+  $\HH = \Hac \oplus \Hpp$ and we may simply write
+  $P_{\mathrm{c}} = P_{\mathrm{ac}}$.
+\end{remark}
+
+\begin{theorem}\label{thm:dispersive-decay-1d}
+  Let $d = 1$ and $H = -\partial_x^2 + V$, where
+  $V$ is sufficiently nice (e.g. enough decay).
+  Then
+  \[
+    \|e^{iHt} P_{\mathrm{c}} f\|_{L^\infty} \lesssim t^{-1 / 2} \|f\|_{L^1}.
+  \]
+\end{theorem}
+
+\begin{remark}
+  Why do we need $P_{\mathrm{c}}$? This is because
+  if $f \in \Ran(P_{\mathrm{pp}})$, then $Hf = \lambda f$
+  for some $\lambda \in \R$ (since $H$ is self-adjoint).
+  Then $e^{iHt} f = e^{i\lambda t} f$, which is
+  oscillatory in $t$ and does not decay.
+\end{remark}
+
+\begin{lemma}[High energy part]
+  Let
+  $\chi \in C^\infty(\R)$ such that
+  $\chi(\lambda) \equiv 1$ for $\lambda \ge 2 \lambda_0$
+  and $\chi(\lambda) \equiv 0$ for $\lambda \le \lambda_0$
+  for some large but fixed $\lambda_0$. Then we have
+  \[
+    \| e^{iHt} \chi(H) f \|_{L^\infty} \lesssim t^{-1 / 2} \|f\|_{L^1}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  This proof is due to Goldberg--Schlag (2004), we
+  will give an alternative (more direct but less
+  general) proof later on. Note that
+  $\sigma(-\partial_x^2) = [0, \infty)$, so
+  $\langle -\partial_x^2 f, f \rangle \ge 0$.
+  So one can always invert $-\partial_x^2 - \lambda$
+  for $\lambda < 0$.
+  Then the absolutely continuous spectrum of
+  $-\partial_x^2 + V$ will also be $[0, \infty)$
+  by Weyl's theorem provided that $V$ decays
+  sufficiently fast. Then by spectral theory,
+  one can write
+  \[
+    \langle e^{iHt} \chi(H) P_{\mathrm{c}} f, g \rangle
+    = \int_0^\infty  e^{i\lambda t} \chi(\lambda) \langle (R(\lambda + i0) - R(\lambda - i0)) f, g \rangle\, d\lambda.
+  \]
+  The resolvent in this case is
+  \[
+    R(\lambda \pm i 0)
+    = \lim_{\epsilon \to 0^+}
+    (-\partial_x^2 + V - (\lambda \pm i \epsilon))^{-1}
+    = \lim_{\epsilon \to 0^+}
+    (H_0 + V - (\lambda \pm i \epsilon))^{-1}
+  \]
+  where $H_0 = -\partial_x^2$. Then one can write
+  \[
+    R(\lambda \pm i\epsilon)
+    = (H_0 + V - (\lambda \pm i \epsilon))^{-1}
+    = R_0(\lambda \pm i\epsilon) - R_0(\lambda \pm i\epsilon) V R(\lambda \pm i\epsilon).
+  \]
+  The above is the \emph{second resolvent identity},
+  which follows from
+  \[
+    (H - (\lambda \pm i \epsilon)) R(\lambda \pm i \epsilon) = I
+  \]
+  and
+  \[
+    -(H - (\lambda \pm i \epsilon)) R_0(\lambda \pm i \epsilon)
+    = (H_0 + V - (\lambda \pm i \epsilon)) R_0(\lambda \pm i \epsilon)
+    = V R_0(\lambda \pm i \epsilon) + I,
+  \]
+  which gives
+  \[
+    -(H - (\lambda \pm i \epsilon)) (R(\lambda \pm i \epsilon) V R_0(\lambda \pm i \epsilon))
+    = V R_0(\lambda \pm i \epsilon).
+  \]
+  Adding the above equations gives the desired
+  identity. Thus we can formally write
+  \[
+    R(\lambda \pm i \epsilon)
+    = R_0(\lambda \pm i \epsilon)
+    - R_0 (\lambda \pm i \epsilon) V R(\lambda \pm i \epsilon)
+    + \dots
+    = \sum_{n = 0}^\infty R_0(\lambda \pm i \epsilon) (-V R_0(\lambda \pm i \epsilon))^n,
+  \]
+  which is known as the \emph{Born series}.\footnote{Formally, one can see this as the \emph{Neumann series} for $(H - (\lambda \pm i \epsilon))^{-1} = (H_0 - (\lambda \pm i \epsilon))^{-1} (1 + V / (H_0 - (\lambda + i\epsilon)))^{-1}$ and apply the geometric series formula.}
+  Now we claim that for $\lambda > \lambda_0$ with
+  $\lambda_0$ large enough,
+  \[
+    \langle R(\lambda + i 0)f, g \rangle
+    = \sum_{n = 0}^\infty \langle R_0(\lambda + i 0) (-V R_0(\lambda + i 0))^n f, g \rangle
+  \]
+  for Schwartz functions $f, g \in \mathcal{S}$. To
+  see this, we can write
+  \[
+    \langle R_0(\lambda + i\epsilon) f, g \rangle
+    = -\iint \frac{1}{2i \sqrt{\lambda + i\epsilon}} e^{i\sqrt{\lambda + i\epsilon} |x - y|} f(y)\, dy\, \overline{g(x)}\, dx.
+  \]
+  Thus we have the bound
+  \[
+    |\langle R_0(\lambda + i\epsilon) f, g \rangle|
+    \le \frac{1}{2 \sqrt{\lambda}} \|f\|_{L^1} \|g\|_{L^1}.
+  \]
+  In general, we can estimate
+  \begin{align*}
+    &|\langle R_0(\lambda + i\epsilon)(VR_0(\lambda + i\epsilon))^n f, g \rangle| \\
+    &\quad \quad \le \int \dots \int \frac{1}{|2\sqrt{\lambda + \epsilon}|^{n + 1}} |V(x_1) \dots V(x_n)| |f(x_0)| |g(x_{n + 1})|\, dx_0 \dots dx_{n + 1} \\
+    &\quad \quad \le \frac{1}{(2\sqrt{\lambda + i\epsilon})^{n + 1}} \|V \|_{L^1}^n \|f\|_{L^1} \|g\|_{L^1}.
+  \end{align*}
+  Now take $\lambda_0$ such that $2\sqrt{\lambda_0} > \|V\|_{L^1}$, so that the series
+  \[
+    \sum_{n = 0}^\infty \langle R_0(\lambda + i 0) (-V R_0(\lambda + i 0))^n f, g \rangle
+  \]
+  converges uniformly in $\lambda$. We will finish the
+  proof next time.
+\end{proof}
