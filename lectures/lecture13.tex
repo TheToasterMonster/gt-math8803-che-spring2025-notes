@@ -1,0 +1,220 @@
+\chapter{Feb.~24 --- Dispersive Decay with Potential, Part 2}
+
+\section{High Energy Estimates, Continued}
+\begin{prop}
+  We have the estimate
+  \[
+    |\langle e^{iH t} \chi(H) P_{\mathrm{ac}} f, g \rangle|
+    \lesssim t^{-1 / 2} \|f\|_{L^1} \|g\|_{L^1}.
+  \]
+\end{prop}
+
+\begin{proof}
+  Using the Born series, we have
+  \begin{align*}
+    &|\langle e^{iH t} \chi(H) P_{\mathrm{ac}} f, g \rangle| \\
+    &\le \sum_{n = 0}^\infty \left|
+    \frac{(-1)^n}{2\pi i} \int_0^\infty e^{it\lambda} \chi(\lambda) \left(
+      \langle R_0(\lambda + i0) (V R_0(\lambda + i0))^n f, g \rangle
+      - \langle R_0(\lambda - i0) (V R_0(\lambda - i0))^n f, g \rangle
+    \right) d\lambda
+    \right|.
+  \end{align*}
+  The general term in the above series is
+  (the minus term is similar)
+  \[
+    \int_0^\infty e^{it\lambda} \chi(\lambda)
+    \langle R_0(\lambda + i0) (V R_0(\lambda + i0))^n f, g \rangle\, d\lambda.
+  \]
+  Changing variables using $\lambda = \eta^2$, we have
+  \[
+    \int_0^\infty e^{it \eta^2} \chi(\eta^2) \cdot 2\eta
+    \langle R_0(\eta^2 + i0) (V R_0(\eta^2 + i0))^n f, g \rangle\, d\eta.
+  \]
+  Using the calculation that
+  $R_0(\lambda \pm i 0) = \pm i e^{\pm i |x| \sqrt{\lambda}} / 2\sqrt{\lambda}$,
+  we have $R_0(\eta^2 + i 0) = i e^{i|x| \eta} / 2\eta$,
+  and we get
+  \[
+    \iint f(x_0) g(x_{n + 1})
+    \int \dots \int V(x_1) \dots V(x_n)
+    \int_0^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2)
+    \frac{e^{i \eta \sum_{j = 1}^{n + 1} |x_j - x_{j - 1}|}}{(-2\eta i)^{n + 1}}\, d\eta\, dx_1 \dots dx_n\, dx_0 dx_{n + 1}.
+  \]
+  Note the above integral by $(*)$, and by Minkowski's
+  inequality we have
+  \begin{align*}
+    &|(*)| \\
+    &\le
+    \int \dots \int |f(x_0)| |g(x_{n + 1})| V(x_1) \dots V(x_n)
+    \sup_{x_0, \dots, x_{n + 1}} \left| \int_0^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2) \frac{e^{i \eta \sum_{j = 1}^{n + 1} |x_j - x_{j - 1}|}}{(-2\eta i)^{n + 1}}\, d\eta \right|
+    dx_0 \dots dx_{n + 1}.
+  \end{align*}
+  Setting $a = \sum_{j = 1}^{n + 1} |x_j - x_{j - 1}|$,
+  the inner integral satisfies
+  \[
+    \sup_{x_0, \dots, x_{n + 1}} \left| \int_0^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2) \frac{e^{i \eta \sum_{j = 1}^{n + 1} |x_j - x_{j - 1}|}}{(-2\eta i)^{n + 1}}\, d\eta \right|
+    = \sup_a \left| \int_0^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2) \frac{e^{i \eta a}}{(-2\eta i)^{n + 1}}\, d\eta \right|.
+  \]
+  By a suitable change of variables, it suffices to study
+  \[
+    \sup_a \left| \int_{-\infty}^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2) \frac{e^{i \eta a}}{(-2\eta i)^{n + 1}}\, d\eta \right|
+    = \sup_a \left| \int_{-\infty}^\infty e^{it\eta^2 + i\eta a} \widehat{\mu}_n(\eta)\, d\eta \right|,
+  \]
+  where we have
+  \[
+    \widehat{\mu}_n(\eta) = \frac{2\eta \cdot \chi(\eta^2)}{(-2\eta i)^{n + 1}}
+    = \|e^{i\partial_x^2 t} \mu_n \|_{L^\infty}
+    \le t^{-1 / 2}\|\mu_n \|_{L^1}.
+  \]
+  The key idea is to reduce
+  the computation to the $1$-D free Schr\"odinger
+  equation. Writing
+  \[
+    \mu_n(x) = \int_{-\infty}^\infty \frac{\chi(\lambda^2)}{\lambda^n} e^{-i\lambda x}\, d\lambda,
+  \]
+  we want to estimate $\|\mu_n\|_{L^1}$. For $n = 0$,
+  we have
+  \[
+    \mu_0(x) = \int_{-\infty}^\infty \chi(\lambda^2) e^{-i\lambda x}\, d\lambda
+    = \int_{-\infty}^\infty (1 + (1 - \chi(\lambda^2))) e^{-i\lambda x}\, d\lambda
+    = \delta_0 + \int_{-\infty}^\infty (1 - \chi(\lambda))^2 e^{-i\lambda x}\, d\lambda.
+  \]
+  The latter integral is a Schwartz
+  function since $1 - \chi(\lambda)$ is compactly
+  supported. So $\|\mu_0\|_{L^1} < \infty$.
+  For general $n$, we would like to estimate
+  $\|x^2 \mu_n(x)\|_{L^\infty}$:
+  \[
+    \|x^2 \mu_n(x)\|_{L^\infty}
+    = \|(\widehat{\mu}_n''(x))^\vee\|_{L^\infty}
+    \le \|\widehat{\mu}_n''\|_{L^1}
+    = \left\| \left(\frac{\chi(\lambda^2)}{\lambda^n}\right)'' \right\|
+    \lesssim \lambda_0^{-n / 2},
+  \]
+  where the second inequality is by Young's inequality
+  and the last inequality is because
+  \[
+    \left(\frac{\chi(\lambda^2)}{\lambda^n}\right)''
+    \lesssim \left|\frac{\chi'(\lambda^2)}{\lambda^{n + 2}}\right|
+    + \left|\frac{\lambda \chi'(\lambda^2)}{\lambda^{n + 1}}\right|
+    + \left|\frac{\lambda^2 \chi''(\lambda^2)}{\lambda^{n}}\right|
+  \]
+  and the observation that $\chi', \chi''$ are
+  compactly supported functions. Thus we have
+  \[
+    |\mu_n(x)| \lesssim (\lambda_0)^{-n / 2} |x|^{-2}.
+  \]
+  This gives us decay as $x \to \infty$, but we also
+  need to estimate $\|\mu_n\|_{L^\infty}$: For $n \ge 2$,
+  \[
+    \| \mu_n \|_{L^\infty}
+    \lesssim \|\widehat{\mu}_n\|_{L^1}
+    = \left\| \frac{\chi(\lambda^2)}{\lambda^n} \right\|
+    \lesssim (\lambda_0)^{-n / 2}
+  \]
+  since $\widehat{\mu}_n$ is integrable for $n \ge 2$.
+  When $n = 1$, we have
+  \[
+    \|\mu_1(x)\|_{L^\infty}
+    = \left\| \left(\frac{\chi(\lambda^2)}{\lambda}\right)^\vee \right\|_{L^\infty}
+    = \| (\chi(\lambda^2))^\vee * (1 / \lambda)^\vee \|_{L^\infty}
+    = \| \chi(\lambda^2) \|_{L^1} \|(1 / \lambda)^\vee\|_{L^\infty} < \infty
+  \]
+  since $\|\chi(\lambda^2)\|_{L^1}$ is finite and
+  $(1 / \lambda)^\vee = -i \sign(x)$, so
+  $\|(1 / \lambda)^\vee\|_{L^\infty} \le 1$. Thus
+  for $n \ge 1$,
+  \[
+    \|\mu_n\|_{L^\infty} \lesssim (\lambda_0)^{-n / 2}
+    \quad \text{and} \quad
+    \|\mu_n(x)\| \lesssim (\lambda_0)^{-n / 2} |x|^{-2},
+  \]
+  which gives $\|\mu_n \|_{L^1} \lesssim (\lambda_0)^{-n / 2}$.
+  When $n = 0$, we already know
+  $\|\mu_0\|_{L^1} < \infty$. This gives
+  \[
+    \sup_a \left| \int_0^\infty e^{it\eta^2} 2\eta \cdot \chi(\eta^2) \frac{e^{i \eta a}}{(-2\eta i)^{n + 1}}\, d\eta \right|
+    \lesssim |t|^{-1 / 2} (\lambda_0)^{-n / 2},
+  \]
+  and so we have
+  \[
+    (*) \lesssim \|f\|_{L^1} \|g\|_{L^1} \|V\|_{L^1}^n (\lambda_0)^{-n / 2} |t|^{-1 / 2}.
+  \]
+  As long as $\lambda_0^{-1 / 2} \| V \|_{L^1} < 1$,
+  we can sum the Born series and get
+  \[
+    \langle e^{iHt} \chi(H) P_{\mathrm{ac}} f, g \rangle
+    \le |t|^{-1 / 2} \|f\|_{L^1} \|g\|_{L^1} \sum_{n = 0}^\infty (\lambda_0^{-1 / 2} \|V\|_{L^1})^n
+    \lesssim |t|^{-1 / 2} \|f\|_{L^1} \|g\|_{L^1},
+  \]
+  which is the desired estimate.
+\end{proof}
+
+\begin{remark}
+  The takeaway from this proof is that for the
+  high frequency part, we use a Born series, the
+  free resolvent, and explicit computations.
+\end{remark}
+
+\section{Low Energy Estimates}
+
+\begin{remark}
+  In this setting, the influence of the potential
+  becomes more serious.
+\end{remark}
+
+\begin{lemma}[Low energy]
+  Let $V$ be ``nice'' and $\chi$ a cutoff function
+  near $0$. Then
+  \[
+    \| e^{iHt} \chi(H) P_{\mathrm{ac}} f \|_{L^\infty}
+    \le |t|^{-1 / 2} \|f\|_{L^1}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  We use spectral theory. Write
+  \[
+    e^{iHt} \chi(H) P_{\mathrm{ac}} f
+    = \frac{1}{2\pi i} \int_0^\infty \chi(\lambda) e^{-it\lambda} [R(\lambda + i0) - R(\lambda - i0)] f\, d\lambda.
+  \]
+  We will use the convention (note that
+  $(\eta + i\epsilon)^2 = \eta^2 - \epsilon^2 + 2i\eta \epsilon$)
+  \[
+    R(\eta^2 + i 0) = \lim_{\epsilon \to 0^+} R((\eta + i\epsilon)^2)
+    = \lim_{\epsilon \to 0^+} R(\eta^2 + i \sign (\eta) \epsilon).
+  \]
+  Then we can write
+  \[
+    e^{iHt} \chi(H) P_{\mathrm{ac}} f
+    = \frac{1}{\pi i} \int_{-\infty}^\infty \eta \cdot \chi(\eta^2) e^{it\eta^2} R(\eta^2 + i0) f\, d\eta.
+  \]
+  Using a Green's function, we can write
+  \[
+    R(\lambda^2 + i 0)(x, y)
+    = \frac{f_+(\lambda, y)f_-(\lambda, x)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm\{x < y\}
+    + \frac{f_+(\lambda, x)f_-(\lambda, y)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm\{x > y\},
+  \]
+  where $f_{\pm}$ are the Jost functions solving
+  \[
+    \begin{cases}
+      -f_{\pm}'' + V f_{\pm} = \lambda^2 f_{\pm}, \\
+      |f_+(\lambda, x) - e^{i\lambda x}| \xrightarrow[x \to \infty]{} 0, \\
+      |f_-(\lambda, x) - e^{-i\lambda x}| \xrightarrow[x \to \infty]{} 0.
+    \end{cases}
+  \]
+  The conclusion from this is that
+  \begin{align*}
+    \langle e^{iHt} \chi(H) P_{\mathrm{ac}} f, g \rangle
+    &=
+    \frac{1}{\pi i} \int_{-\infty}^\infty
+    \int e^{it \lambda^2} \lambda \cdot  \chi(\lambda^2)
+    \frac{f_+(\lambda, y) f_-(\lambda, x)}{W(\lambda)}\, d\lambda\, f(x) \overline{g(y)} \mathbbm{1}_{\{x < y\}}\, dx\, dy \\
+    & \quad \quad +
+    \frac{1}{\pi i} \int_{-\infty}^\infty
+    \int e^{it \lambda^2} \lambda \cdot  \chi(\lambda^2)
+    \frac{f_+(\lambda, x) f_-(\lambda, y)}{W(\lambda)}\, d\lambda\, f(x) \overline{g(y)} \mathbbm{1}_{\{y < x\}}\, dx\, dy.
+  \end{align*}
+  We will finish the proof next time.
+\end{proof}
