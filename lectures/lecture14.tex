@@ -1,0 +1,130 @@
+\chapter{Feb.~26 --- Dispersive Decay with Potential, Part 3}
+
+\section{Low Energy Estimates, Continued}
+\begin{proof}[Proof of Lemma \ref{lem:low-energy}, continued]
+  Our goal is to understand $f_\pm$. Define
+  $m_+(\lambda, x) = e^{i\lambda x} f_+(\lambda)$,
+  so that
+  \[
+    m_+(\lambda, x) \to 1 \quad \text{as $x \to \infty$}
+  \]
+  ``Volterra iteration'' gives more precise
+  estimates, but we will go with a rougher approach:
+  $m_+$ satisfies
+  \[
+    \partial_x^2 m_+(\lambda, x) + 2i \lambda \partial_x m_+(\lambda, x) + V(x) m_+(\lambda, x) = 0.
+  \]
+  Then we have the \emph{Volterra equation}
+  \[
+    m_+(\lambda, x) = 1 + \int_x^\infty D_\lambda(x - y) V(y) m_+(\lambda, y)\, dy, \quad
+    D_\lambda = \int_0^x e^{2i\lambda z}\, dz = \frac{e^{2i\lambda x} - 1}{2 i \lambda}.
+  \]
+  Denote $\dot{m}_+(\lambda, x) = \partial_\lambda m_+(\lambda, x)$
+  and $\ddot{m}_+(\lambda, x) = \partial_\lambda^2 m_+(\lambda, x)$,
+  which satisfy
+  \[
+    \dot{m}_+(\lambda, x) = \int_x^\infty D_\lambda(x - y) V(y) \dot{m}_+(\lambda, y)\, dy
+    + \int_x^\infty \dot{D}_\lambda(x - y) V(y) m_+(\lambda, y)\, dy
+  \]
+  and a similar integral equation for $\ddot{m}_+$. We
+  want to
+  show the existence of $m_+$, and we are interested
+  in the behavior of $m_+$ as $x \to \infty$.
+  We will solve the equation on $[x_0, \infty)$ for
+  $x_0$ large enough. Set
+  \[
+    z_+(\lambda, x)
+    = \langle \lambda \rangle \frac{m_+(k, x) - 1}{W_+'(x)}, \quad
+    W_+'(x) = \int_x^\infty \langle y \rangle |V(y)|\, dy.
+  \]
+  where $\langle \lambda \rangle = \sqrt{1 + \lambda^2}$
+  is the \emph{Japanese bracket}.
+  Note that $W_+'(x) \to 0$ with the same rate, and if
+  \[
+    \int \langle y \rangle^n |V(y)|\, dy < \infty,
+  \]
+  then $|W_+'(x)| \le \langle x \rangle^{1 - n}$.
+  From the equation of $m_+$, we can see that
+  \[
+    (I - L) z_+(k, x) = z_+(k, x) - L z_+
+    = \frac{\langle \lambda \rangle}{W_+'(x)} \int_x^\infty D_\lambda(y - x) V(y)\, dy, \quad
+  \]
+  where $Lz_+$ is given by
+  \[
+    L z_+ = \frac{1}{W_+'(x)} \int_x^\infty D_\lambda(y - x) V(y) W_+'(y) z_+(y) \, dy.
+  \]
+  Our goal is to show that $(I - L)$ is invertible
+  on $L^\infty([x_0, \infty))$.
+  Note that we have
+  $|D_\lambda(z)| \lesssim |z| / |\lambda|$
+  since $|e^{ix} - 1| \le |x|$, and also
+  $|D_\lambda(z)| \le |z|$. Then we can estimate
+  \[
+    \left\|\langle \lambda \rangle W_+' \int_x^\infty D_\lambda(y - x) V(y)\, dy \right\|_{L^\infty([x_0, \infty))}
+    \lesssim
+    \left\|\langle \lambda \rangle W_+' \int_x^\infty \frac{|y - x|}{|\lambda|} V(y)\, dy \right\|_{L^\infty([x_0, \infty))}
+    < \infty
+  \]
+  So if $(I - L) z_+ = G$, then from the
+  above computation $\|G\|_{L^\infty([x_0, \infty))} < \infty$.
+  We also have
+  \begin{align*}
+    \|Lz_+\|_{L^\infty([x_0, \infty))}
+    &\lesssim \left\|\frac{1}{W_+'(x)} \int_x^\infty |y - x| V(y) W_+'(y) \|z_+\|_{L^\infty}\, dy \right\|_{L^\infty([x_0, \infty))} \\
+    &\lesssim W_+'(x_0) \|z_+\|_{L^\infty([x_0, \infty))}\left\|\frac{1}{W_+'(x)} \int_x^\infty |y - x| |V(y)|\, dy \right\|_{L^\infty([x_0, \infty))} \\
+    &\lesssim W_+'(x_0) \|z_+\|_{L^\infty([x_0, \infty))}.
+  \end{align*}
+  As $|x_0| \to \infty$, we have
+  $\|Lz_+\|_{L^\infty([x_0, \infty))} \ll \|z_+\|_{L^\infty([x_0, \infty))}$,
+  so $(I - L)$ is invertible on
+  $L^\infty([x_0, \infty))$. Thus $z_+$ exists
+  in $L^\infty([x_0, \infty))$, hence
+  $m_+$ also exists in $L^\infty([x_0, \infty))$.
+
+  We still need to work on $(-\infty, x_0)$.
+  For $-1 \le x \le x_0$, we have
+  \[
+    |z_+(\lambda, x)|
+    \lesssim 1 + \int_x^{x_0} \langle y \rangle |V(y)| |z_+(\lambda, y)|\, dy,
+  \]
+  so by Gronwall's inequality,
+  $|z_+(\lambda, x)| \lesssim 1$. For $x \le 0$,
+  we can notice that
+  \[
+    \frac{|z_+(\lambda, x)|}{\langle x \rangle}
+    \lesssim 1 + \frac{1}{\langle x \rangle} \int_x^0 \langle x - y\rangle |V(y)| \frac{|z_+(\lambda, y)|}{\langle y \rangle}\, dy
+    \lesssim 1 + \int_x^0 \langle y\rangle |V(y)| \frac{|z_+(\lambda, y)|}{\langle y \rangle}\, dy
+  \]
+  Applying Gronwall's inequality again, we obtain
+  $|z_+(\lambda, x) / \langle x \rangle| \lesssim 1$.\footnote{Note that one can also apply Gronwall's inequality for $x > 0$, but the resulting estimate $|z_+(\lambda, x)| \lesssim \langle x \rangle$ does not give precise asymptotic information for $z_+$ as $x \to \infty$.}
+  So we know the existence of $f_+$ and $m_+$, and
+  a similar argument shows the existence of
+  $f_-$ and $m_-$. We can also obtain estimates for
+  $\dot{m}_\pm$ and $\ddot{m}_\pm$ in a similar fashion.
+  We continue the proof from here next time.
+\end{proof}
+
+\begin{remark}
+  Inserting the formula for $m_+$ again in the
+  Volterra equation yields
+  \begin{align*}
+    m_+(\lambda, x)
+    &= 1 + \int_x^\infty D_\lambda(x - y) V(y) m_+(\lambda, y)\, dy \\
+    &= 1 + \int_x^\infty D_\lambda(x - y) V(y) \, dy
+    + \int_x^\infty D_\lambda(x - y) V(y) \int_y^\infty D_\lambda(y - z) V(z) m_+(\lambda, z)\, dz\, dy \\
+    &= \dots.
+  \end{align*}
+  Iterating this process (Volterra iteration) and
+  bounding each term not
+  involving $m_+$ gives more precise estimates (argue
+  that one ends up with a summable series and get
+  estimates from there).
+\end{remark}
+
+\begin{lemma}
+  Suppose $W(0) \ne 0$. Then we have
+  \[
+    \sup_{x < y} \left|\int_{-\infty}^\infty e^{it\lambda^2} \frac{\lambda \chi(x^2)}{W(\lambda)} f_+(\lambda)\ f_-(\lambda, x), d\lambda\right|
+    \le |t|^{-1 / 2}.
+  \]
+\end{lemma}
