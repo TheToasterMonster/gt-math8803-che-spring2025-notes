@@ -193,8 +193,8 @@
   Using a Green's function, we can write
   \[
     R(\lambda^2 + i 0)(x, y)
-    = \frac{f_+(\lambda, y)f_-(\lambda, x)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm\{x < y\}
-    + \frac{f_+(\lambda, x)f_-(\lambda, y)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm\{x > y\},
+    = \frac{f_+(\lambda, y)f_-(\lambda, x)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm{1}_{\{x < y\}}
+    + \frac{f_+(\lambda, x)f_-(\lambda, y)}{W[f_+(\lambda, \cdot), f_-(\lambda, \cdot)]} \mathbbm{1}_{\{y < x\}},
   \]
   where $f_{\pm}$ are the Jost functions solving
   \[

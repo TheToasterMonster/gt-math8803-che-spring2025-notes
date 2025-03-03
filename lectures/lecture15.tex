@@ -1,0 +1,220 @@
+\chapter{Mar.~3 --- Dispersive Decay with Potential, Part 4}
+
+\section{Low Energy Estimates, Continued}
+\begin{lemma}
+  Suppose $W(0) \ne 0$. Then we have
+  \[
+    \sup_{x < y} \left|\int_{-\infty}^\infty e^{it\lambda^2} \frac{\lambda \chi(\lambda^2)}{W(\lambda)} f_+(\lambda, y) f_-(\lambda, x)\, d\lambda\right|
+    \le |t|^{-1 / 2}.
+  \]
+\end{lemma}
+
+\begin{proof}
+  We first consider the case $x < 0 < y$. Then
+  $f_+(\lambda, y) \to e^{i y \lambda}$ as
+  $y \to \infty$ and
+  $f_-(\lambda, x) \to e^{-i x \lambda}$ as
+  $x \to -\infty$. So we can write
+  \begin{align*}
+    \left|\int_{-\infty}^\infty e^{it\lambda^2} e^{i\lambda(y - x)} \frac{\lambda \chi(x^2)}{W(\lambda)} m_+(\lambda, y)m_-(\lambda, x)\, d\lambda\right|
+    &= \left|e^{i\partial_x^2 t} \left( \frac{\lambda \chi(\lambda^2)}{W(\lambda)} m_+(\lambda, y) m_-(\lambda, x)\right)^\vee\right| \\
+    &\lesssim |t|^{-1 / 2}
+    \left\| \left(\frac{\lambda \chi(\lambda^2)}{W(\lambda)} m_+(\lambda, y) m_-(\lambda, x)\right)^\vee \right\|_{L^1}.
+  \end{align*}
+  Let $\tau$ be the dual variable of $\lambda$, and
+  write the inner function as $G(x, y; \tau)$, where
+  $x, y$ are fixed. Then we would like to bound
+  $\|G(x, y; \tau)\|_{L^1_\tau}$, for which
+  it suffices to show $|G(x, y; \tau)| \lesssim \langle \tau \rangle^{-2}$.
+  By Fourier duality, it suffices to bound
+  the derivatives of $G$ in $\lambda$:
+  \[
+    \partial_\lambda^2 \left(\frac{\lambda \chi(\lambda^2)}{W(\lambda)} m_+(\lambda, y) m_-(\lambda, x)\right), \quad
+    \partial_\lambda \left(\frac{\lambda \chi(\lambda^2)}{W(\lambda)} m_+(\lambda, y) m_-(\lambda, x)\right), \quad
+    \left(\frac{\lambda \chi(\lambda^2)}{W(\lambda)} m_+(\lambda, y) m_-(\lambda, x)\right).
+  \]
+  Recalling that $\chi$ is compactly supported, it
+  is sufficent to bound the $L^\infty$ norms of the
+  above quantities. So we just need to show that
+  $\partial_{\lambda}^j W(\lambda)$ and
+  $\partial_{\lambda}^j m_\pm$
+  are bounded for $j = 0, 1, 2$. Recall that
+  \[
+    W(\lambda)
+    = W[f_+(\lambda, x), f_-(\lambda, x)]
+    = [e^{i\lambda x} m_+(\lambda, x), e^{-i\lambda x} m_-(\lambda, x)]
+    = [m_+(\lambda, 0), m_-(\lambda, 0)],
+  \]
+  where we assumed $W(0) \ne 0$.
+  Note that the Wronskian is independent of the point
+  at which we evaluate, so that $W(\lambda)$
+  does not depend on $x$. We previously
+  estimated
+  $\partial_\lambda^j m_\pm$ for $x \ge 0$ and
+  $j = 0, 1, 2$, so we have $L^\infty$ bounds
+  for $\partial_\lambda^j W(\lambda)$ and
+  $\partial_\lambda^j m_\pm$ for $j = 0, 1, 2$.
+  This proves pointwise decay in this case.
+
+  Now we consider the case $0 \le x < y$. We need
+  to analyze $f_+(\lambda, y) f_-(\lambda, x)$ (note
+  that $f_-(\lambda, x)$ behaves badly as
+  $x \to \infty$, we only know that $f_-(\lambda, x)$
+  might grow linearly as $x \to \infty$). To deal
+  with this, we use
+  some $1$-D scattering theory. Note that
+  $f_\pm(\lambda, x)$ solve the ODE
+  $-\partial_x^2 f_\pm + V f_\pm = \lambda^2 f$,
+  so we can write
+  \[
+    f_\pm(\lambda, x) = \alpha_{\pm}(\lambda) f_{\mp} f(\lambda, x)
+    + \beta_{\pm}(\lambda) f_{\mp}(-\lambda, x)
+  \]
+  for $\lambda \ne 0$. Since
+  $f_-(\lambda, x)$ and $f_-(-\lambda, x)$ are
+  linearly independent ($W[f_-(\lambda, x), f_-(-\lambda, x)] = 2i\lambda$ and $\lambda \ne 0$).
+  Since $0 \le x < y$, we can use this to write
+  \begin{align*}
+    f_+(\lambda, y) f_-(\lambda, x)
+    &= f_+(\lambda, y)(\alpha_-(\lambda) f_+(\lambda, x) + \beta_-(\lambda) f_+(-\lambda, x)) \\
+    &= \alpha_-(\lambda) f_+(\lambda, y) f_+(\lambda, x)
+    + \beta_-(\lambda) f_+(\lambda, y) f_+(-\lambda, x),
+  \end{align*}
+  and we can now make the same argument as in the
+  previous case to get the decay estimate.
+
+  In the final case $x < y \le 0$, the idea is the same
+  as when $x_0 \le x < y$:
+  We can write $f_+(\lambda, y)$ as a linear combination of
+  $f_-(-\lambda, y)$ and $f_-(\lambda, y)$ and
+  proceed as before.
+\end{proof}
+
+\begin{remark}
+  This completes the proof of the low energy part.
+\end{remark}
+
+\begin{remark}
+  Consider the two \emph{scattering relations} from above
+  \begin{align*}
+    f_+(\lambda, x)
+    &= \alpha_+(\lambda) f_-(\lambda, x) + \beta_+(\lambda) f_-(-\lambda, x) \\
+    f_-(\lambda, x)
+    &= \alpha_-(\lambda) f_+(\lambda, x) + \beta_-(\lambda) f_+(-\lambda, x).
+  \end{align*}
+  We can rewrite the first equation as
+  \begin{align*}
+    \frac{1}{\beta_+(\lambda)} f_+(\lambda, x)
+    = \frac{\alpha_+(\lambda)}{\beta_+(\lambda)} f_-(\lambda, x) + f_-(-\lambda, x),
+  \end{align*}
+  and we find that
+  \begin{align*}
+    \frac{1}{\beta_+(\lambda)} f_+(\lambda, x)
+    &\xrightarrow[x \to +\infty]{} \frac{1}{\beta_+(\lambda)} e^{i\lambda x} \\
+    \frac{\alpha_+(\lambda)}{\beta_+(\lambda)} f_-(\lambda, x)
+    &\xrightarrow[x \to -\infty]{} \frac{\alpha_+(\lambda)}{\beta_+(\lambda)} e^{-i\lambda x} \\
+    f_-(-\lambda, x)
+    &\xrightarrow[x \to -\infty]{} e^{i\lambda x}.
+  \end{align*}
+  We call $T(\lambda) = 1 / \beta_+(\lambda)$ the
+  \emph{transmission coefficient} and
+  $R_+(\lambda) = \alpha_+(\lambda) / \beta_+(\lambda)$
+  the \emph{reflection coefficient}.
+  One also has the relation
+  $|T(\lambda)|^2 + |R_+(\lambda)|^2 = 1$.
+\end{remark}
+
+\section{Distorted Fourier Transforms}
+
+\begin{remark}
+  We give an alternate approach to proving
+  the low energy estimates via ``distorted Fourier
+  transforms.'' Recall that the usual Fourier transform
+  diagonalizes differentiation. The ``distorted
+  Fourier transform'' $\widetilde{\mathcal{F}}$
+  will diagonalize $-\partial_x^2 + V$, i.e. it will
+  satisfy
+  \[
+    \widetilde{\mathcal{F}}((-\partial_x^2 + V) g)(\xi)
+    = \xi^2 \widetilde{\mathcal{F}}(g).
+  \]
+  In Fourier space, the scattering relations from
+  before become:
+  \begin{align*}
+    T(\xi) f_+(x, \xi)
+    &= f_-(x, -\xi) + R_-(\xi) f_-(x, \xi) \\
+    T(\xi) f_-(x, \xi)
+    &= f_+(x, -\xi) + R_+(\xi) f_+(x, \xi)
+  \end{align*}
+  Recall that for $H = -\partial_x^2 + V$, we have
+  the spectral resolution
+  \[
+    (H - (\xi^2 + i 0))^{-1}(x, y)
+    = R(\xi^2 + i 0)(x, y)
+    = \frac{f_+(x, \xi) f_-(y, \xi) \mathbbm{1}_{\{x \ge y\}} + f_-(x, \xi) f_+(y, \xi) \mathbbm{1}_{\{x < y\}}}{W[f_+(\cdot, \xi), f_-(\cdot, \xi)]}
+  \]
+  for $x, y \in \R$ and $\xi \in \R$.
+\end{remark}
+
+\begin{lemma}
+  The density of the spectral resolution
+  $E(d\xi^2)$ on $[0, \infty)$ can be written as
+  \[
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    = \frac{|T(\xi)|^2}{2\pi} [f_+(x, \xi) f_+(y, -\xi) + f_-(x, \xi) f_-(y, -\xi)].
+  \]
+  Alternatively, it can also be written as
+  \[
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    = \frac{1}{\pi}
+    \begin{cases}
+      \re [T(\xi) f_+(x, \xi) f_-(y, \xi)], & \text{if $x \ge y$}, \\
+      \re [T(\xi) f_+(y, \xi) f_-(x, \xi)], & \text{if $x \ge y$}.
+    \end{cases}
+  \]
+\end{lemma}
+
+\begin{proof}
+  Recall that (make a change of variables $\lambda = \xi^2$
+  in the usual formula for $E(d\lambda)$)
+  \[
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    = \frac{\xi}{\pi i} [R(\xi^2 + i0) - R(\xi^2 - i0)](x, y).
+  \]
+  Then we can write
+  \[
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    = \frac{\xi}{2\pi} [W(\xi)^{-1} f_+(x, \xi) f_-(y, \xi) - W(-\xi)^{-1} f_+(x, -\xi) f_-(y, -\xi)].
+  \]
+  Using the scattering relations, we have
+  $T(\xi) W(\xi) = -2 \xi i$, so we have
+  \[
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    = \frac{1}{2\pi}(T(\xi) f_+(x, \xi) f_-(y, \xi) + T(-\xi) f_+(x, -\xi) f_-(y, -\xi)).
+  \]
+  Write $f_-(y, \xi)$ in the first term
+  using $f_+(y, \xi)$ and $f_-(y, -\xi)$, and
+  write $f_+(x, -\xi)$ in the second term
+  as $f_-(x, \xi)$ and $f_+(x, \xi)$ to obtain
+  (note that $T(-\xi) = T(\xi)$ and
+  $R_{\pm}(-\xi) = \overline{R_{\pm}(\xi)}$)
+  \begin{align*}
+    \frac{E(d\xi^2)}{d\xi}(x, y)
+    &= \frac{1}{2\pi} [T(\xi) f_+(x, \xi)(T(-\xi) f_+(y, -\xi) - R_-(-\xi) f_-(y, \xi)) \\
+    & \quad \quad + T(-\xi)(T(\xi)f_-(x, \xi) - R_+(\xi) f_+(x, \xi)) f_-(y, -\xi)] \\
+    &= \frac{|T(\xi)|^2}{2\pi} [f_+(x, \xi) f_+(y, -\xi) + f_-(x, \xi) f_-(y, -\xi)].
+  \end{align*}
+  This proves the case $x > y$, and $x < y$ follows
+  similarly.
+\end{proof}
+
+\begin{definition}
+  Define the \emph{distorted Fourier basis}
+  \[
+    e(x, \xi) = \frac{1}{\sqrt{2\pi}}
+    \begin{cases}
+      T(\xi) f_+(x, \xi) & \text{if $\xi \ge 0$}, \\
+      T(-\xi) f_-(x, -\xi) & \text{if $\xi < 0$}.
+    \end{cases}
+  \]
+\end{definition}
