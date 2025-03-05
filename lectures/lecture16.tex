@@ -1,0 +1,215 @@
+\chapter{Mar.~5 --- Scattering Relations}
+
+\section{Distorted Fourier Transform, Continued}
+
+\begin{remark}
+  Let $H = -\partial_x^2 + V$ and $P_{\mathrm{c}}$
+  be the projection onto the continuous spectrum of
+  $\mathcal{H}$. By spectral theory, we can write
+  \[
+    H P_{\mathrm{c}} f
+    = \frac{1}{2\pi i} \int_0^\infty \lambda E(d\lambda) f,
+  \]
+  which gives
+  \[
+    P_c f
+    = \frac{1}{2\pi i} \int_0^\infty E(d\lambda) f
+    = \frac{1}{2\pi i} [R(\lambda + i 0) - R(\lambda - i 0)] f\, d\lambda
+  .\]
+  Setting $\lambda = \xi^2$, we find
+  \begin{align*}
+    P_{\mathrm{c}} f
+    &= \frac{1}{2\pi i} \int_0^\infty 2\xi [R(\xi^2 + i 0) - R(\xi^2 - i 0)] f\, d\xi \\
+    &= \int_{\R} \int_0^\infty
+    \frac{|T(\xi)|^2}{2\pi} [f_+(x, \xi)f_+(y, -\xi) + f_-(x, \xi) f_-(y, -\xi)] f(y)\,
+    d\xi dy \\
+    &= 
+    \int_{\R} \int_0^\infty
+    \frac{|T(\xi)|^2}{2\pi} (f_+(x, \xi)f_+(y, -\xi)) f(y)\,
+    d\xi dy
+    +
+    \int_{\R} \int_0^\infty
+    \frac{|T(\xi)|^2}{2\pi} (f_-(x, \xi)f_-(y, -\xi)) f(y)\,
+    d\xi dy.
+  \end{align*}
+  We keep the first piece and
+  change variables $\xi \mapsto -\xi$ in the second
+  piece to get
+  \begin{align*}
+    P_{\mathrm{c}} f
+    &= \int_{\R} \int_0^\infty
+    \frac{|T(\xi)|^2}{2\pi} (f_+(x, \xi)f_+(y, -\xi)) f(y)\,
+    d\xi dy
+    +
+    \int_{\R} \int_{-\infty}^0
+    \frac{|T(\xi)|^2}{2\pi} (f_-(x, -\xi)f_-(y, \xi)) f(y)\,
+    d\xi dy \\
+    &= \int_\R e(x, \xi) \int_\R \overline{e(y, \xi)} f(y)\, dy d\xi,
+  \end{align*}
+  where $e(x, \xi)$ is the distorted Fourier basis
+  (note that
+  $\overline{f_+}(y, \xi) = f_+(y, -\xi)$
+  and $\overline{f_-}(y, -\xi) = f_-(y, \xi)$).
+  Note when $V = 0$, we have
+  $f_\pm = e^{\pm i x \xi}$ and
+  $T(\xi) = 1$, so we recover the standard Fourier
+  transform.
+\end{remark}
+
+\begin{corollary}
+  Let $H = -\partial_x^2 + V$. Define the
+  \emph{distorted Fourier transform} by
+  \[
+    \widetilde{F}(f) = \int_{\R} \overline{e(x, \xi)} f(x)\, dx \quad \text{and} \quad
+    \widetilde{F}^{-1}(h) = \int_{\R} e(x, \xi) h(x)\, dx.
+  \]
+  Then for any Borel function $G$, we have
+  the formula
+  \[
+    G(H) P_{\mathrm{c}} f
+    = \widetilde{F}^{-1} [G(\xi) \widetilde{F}(f)(\xi)].
+  \]
+\end{corollary}
+
+\begin{remark}
+  Using the distorted Fourier transform, we can write
+  \[
+    e^{iHt} P_{\mathrm{c}} f
+    = \int_\R e(x, \xi) e^{it \xi^2} \widetilde{\mathcal{F}}(f)(\xi)\, d\xi. \tag{$*$}
+  \]
+  Note that for $\xi \ge 0$, we have
+  $e(x, \xi) = T(\xi) f_+(x, \xi) \sim e^{ix \xi}$
+  as $x \to \infty$. So at least morally,
+  \[
+    \int_\R e(x, \xi) e^{it \xi^2} \widetilde{\mathcal{F}}(f)(\xi)\, d\xi
+    = e^{-i\partial_x^2 t} [\mathcal{F}^{-1} [\widetilde{\mathcal{F}}(f)]].
+  \]
+  On the other hand, we do not know the precise
+  behavior of $T(\xi) f_+(x, \xi)$ as $x \to -\infty$.
+  But we can use the scattering relation and write
+  $f_+$ in terms of $f_-$:
+  \[
+    T(\xi) f_+(x, \xi) = f_-(x, -\xi) + R_-(\xi) f_-(x, \xi),
+  \]
+  so we can write
+  \[
+    \int_{\R} e^{ix\xi} e^{it \xi^2} \widetilde{F}(f)(\xi)\, d\xi
+    + \int_{\R} R_-(\xi) e^{-ix\xi} e^{it \xi^2} \widetilde{F}(f)(\xi)\, d\xi,
+  \]
+  which we can estimate as a $1$-D oscillatory
+  integral. Then using $(*)$, we get
+  $\|e^{iHt} P_{\mathrm{c}} f\|_{L^\infty} \lesssim |t|^{-1 / 2}$.
+\end{remark}
+
+\section{Scattering Relations}
+
+\begin{remark}
+  Recall that we used the scattering relations
+  \begin{align*}
+    T(\xi) f_+(x, \xi) = f_-(x, -\xi) + R_-(\xi) f_-(x, \xi), \\
+    T(\xi) f_-(x, \xi) = f_+(x, -\xi) + R_+(\xi) f_+(x, \xi).
+  \end{align*}
+  We can also write
+  \[
+    f_+(x, \xi) = \alpha_+(\xi) f_-(x, -\xi) + \beta_+(\xi) f_-(x, \xi) \tag{$\star$}
+  \]
+  since $f_+(x, \xi)$ and $f_-(x, -\xi)$ are
+  linearly independent for $\xi \ne 0$. Similarly,
+  we can write
+  \[
+    f_-(x, \xi)
+    = \alpha_-(\xi) f_+(x, -\xi)
+    + \beta_-(\xi) f_+(x, \xi). \tag{$\star\star$}
+  \]
+  The scattering relations then come from dividing
+  these equations by $\alpha_{\pm}(\xi)$. We will now
+  try to understand these coefficients in more detail.
+  Recall that
+  \begin{align*}
+    W(\lambda)
+    = W[f_+(x, \lambda), f_-(x, \lambda)]
+    &= W[\alpha_+(\lambda) f_-(x, -\lambda) + \beta_+(\lambda) f_-(x, \lambda), f(x, \lambda)] \\
+    &= \alpha_+(\lambda) W[f_-(x, -\lambda), f_-(x, \lambda)].
+  \end{align*}
+  Now passing $x \to -\infty$ (since the Wronskian
+  is independent of the point at which we evaluate),
+  we have
+  \[
+    W(\lambda) = \alpha_+(\lambda)
+    \begin{vmatrix}
+      e^{i\lambda x} & i\lambda e^{i\lambda x} \\
+      e^{-i\lambda x} & -i\lambda e^{-i\lambda x} \\
+    \end{vmatrix}
+    = -2i\lambda \alpha_+(\lambda).
+  \]
+  Using the same idea, we can compute that
+  \[
+    W[f_+(x, \lambda), f_-(x, -\lambda)]
+    = \beta_+(\lambda) W[f_-(x, \lambda), f_-(x, -\lambda)]
+    = 2i\lambda \beta_+(\lambda).
+  \]
+  Continuing in this manner, we also get
+  $W[f_-(x, \lambda), f_+(x, -\lambda)] = -2i\lambda \beta_-(\lambda)$
+  and
+  \[
+    \alpha_-(\lambda) = \alpha_+(\lambda)
+    = \frac{W(\lambda)}{-2i\lambda}.
+  \]
+  From this, we can also conclude
+  \[
+    \beta_+ = \frac{W[f_+(\lambda), f_-(-\lambda)]}{2i\lambda} \quad \text{and} \quad
+    \beta_- = \frac{W[f_-(\lambda), f_+(-\lambda)]}{-2i\lambda}.
+  \]
+  Substituting $(\star\star)$ into $(\star)$, we get
+  \begin{align*}
+    f_+(x, \xi)
+    &= \alpha_+(\xi) (\alpha_-(-\xi) f_+(x, \xi) + \beta_-(-\xi) f_+(x, -\xi))
+    + \beta_+(\xi) (\alpha_-(\xi) f_+(x, -\xi) + \beta_-(\xi) f_+(x, \xi)) \\
+    &= [\alpha_+(\xi) \alpha_-(-\xi) + \beta_+(\xi) \alpha_-(\xi)] f_+(x, -\xi)
+    + [\alpha_+(\xi) \beta_-(-\xi) + \beta_+(\xi) \beta_-(\xi)] f_+(x, \xi).
+  \end{align*}
+  This then tells us that (note that there is a mistake
+  earlier;
+  go back and swap the
+  $\pm \xi$ in $(\star)$ and $(\star\star)$)
+  \[
+    \alpha_+(\xi) \alpha_-(\xi) + \beta_+(\xi) \beta_-(-\xi) = 1
+    \quad \text{and} \quad
+    \alpha_+(\xi) \beta_-(\xi) + \beta_+(\xi) \alpha_-(-\xi) = 0.
+  \]
+  Using our formulas for $\alpha_{\pm}$ and $\beta_{\pm}$ in the second equation,
+  we get
+  \[
+    2i \xi \beta(-\xi) = W(-\xi) = \overline{W(\xi)}
+    = 2 i\xi \beta(\xi) \quad \text{and} \quad
+    -2i \xi \alpha_+(\xi) = 2i\xi \overline{\alpha_-(\xi)},
+  \]
+  so $\beta(-\xi) = \beta(\xi)$, and
+  $\alpha_+(\xi) = -\overline{\alpha_-(\xi)}$
+  or $\alpha_-(\xi) = -\overline{\alpha_+(\xi)}$.
+  By the first equation, this implies
+  \[
+    -|\alpha_+(\xi)|^2 + |\beta(\xi)|^2 = 1.
+  \]
+  Dividing by $|\beta(\xi)|^2$ and using some algebra,
+  we find that
+  \[
+    \frac{1}{|\beta(\xi)|^2}
+    + \frac{|\alpha_+(\xi)|^2}{|\beta(\xi)|^2} = 1.
+  \]
+  Setting $T(\xi) = 1 / \beta(\xi)$ and
+  $R_{\pm}(\xi) = \alpha_{\mp}(\xi) / \beta(\xi)$,
+  we get the relationss
+  \[
+    |T(\xi)|^2 + |R_{\pm}(\xi)|^2 = 1.
+  \]
+  We can also define
+  \[
+    S(\xi) =
+    \begin{bmatrix}
+      T(\xi) & R_-(\xi) \\
+      R_+(\xi) & T(\xi)
+    \end{bmatrix},
+  \]
+  which is called the \emph{scattering matrix}.
+\end{remark}
