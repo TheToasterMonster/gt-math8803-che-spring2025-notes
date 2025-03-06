@@ -109,17 +109,17 @@
     T(\xi) f_+(x, \xi) = f_-(x, -\xi) + R_-(\xi) f_-(x, \xi), \\
     T(\xi) f_-(x, \xi) = f_+(x, -\xi) + R_+(\xi) f_+(x, \xi).
   \end{align*}
-  We can also write
+  Also recall that
   \[
-    f_+(x, \xi) = \alpha_+(\xi) f_-(x, -\xi) + \beta_+(\xi) f_-(x, \xi) \tag{$\star$}
+    f_+(x, \xi) = \alpha_+(\xi) f_-(x, \xi) + \beta_+(\xi) f_-(x, -\xi) \tag{$\star$}
   \]
   since $f_+(x, \xi)$ and $f_-(x, -\xi)$ are
   linearly independent for $\xi \ne 0$. Similarly,
   we can write
   \[
     f_-(x, \xi)
-    = \alpha_-(\xi) f_+(x, -\xi)
-    + \beta_-(\xi) f_+(x, \xi). \tag{$\star\star$}
+    = \alpha_-(\xi) f_+(x, \xi)
+    + \beta_-(\xi) f_+(x, -\xi). \tag{$\star\star$}
   \]
   The scattering relations then come from dividing
   these equations by $\alpha_{\pm}(\xi)$. We will now
@@ -128,50 +128,47 @@
   \begin{align*}
     W(\lambda)
     = W[f_+(x, \lambda), f_-(x, \lambda)]
-    &= W[\alpha_+(\lambda) f_-(x, -\lambda) + \beta_+(\lambda) f_-(x, \lambda), f(x, \lambda)] \\
-    &= \alpha_+(\lambda) W[f_-(x, -\lambda), f_-(x, \lambda)].
+    &= W[\alpha_+(\lambda) f_-(x, \lambda) + \beta_+(\lambda) f_-(x, -\lambda), f_-(x, \lambda)] \\
+    &= \beta_+(\lambda) W[f_-(x, -\lambda), f_-(x, \lambda)].
   \end{align*}
   Now passing $x \to -\infty$ (since the Wronskian
   is independent of the point at which we evaluate),
   we have
   \[
-    W(\lambda) = \alpha_+(\lambda)
+    W(\lambda) = \beta_+(\lambda)
     \begin{vmatrix}
       e^{i\lambda x} & i\lambda e^{i\lambda x} \\
       e^{-i\lambda x} & -i\lambda e^{-i\lambda x} \\
     \end{vmatrix}
-    = -2i\lambda \alpha_+(\lambda).
+    = -2i\lambda \beta_+(\lambda).
   \]
   Using the same idea, we can compute that
   \[
     W[f_+(x, \lambda), f_-(x, -\lambda)]
-    = \beta_+(\lambda) W[f_-(x, \lambda), f_-(x, -\lambda)]
-    = 2i\lambda \beta_+(\lambda).
+    = \alpha_+(\lambda) W[f_-(x, \lambda), f_-(x, -\lambda)]
+    = 2i\lambda \alpha_+(\lambda).
   \]
   Continuing in this manner, we also get
-  $W[f_-(x, \lambda), f_+(x, -\lambda)] = -2i\lambda \beta_-(\lambda)$
+  $W[f_-(x, \lambda), f_+(x, -\lambda)] = -2i\lambda \alpha_-(\lambda)$
   and
   \[
-    \alpha_-(\lambda) = \alpha_+(\lambda)
+    \beta_-(\lambda) = \beta_+(\lambda)
     = \frac{W(\lambda)}{-2i\lambda}.
   \]
   From this, we can also conclude
   \[
-    \beta_+ = \frac{W[f_+(\lambda), f_-(-\lambda)]}{2i\lambda} \quad \text{and} \quad
-    \beta_- = \frac{W[f_-(\lambda), f_+(-\lambda)]}{-2i\lambda}.
+    \alpha_+ = \frac{W[f_+(\lambda), f_-(-\lambda)]}{2i\lambda} \quad \text{and} \quad
+    \alpha_- = \frac{W[f_-(\lambda), f_+(-\lambda)]}{-2i\lambda}.
   \]
   Substituting $(\star\star)$ into $(\star)$, we get
   \begin{align*}
     f_+(x, \xi)
-    &= \alpha_+(\xi) (\alpha_-(-\xi) f_+(x, \xi) + \beta_-(-\xi) f_+(x, -\xi))
-    + \beta_+(\xi) (\alpha_-(\xi) f_+(x, -\xi) + \beta_-(\xi) f_+(x, \xi)) \\
-    &= [\alpha_+(\xi) \alpha_-(-\xi) + \beta_+(\xi) \alpha_-(\xi)] f_+(x, -\xi)
-    + [\alpha_+(\xi) \beta_-(-\xi) + \beta_+(\xi) \beta_-(\xi)] f_+(x, \xi).
+    &= \alpha_+(\xi) (\alpha_-(\xi) f_+(x, \xi) + \beta_-(\xi) f_+(x, -\xi))
+    + \beta_+(\xi) (\alpha_-(-\xi) f_+(x, -\xi) + \beta_-(-\xi) f_+(x, \xi)) \\
+    &= [\alpha_+(\xi) \beta_-(\xi) + \beta_+(\xi) \alpha_-(-\xi)] f_+(x, -\xi)
+    + [\alpha_+(\xi) \alpha_-(\xi) + \beta_+(\xi) \beta_-(-\xi)] f_+(x, \xi).
   \end{align*}
-  This then tells us that (note that there is a mistake
-  earlier;
-  go back and swap the
-  $\pm \xi$ in $(\star)$ and $(\star\star)$)
+  This then tells us that
   \[
     \alpha_+(\xi) \alpha_-(\xi) + \beta_+(\xi) \beta_-(-\xi) = 1
     \quad \text{and} \quad
