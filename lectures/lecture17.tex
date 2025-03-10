@@ -1,0 +1,243 @@
+\chapter{Mar.~10 --- Compact Operators}
+
+\section{Conclusion on Dispersive Decay}
+\begin{remark}
+  Recall that we have previously shown if
+  $V$ is sufficiently nice, then
+  \[
+    \|e^{iHt} P_{\mathrm{c}} f\|_{L^\infty}
+    \lesssim |t|^{-\frac{1}{2}}.
+  \]
+  In particular, if we consider the following equation:
+  \[
+    \begin{cases}
+      i \partial_t \psi - \partial_x^2 \psi + V \psi = F, \\
+      \psi(0) = f,
+    \end{cases}
+  \]
+  then we have the Strichartz estimate (which
+  follows by a $TT^*$ argument)
+  \[
+    \|P_{\mathrm{c}} \psi\|_{L^6_{t, x}} \lesssim \|f\|_{L^2_x} + \|F\|_{L^{6 / 5}_{t, x}}.
+  \]
+\end{remark}
+
+\section{Compact Operators}
+
+\begin{definition}
+  A linear operator $A : \HH \to \HH$ is \emph{compact}
+  if it satisfies one of the following (equivalent)
+  conditions:
+  \begin{enumerate}
+    \item $A$ takes bounded sets to relatively
+      compact sets;
+    \item $A$ takes bounded sets to sets that
+      have $\epsilon$-nets for all $\epsilon > 0$ (see below);
+    \item if $\{u_n\}$ is a bounded sequence in
+      $\HH$, then $\{A u_n\}$ has a strongly
+      convergent subsequence;
+    \item $A$ takes weakly convergent to strongly
+      convergent sequences.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  Let $K$ be a metric space. We say that $E \subseteq K$
+  is an $\epsilon$-net of $K$ if for every $x \in K$,
+  we can find $y \in E$ such that $d(x, y) < \epsilon$.
+\end{definition}
+
+\begin{theorem}[Spectral theorem for compact self-adjoint operators]
+  Let $A : \HH \to \HH$ be compact and self-adjoint.
+  Then we can find an orthonormal basis
+  $\{\phi_n\}_{n = 1}^\infty$ of $\HH$ such that
+  \[
+    A \phi_n = \lambda_n \phi_n,
+    \quad \lambda_n \in \R,
+  \]
+  and the $\lambda_n$ can only accumulate at zero.
+\end{theorem}
+
+\begin{definition}
+  The \emph{essential spectrum} of $A$ is the spectrum
+  of $A$ minus the isolated eigenvalues of finite
+  multiplicity.
+\end{definition}
+
+\begin{theorem}[Weyl's criterion]
+  Let $A, B : \HH \to \HH$ be self-adjoint. Assume
+  \[
+    (A + M)^{-1} - (B + M)^{-1} = K
+  \]
+  for some compact operator $K$ and
+  constant $M$. Then the essential spectrum of
+  $A$ and $B$ are the same.
+\end{theorem}
+
+\begin{proof}
+  We only sketch a proof here. We first claim that if
+  $\lambda$ is in the essential spectrum of $A$, then
+  for every $\epsilon > 0$, there exists
+  an infinite dimensional subspace $L$ of $\HH$
+  such that
+  \[
+    \|(A + M)^{-1} f - (\lambda + M)^{-1} f\|_{\HH}
+    \le \epsilon \|f\|_{\HH}
+  \]
+  for all $f \in L$.
+  This is by spectral theory, as we can write
+  \[
+    (A + M)^{-1} f - (\lambda + M)^{-1} f
+    = \int \left(\frac{1}{t + M} - \frac{1}{\lambda + M}\right) E(dt) f.
+  \]
+  Then since $\lambda$ is fixed, for any $\epsilon > 0$
+  we can find $\delta > 0$ (by continuity) such that
+  \[
+    \int_{\lambda - \delta}^{\lambda + \delta}
+    \left|\frac{1}{t + M} - \frac{1}{\lambda + M}\right|^2 \langle E(d\lambda) f, f \rangle \le \epsilon^2.
+  \]
+  We can take $L = \Ran E([\lambda - \delta, \lambda + \delta])$.
+  By spectral theory again, for any $f \in L$, we have
+  \[
+    \|(A + M)^{-1} f - (\lambda + M)^{-1} f\|_{\HH}^2
+    = \int_{\lambda - \delta}^{\lambda + \delta}
+    \left|\frac{1}{t + M} - \frac{1}{\lambda + M}\right|^2 \langle E(d\lambda) f, f \rangle
+    \le \epsilon^2 \|f\|_{\HH}^2,
+  \]
+  since $E(d\lambda) f = f$ as
+  $f \in L$. So it only remains to check that $L$ is
+  infinite dimensional. To see this, note that if
+  $L$ was finite dimensional, then
+  $\langle E([\lambda - \delta, \lambda + \delta]) f, f \rangle$
+  is a purely atomic measure, a contradiction with
+  $\lambda$ being in the essential spectrum of $A$.\footnote{This claim says that the essential spectrum is related to the infinite dimensional subspaces of $\HH$.}
+
+  Now the converse of the claim is also true (exercise).
+  We will use this to show that $\lambda$ is
+  essential spectrum of $B$. By the converse of
+  the claim, it suffices to find $\widetilde{L}$
+  such that $\dim \widetilde{L} = \infty$ and
+  for every $g \in \widetilde{L}$,
+  \[
+    \|(B + M)^{-1} g - (\lambda + M)^{-1} g\|_{\HH}
+    \le 2 \epsilon \|g\|_{\HH}.
+  \]
+  We now claim that there $\widetilde{L}$ with
+  $\dim \widetilde{L} = \infty$ and $\widetilde{L} \subseteq L$ such that
+  \[
+    \|PK^2 P g\|_{\HH} \le 2 \epsilon \|g\|_{\HH}
+  \]
+  for all $g \in \widetilde{L}$, where
+  $P = E([\lambda - \delta, \lambda + \delta])$.
+  To see this, note that $T = PK^2 P$ is a self-adjoint
+  compact operator, so by the spectral theorem
+  we can find $\{\eta_n\}_{n = 1}^\infty$ and
+  $\{\phi_n\}_{n = 1}^\infty$ with
+  $T\phi_n = \eta_n \phi_n$ and $\eta_n \to 0$ (Since
+  $L$ is an infinite dimensional subspace of $\HH$,
+  we can find a basis $\{b_m\}_{m = 1}^\infty$ for $L$.
+  Then $b_n \to 0$ weakly. A compact operator takes
+  weakly convergent sequences to strongly convergent
+  sequences, so $T b_n \to 0$ strongly. In particular,
+  it is impossible that $\{\eta_n\}_{n = 1}^\infty$ is
+  a finite subset of $\R$. So it has an
+  accumulation point by the Bolzano-Weierstrass
+  theorem, which must be $0$.) Take
+  \[
+    \widetilde{L} = \mathrm{span}\{\phi_n : |\eta_n| \le \epsilon^2\},
+  \]
+  which is infinite dimensional since
+  $\eta_n \to 0$. Then for any $g \in \widetilde{L}$,
+  \[
+    \|Kg\|^2_{\HH} = \langle PK^2 P g, g \rangle
+    \le \epsilon^2 \|g\|^2_{\HH}.
+  \]
+  We can write
+  \begin{align*}
+    (B + M)^{-1} g - (\lambda + M)^{-1} g
+    &= (B + M)^{-1} g - (A + M)^{-1} g
+    + (A + M)^{-1} g - (\lambda + M)^{-1} g \\
+    &= K g + [(A + M)^{-1} g - (\lambda + M)^{-1} g],
+  \end{align*}
+  and thus we have
+  \[
+    \|(B + M)^{-1} g - (\lambda + M)^{-1} g\|_{\HH}
+    \le \|Kg\|_{\HH} + \|(A + M)^{-1} g - (\lambda + M)^{-1} g\|_{\HH}
+    \le 2 \epsilon \|g\|_{\HH}.
+  \]
+  This implies that $\lambda$ lies in the essential
+  spectrum of $B$. We conclude the theorem by symmetry.
+\end{proof}
+
+\begin{example}
+  Let $A = -\Delta$ (with essential spectrum
+  $[0, \infty)$)
+  and $B = -\Delta + V$, where $V$ decays to
+  $0$ as $|x| \to \infty$. Then for $M > 0$,
+  we can see that (using
+  the resolvent identities)
+  \begin{align*}
+    (A + M)^{-1} - (B + M)^{-1}
+    &= (-\Delta + M)^{-1} - (-\Delta + V + M)^{-1} \\
+    &= \sum_{n = 1}^\infty (-\Delta + M)^{-1}
+    (-V(-\Delta + M)^{-1})^n.
+  \end{align*}
+  Notice that $\|(-\Delta + M)^{-1}\|_{L^2 \to L^2} \le 1 / M$,
+  since
+  $((-\Delta + M)^{-1})^\wedge = 1 / (\xi^2 + M) \le 1 / M$
+  for $M > 0$. Now
+  \[
+    \|V(-\Delta + M)^{-1}\|_{L^2 \to L^2} \le \frac{\|V\|_{L^\infty}}{M},
+  \]
+  so if $M > \|V\|_{L^\infty}$, then
+  we have a convergent series. So in order to show
+  that $(A + M)^{-1} - (B + M)^{-1}$ is compact, it
+  suffices to show $K = V(-\Delta + M)^{-1}$ is compact
+  (since the sum and composition of compact operators
+  is again compact). Note that a loss of compactness
+  can come from either the physical or the frequency
+  side. But we have
+  \[
+    ((-\Delta + M)^{-1})^\wedge = \frac{1}{\xi^2 + M},
+  \]
+  which localizes a function on the frequency side,
+  and the decay of $V$ localizes a function on the
+  physical side. This gives intuition for why
+  $K$ should be compact.
+
+  A more rigorous argument is the following: Let
+  $B \subseteq L^2(\R^d)$ be the unit ball, and set
+  \[
+    W = \{w = V(-\Delta + M)^{-1} v : \|v\|_{L^2} \le 1\}.
+  \]
+  We would like to show that $W$ is relatively compact,
+  which we will do by appealing to the Arzela-Ascoli
+  theorem. For this, we must check boundedness and
+  equicontinuity. Define
+  \[
+    W_\epsilon = \{w_\epsilon = \chi_\epsilon * w : w \in W\},
+  \]
+  where $\chi_\epsilon$ is the standard mollifier.
+  For boundedness, we have
+  \[
+    |w_\epsilon(x)| = |\chi_\epsilon * w|
+    \lesssim \epsilon^{-n / 2} \|w\|_{L^2}
+    \lesssim \epsilon^{-n / 2}
+  \]
+  and $\|w_\epsilon(x) - w(x)\|_{L^2} \lesssim \epsilon$,
+  which proves boundedness. For
+  equicontinuity, we note that
+  \[
+    |w_\epsilon(x) - w_\epsilon(y)|
+    \le \left|\int (\chi_\epsilon(x - z) - \chi_\epsilon(y - z))\right| w(z)\, dz
+    \lesssim \epsilon^{-n / 2} \epsilon^{-1} |x - y|,
+  \]
+  which proves equicontinuity. Thus we can apply
+  the Arzela-Ascoli theorem to get that $W_\epsilon$ is
+  relatively compact. Since this holds for all
+  $\epsilon > 0$, we can also conclude that
+  $W$ is relatively compact.
+
+  Finally, by Weyl's criterion, we conclude that
+  the essential spectrum of $B$ is also $[0, \infty)$.
+\end{example}
