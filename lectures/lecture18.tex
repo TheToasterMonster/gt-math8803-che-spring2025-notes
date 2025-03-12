@@ -1,0 +1,239 @@
+\chapter{Mar.~12 --- Spectral Theory and Negative Eigenvalues}
+
+\section{Spectral Theory for \texorpdfstring{$-\Delta + V$}{-Delta + V}}
+\begin{lemma}
+  Suppose $V \to 0$ as $|x| \to \infty$.
+  Then the following are equivalent:
+  \begin{enumerate}
+    \item There exists an eigenvalue $\lambda < 0$
+      of $H = -\Delta + V$.
+    \item There exists $f \in H^2$
+      such that $\langle H f, f \rangle < 0$.
+  \end{enumerate}
+\end{lemma}
+
+\begin{proof}
+  $(1 \Rightarrow 2)$ Let $f$ be the eigenfunction,
+  so that $H f = \lambda f$. Then
+  $\langle Hf, f \rangle  = \lambda \langle f, f \rangle < 0$.
+
+  $(2 \Rightarrow 1)$
+  If $\langle Hf , f \rangle < 0$, then by the
+  spectral theorem, the spectrum of $H$ must extend
+  below zero. But the essential spectrum of
+  $H$ is $[0, \infty)$, so any part of the spectrum below
+  must be an eigenvalue.
+\end{proof}
+
+\begin{theorem}[Birman-Schwinger]
+  In $\R^3$, let $V^{-}$ denote the negative part
+  of $V$, and suppose that
+  \[
+    \int_{\R^3} \int_{\R^3} \frac{|V^-(x)| |V^-(y)|}{|x - y|} \,dx dy < (4\pi)^2.
+  \]
+  Then $H = -\Delta + V$ has no negative eigenvalues.
+\end{theorem}
+
+\begin{remark}
+  If $V \ge 0$, then integration by parts yields
+  \[
+    \langle (-\Delta + V) f, f \rangle
+    = \langle \nabla f, \nabla f \rangle + \langle V f, f \rangle
+    = \|\nabla f\|^2 + \langle V f, f \rangle \ge 0.
+  \]
+  So the previous lemma implies that $-\Delta + V$
+  has no negative eigenvalues.
+\end{remark}
+
+\begin{proof}
+  We argue by contradiction. Assume the exists an
+  eigenvalue $\lambda < 0$. Then by the previous lemma,
+  we can find $f \in H^2$ such that
+  $\langle Hf, f \rangle < 0$. Write
+  $V = V^+ + V^-$,
+  where $V^+, V^-$ are the positive and negative parts
+  of $V$, respectively. Since $V^+ \ge 0$, we have
+  \begin{align*}
+    \langle Hf, f \rangle
+    = \langle (-\Delta + V) f, f \rangle
+    &= \langle (-\Delta + V^+ + V^-) f, f \rangle \\
+    &= \langle (-\Delta + V^-) f, f \rangle + \langle V^+ f, f \rangle
+    \ge \langle (-\Delta + V^-) f, f \rangle.
+  \end{align*}
+  Let $\widetilde{H} = -\Delta + V^-$, so
+  $\langle \widetilde{H} f, f \rangle < 0$.
+  By the previous lemma, $\widetilde{H}$ has a
+  negative eigenvalue $\widetilde{\lambda}$, and
+  we can find $\phi$ such that
+  $(-\Delta + V^-) \phi
+    = \widetilde{H} \phi = \widetilde{\lambda} \phi$.
+    Then $(-\Delta - \widetilde{\lambda}) \phi = -V^- \phi \in L^2$, and we can write
+    \[
+      \phi = -(-\Delta - \widetilde{\lambda})^{-1} V^- \phi,
+    \]
+    where $(-\Delta - \widetilde{\lambda}$ is invertible
+    since $-\widetilde{\lambda} > 0$. Note that
+    $V^- \le 0$, so
+    \[
+      \underbrace{\sqrt{|V^-|}}_{\psi} = \underbrace{\sqrt{|V^-|} (-\Delta - \widetilde{\lambda})^{-1}\sqrt{|V^-|}}_T \underbrace{(\sqrt{|V^-|}\phi)}_{\psi}.
+    \]
+    The above says $\psi = T \psi$, so
+    $\|T\|_{L^2 \to L^2} \ge 1$ (recall that
+    $\|T\|_{L^2 \to L^2} = \sup_{f \in L^2} (\|Tf\|_{L^2} / \|f\|_{L^2}))$.
+    But
+    \[
+      Tf(x)
+      = \sqrt{|V^{-}|(x)} \int_\R (-\Delta - \widetilde{\lambda})^{-1}(x, y) \sqrt{|V^{-}|(y)} f(y) \,dy.
+    \]
+    Such a $T$ is called a \emph{Hilbert-Schmidt operator}.
+    These operators have kernels, so we have
+    \begin{align*}
+      \|T\|_{L^2 \to L^2}
+      \le \|T\|_{\mathrm{H.S.}}
+      &= \left(\int_{\R^3} \int_{\R^3} |\mathrm{kernel}(T)|^2(x, y)\, dxdy\right)^{1 / 2} \\
+      &= \left(\int_{\R^3} \int_{\R^3} \sqrt{|V^{-}|}(x) ((-\Delta - \widetilde{\lambda})^{-1}(x, y) \sqrt{|V^-|}(y))^2\, dxdy\right)^{1 / 2} \\
+      &= \left(\int_{\R^3} \int_{\R^3} |V^{-}|(x) \frac{e^{-i\sqrt{\widetilde{\lambda}}|x - y|}}{(4\pi|x - y|)^2} |V^-|(y) \, dxdy\right)^{1 / 2} \\
+      &= \left(\int_{\R^3} \int_{\R^3} \frac{|V^-|(x) |V^-(y)|}{(4\pi |x - y|)^2} \, dxdy\right)^{1 / 2}
+      < 1
+    \end{align*}
+    by assumption, which contradicts
+    $\|T\|_{L^2 \to L^2} \ge 1$.
+\end{proof}
+
+\begin{remark}
+  The full version of Birman-Schwinger says that
+  \[
+    \text{\# of negative eigenvalues of $H$}
+    \le \frac{1}{(4\pi)^2} \int_{\R^3} \int_{\R^3} \frac{|V^-(x)| |V^-(y)|}{|x - y|} \,dx dy.
+  \]
+  A proof can be seen in Reed-Simon IV.
+\end{remark}
+
+\begin{lemma}
+  In one dimension, if $V \in L^1(\R)$ and
+  \[
+    \int_{-\infty}^\infty V(x)\, dx < 0,
+  \]
+  then $H = -\partial_x^2 + V$ has a negative
+  eigenvalue.
+\end{lemma}
+
+\begin{proof}
+  By the first lemma from the day, it suffices
+  to find $f \in H^2$ such that $\langle Hf, f \rangle < 0$.
+  Let $\phi$ be a nice function, and
+  set $f(x) = \phi(\epsilon x)$ for
+  $\epsilon \ll 1$ to be determined. We have
+  \begin{align*}
+    \langle Hf, f \rangle
+    = \langle f', f' \rangle + \langle Vf, f \rangle
+    &= \epsilon^2 \int |\phi'(\epsilon x)|^2\, dx
+    + \int V \phi^2(\epsilon x)\, dx \\
+    &= \epsilon \int |\phi'|^2\, dx
+    + \int V \phi^2(\epsilon x) \, dx
+    \xrightarrow[\epsilon \to 0]{} 0 + |\phi^2(0)|^2 \int V\, dx < 0
+  \end{align*}
+  by the dominated convergence theorem.
+  Thus taking $\epsilon$ small enough, we can get
+  $\langle Hf, f \rangle < 0$.
+\end{proof}
+
+\begin{remark}
+  Consider
+  \[
+    (*) = \iint \frac{|V(x)| |V(y)|}{|x - y|^2}\, dxdy
+  \]
+  in $\R^3$. We know that if $(*)$ is small enough,
+  then $H$ behaves similarly to $-\Delta$.
+  The \emph{Kato norm} of $V$ is
+  \[
+    \|V\|_{K}
+    = \sup_x \int \frac{|V(y)|}{|x - y|}\, dy.
+  \]
+  This norm is scaling invariant. In 2004,
+  Rodnianski-Schlag showed that
+  if $\|V\|_K < 4\pi$, then
+  \[
+    \|e^{itH} P_{\mathrm{ac}} f\|_{L^\infty}
+    \lesssim |t|^{-3 / 2} \|f\|_{L^1}.
+  \]
+  Another result by Beceanu-Goldberg in 2010 showed
+  that if $\|V\|_{K} < \infty$ and $V$ is ``nice''
+  such that $H$ has
+  ``no zero resonance'' nor ``zero eigenfunctions,''
+  then
+  \[
+    \|e^{itH} P_{\mathrm{ac}} f\|_{L^\infty}
+    \lesssim |t|^{-3 / 2} \|f\|_{L^1}.
+  \]
+\end{remark}
+
+\section{Agmon Bound}
+\begin{remark}
+  We consider the equation $(-\Delta + V) \psi = E\psi$
+  with $E < 0$ and $\psi \in H^2$.
+\end{remark}
+
+\begin{theorem}[Agmon bound]
+  Let $V \in C(\R^d)$ and $V \to 0$ as $|x| \to \infty$.
+  Then
+  \[
+    \int_{\R^d} e^{\alpha |x|} |\psi(x)|^2\, dx < \infty
+  \]
+  for some $\alpha > 0$. If $V$ is smooth and
+  $\|D^\gamma V\|_{L^\infty} < \infty$ for
+  $|\gamma| \ge (n + 1) / 2$, then
+  $|\psi(x)| \lesssim e^{-\alpha |x| / 2}$.
+\end{theorem}
+
+\begin{remark}
+  Some intuition is the following:
+  Consider $-\psi'' + V(x) \psi = E\psi$ in $1$-D,
+  and suppose that
+  \[
+    \psi(x) \sim \exp\left(-\int_0^x\sqrt{(V - E)^+}\, dy\right).
+  \]
+  Then $\psi'(x) \sim -\sqrt{(V - E)^+} \psi(x)$ and
+  $\psi''(x) \sim (V - E)^+ \psi(x) - (V'(x) / \sqrt{(V - E)^+}) \psi(x)$.
+  In the limit $x \to \infty$, we have
+  $V \to 0$ and $E < 0$, so
+  $(V - E)^+ = V - E$. We also have $V' \to 0$, so
+  $V'(x) / \sqrt{(V - E)^+}$ is small and so
+  $\psi$ approximately solves
+  $-\psi'' + V(x) \psi = E\psi$.
+\end{remark}
+
+\begin{proof}
+  Define the \emph{Agmon metric} by
+  \[
+    P_E(x) = \inf_{\text{$\gamma$ a path $0 \to x$}}
+    \int_0^1 \sqrt{(V(\gamma(t)) - E)^+} |\gamma'(t)|\, dt.
+  \]
+  Then one can check directly that $|\nabla P_E(x)| \le \sqrt{(V(x) - E)^+}$
+  and $P_E(x) \le (\|V\|_{L^\infty} + |E|)^{1 / 2} |x|$.
+  The crucial estimate is the following: Let
+  $w(x) = \exp(\min\{2(1 - \epsilon P_E(x), N)\})$
+  for some $0 < \epsilon \ll 1$ and $N \gg 1$, and let
+  $\phi \in C^\infty$ with $\phi = 1$ for
+  $|x| \gg 1$ and $\supp \phi \subseteq \{x : V(x) - E > 0 \}$.
+  Then
+  \[
+    \int w(x) |\psi(x)|^2 \phi^2(x)\, dx \lesssim \|\psi\|_{L^2}^2.
+  \]
+  We will finish the proof next class.
+\end{proof}
+
+\begin{remark}
+  In classic mechanics, the \emph{total energy} of
+  a particle is given by
+  \[
+    E = V(x) + \frac{1}{2} mv^2,
+  \]
+  where $V$ is the \emph{potential energy} and $mv^2 / 2$
+  is the \emph{kinetic energy}. Note that this means
+  $V \le E$, so we cannot find a classical particle
+  with $V > E$. For a quantum particle, however,
+  we can find them in the region
+  $R = \{x \in \R^n : V > E\}$. This region $R$ is
+  called the \emph{classically-forbidden region}.
+\end{remark}
