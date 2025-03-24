@@ -174,7 +174,7 @@
   with $E < 0$ and $\psi \in H^2$.
 \end{remark}
 
-\begin{theorem}[Agmon bound]
+\begin{theorem}[Agmon bound]\label{thm:agmon}
   Let $V \in C(\R^d)$ and $V \to 0$ as $|x| \to \infty$.
   Then
   \[
@@ -202,26 +202,6 @@
   $\psi$ approximately solves
   $-\psi'' + V(x) \psi = E\psi$.
 \end{remark}
-
-\begin{proof}
-  Define the \emph{Agmon metric} by
-  \[
-    P_E(x) = \inf_{\text{$\gamma$ a path $0 \to x$}}
-    \int_0^1 \sqrt{(V(\gamma(t)) - E)^+} |\gamma'(t)|\, dt.
-  \]
-  Then one can check directly that $|\nabla P_E(x)| \le \sqrt{(V(x) - E)^+}$
-  and $P_E(x) \le (\|V\|_{L^\infty} + |E|)^{1 / 2} |x|$.
-  The crucial estimate is the following: Let
-  $w(x) = \exp(\min\{2(1 - \epsilon P_E(x), N)\})$
-  for some $0 < \epsilon \ll 1$ and $N \gg 1$, and let
-  $\phi \in C^\infty$ with $\phi = 1$ for
-  $|x| \gg 1$ and $\supp \phi \subseteq \{x : V(x) - E > 0 \}$.
-  Then
-  \[
-    \int w(x) |\psi(x)|^2 \phi^2(x)\, dx \lesssim \|\psi\|_{L^2}^2.
-  \]
-  We will finish the proof next class.
-\end{proof}
 
 \begin{remark}
   In classic mechanics, the \emph{total energy} of

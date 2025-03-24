@@ -1,0 +1,219 @@
+\chapter{Mar.~24 --- Agmon Bound}
+
+\section{Proof of the Agmon Bound}
+
+\begin{proof}[Proof of Theorem \ref{thm:agmon}]
+  Define the \emph{Agmon metric} by
+  \[
+    P_E(x) = \inf_{\text{$\gamma$ a path $0 \to x$}}
+    \int_0^1 \sqrt{(V(\gamma(t)) - E)^+} |\gamma'(t)|\, dt.
+  \]
+  Then one can check directly that $|\nabla P_E(x)| \le \sqrt{(V(x) - E)^+}$
+  and $P_E(x) \le (\|V\|_{L^\infty} + |E|)^{1 / 2} |x|$.
+  The crucial estimate is the following: Let
+  $w(x) = \exp(\min\{2(1 - \epsilon P_E(x), N)\})$
+  for some $0 < \epsilon \ll 1$ and $N \gg 1$, and let
+  $\phi \in C^\infty$ with $\phi = 1$ for
+  $|x| \gg 1$ and $\supp \phi \subseteq \{x : V(x) - E > 0 \}$.
+  Then
+  \[
+    \int w(x) |\psi(x)|^2 \phi^2(x)\, dx \lesssim \|\psi\|_{L^2}^2.
+  \]
+  Note that this is finite since $\psi$ is an
+  eigenfunction, so it lies in $L^2$. Take
+  $\delta > 0$ to be determined later. Take
+  $\phi$ as above but with $V - E > \delta$ in the
+  support of $\phi$. Set $w_N(x) = \exp(\min\{2(1 - \epsilon P_E(x)), N\})$, and
+  \[
+    I_N = \int w_N(x) |\psi(x)|^2 \phi^2(x)\, dx.
+  \]
+  We claim that $I_n \le C$ independent of
+  $N$. To see this, note that
+  \begin{align*}
+    \delta I_N
+    \le \int (V - E) w_N(x) |\psi(x)|^2 \phi^2(x)\, dx
+    &= \int (V - E) \psi(x) \overline{\psi(x)} w_N(x) \phi^2(x) \, dx \\
+    &= \int (\Delta \psi) \overline{\psi(x)} w_N(x) \phi^2(x)\, dx
+  \end{align*}
+  since $-\Delta \psi + V \psi = E\psi$. Then
+  integrate by parts to get
+  \begin{align*}
+    \delta I_N
+    &\le -\int |\nabla \psi|^2 w_N(x) \phi^2(x)\, dx
+    + 2\int |\nabla \psi| |\overline{\psi}| |w_N(x)| |\phi| |\nabla \phi|\, dx \\
+    & \quad \quad + 2(1 - \epsilon) \int |\nabla \psi| |\overline{\psi}| |w_N| |\phi^2| \sqrt{V - E}\, dx, \tag{$*$}
+  \end{align*}
+  where we used $|\nabla P_E| \le \sqrt{(V - E)^+}$.
+  For the second term, we can apply Cauchy-Schwarz to
+  get
+  \[
+    2\int |\nabla \psi| |\overline{\psi}| |w_N(x)| |\phi| |\nabla \phi|\, dx
+    \le \epsilon \int |\nabla \psi|^2 w_N(x) \phi^2\, dx
+    + \frac{1}{\epsilon} \int |\psi|^2 w_N(x) |\nabla \phi|^2\, dx.
+  \]
+  Note that the $|\nabla \phi|^2$ term is compactly
+  supported (since $\phi(x) = 1$ for all $|x|$ large
+  enough). The first term above of the same form
+  as the first term in $(*)$, so we can combine these
+  later (with a coefficient of $\epsilon - 1$
+  so far). For the third term in $(*)$, we can write
+  \begin{align*}
+    2(1 - \epsilon) \int |\nabla \psi| |\overline{\psi}| |w_N| |\phi^2| \sqrt{V - E}\, dx
+    &\le (1 - \epsilon) \int |\nabla \psi|^2 w_N \phi^2\, dx \\
+    &\quad \quad + (1 - \epsilon) \int |\psi|^2 (V - E) w_N(x) \phi^2\, dx
+  \end{align*}
+  The first term here also matches with the
+  first term in $(*)$, and the three terms cancel
+  out (we previously had a coefficient of $\epsilon - 1$).
+  Now the remaining term is actually the same
+  as the original bound on $\delta I_N$, but with a
+  coefficient of $1 - \epsilon$ instead of $1$. Putting
+  all of this together, we get
+  \[
+    \epsilon \int |\psi|^2 (V - E) w_N(x) \phi^2\, dx
+    \le \frac{1}{\epsilon} \int |\psi|^2 w_N(x) |\nabla \psi|^2\, dx.
+  \]
+  Thus we have the bound
+  \[
+    |\delta I_N| \epsilon \le \frac{1}{\epsilon} \int |\psi|^2 w_N(x) |\nabla \psi|^2\, dx.
+  \]
+  The term $|\nabla \psi|^2$ is compactly supported
+  and $w_N(x)$ is bounded (depending on $N$).
+  Taking $N \to \infty$,
+  \[
+    |\delta I_N| \epsilon
+    \le \frac{1}{\epsilon} \int_{|x| \le R_{\delta, V, E}} e^{2C_{V, E} |x|} |\psi(x)|^2\, dx
+    \lesssim \frac{1}{\epsilon} e^{2C_{V, E} R_{\delta, V, E}} \int |\psi|^2\, dx,
+  \]
+  where $\delta, \epsilon$ are fixed and small.
+  Thus $I_N < \infty$ independent of $N$.
+  So if we pass $N \to \infty$, we have
+  \[
+    \int e^{2(1 - \epsilon) P_E(x)} |\psi|^2 \phi^2(x)\, dx < \infty.
+  \]
+  Note that
+  the complement of $A = \{x : \phi(x) = 1\}$ is
+  compact, so the integral on $A^c$ is finite, which
+  gives
+  \[
+    \int e^{2(1 - \epsilon) P_E(x)} |\psi|^2\, dx < \infty.
+  \]
+  To convert $2(1 - \epsilon) P_E(x)$ to $\alpha |x|$,
+  notice that in the support of $\phi$,
+  we have $V - E > \delta$, so
+  \[
+    P_E(x) = \inf_{\text{$\gamma$ a path $0 \to x$}}
+    \int_0^1 \sqrt{(V(\gamma(t)) - E)^+} |\gamma'(t)|\, dt
+    \le (\|V\|_{L^\infty} + |E|) |x|.
+  \]
+  Also, $(V - E)^{1 / 2} |x| \lesssim P_E(x)$
+  in the support of $\phi$, so
+  $|P_E(x)| \sim (V - E)^{1 / 2} |x| \ge |E|^{1 / 2} |x|$ in this region.
+  Thus if we take $\alpha = 2(1 - \epsilon) |E|^{1 / 2}$,
+  we get the desired weighted $L^2$ bound.
+
+  Now we show the pointwise bound. Since
+  $(-\Delta + V) \psi = E \psi$, by elliptic
+  theory we get $\psi \in H^2$. So
+  \[
+    \int (|\nabla \psi|^2 + V|\psi|^2)
+    = \int E |\psi|^2 < 0
+    \implies \int |\nabla \psi|^2 \le \|V\|_{L^\infty}
+    \int |\psi|^2 < \infty.
+  \]
+  Taking $\partial_\alpha$, we get
+  $-\Delta (\partial_\alpha \psi) + \partial_\alpha(V \psi) = E(\partial_\alpha \psi)(\partial_{\alpha} \overline{\psi})$, so
+  integration by parts gives
+  \begin{align*}
+    \int |\nabla \partial_\alpha \psi|^2
+    &\le \int |\partial_\alpha (V\psi) |\partial_\alpha \psi|\, dx
+    \le \int |\partial_\alpha V\psi| |\partial_\alpha \psi|\, dx
+    + \int V|\partial_\alpha \psi|^2\, dx \\
+    &\le \|\partial_\alpha V\|_{L^\infty}
+    \int |\psi| |\partial_\alpha \psi|^2\, dx
+    + \int V |\partial_\alpha \psi|^2\, dx
+    \lesssim \|\partial_\alpha V\|_{L^\infty} \left(\int |\psi|^2 + |\partial_\alpha \psi|^2\right) \\
+    &\lesssim (\|\partial_\alpha V\|_{L^\infty} + 1) (\|V\|_{L^\infty} + 1) \int |\psi|^2.
+  \end{align*}
+  By induction, one can show
+  \[
+    \int |\nabla \partial_\gamma \psi|^2
+    \le C \|V\|_{C^\gamma} \|\psi\|_{L^2}^2.
+  \]
+  Note that if we consider a compact region, then
+  the pointwise bound is immediate:
+  \[
+    \int_{B_R(x_0)} e^{\alpha |x|} |\psi(x)|^2\, dx
+    \sim e^{\alpha |x_0|} \int_{B_R(x_0)} |\psi|^2\, dx,
+  \]
+  and we can use Sobolev embedding to convert this
+  to an $L^\infty$ bound.
+  In general, write
+  \[
+    \int (-\Delta \psi + E\psi) \overline{\psi(x)} \phi^2(x - y)\, dx
+    = E \int |\psi|^2 \phi^2(x - y)\, dx,
+  \]
+  where $\phi$ is a compactly supported function for
+  every $y \in \R^n$. We can integrate by parts
+  on the left:
+  \begin{align*}
+    E \int |\psi|^2 \phi^2(x - y)\, dx
+    &= \int |\nabla \psi|^2 \phi^2(x - y)\, dx
+    + \int V(x) |\psi|^2 \phi^2(x - y)\, dx \\
+    &\quad \quad + 2 \int (\nabla \psi) \overline{\psi} \phi(x - y) \nabla \phi(x - y)\, dx.
+  \end{align*}
+  Thus we can estimate
+  \begin{align*}
+    \int |\nabla \psi|^2 \phi^2(x - y)\, dx
+    &\le E \int |\psi|^2 \phi^2(x - y)\, dx
+    + \|V\|_{L^\infty} \int |\psi|^2 \phi^2(x - y)\, dx \\
+    &\quad \quad + \left|2 \int (\nabla \psi) \overline{\psi} \phi(x - y) \nabla \phi(x - y)\, dx\right| \\
+    &\le E \int |\psi|^2 \phi^2(x - y)\, dx
+    + \|V\|_{L^\infty} \int |\psi|^2 \phi^2(x - y)\, dx \\
+    &\quad \quad + \frac{1}{2} \int |\nabla \psi|^2 \phi^2(x - y)\, dx
+    + 4 \int |\psi|^2 |\nabla \phi(x - y)|^2\, dx,
+  \end{align*}
+  and we get a bound
+  \[
+    \frac{1}{2} \int |\nabla \psi|^2 \phi^2(x - y)\, dx
+    \le 4 \int |\psi|^2 |\nabla \phi(x - y)|^2\, dx
+    + (\|V\|_{L^\infty} + E) \int |\psi|^2 \phi^2(x - y)\, dx.
+  \]
+  Pick $\phi$ smooth such that $\phi(z) = 1$ when
+  $|z| \le 1$ and $\phi(z) = 0$ when $|z| > 2$. Then
+  \[
+    \int_{|x - y| \le 1} |\nabla \psi|^2
+    \le (\|V\|_{L^\infty} + |E| + 1) \int_{|x - y| \le 2} |\psi|^2\, dx.
+  \]
+  Then by induction,
+  \[
+    \int_{|x - y| \le 1} |\nabla \partial^\gamma \psi|^2 \lesssim C(|E| + \|V\|_{C^\gamma} + 1)
+    \int_{|x - y| \le 2} |\psi|^2\, dx.
+  \]
+  Using Sobolev embedding, we get (for large enough $K$)
+  \[
+    \sup_{|x - y| \le 1} |\psi(x)| \le
+    C \sum_{|\gamma| \le K} \int_{|x - y| \le 1} |\partial^\gamma \psi|^2\, dx
+    \le C \int_{|x - y| \le 2} |\psi|^2\, dx.
+  \]
+  By the Agmon weighted estimate, we have
+  \[
+    \sup_{|x - y| \le 1} |\psi(x)| \lesssim
+    e^{-\alpha|y|} \int e^{\alpha |x|} |\psi|^2\, dx
+    \lesssim e^{-\alpha |y|},
+  \]
+  which gives us the pointwise bound.
+\end{proof}
+
+\begin{remark}
+  Localizing is important since
+  the Sobolev embedding $W^{\alpha, p} \hookrightarrow L^q$
+  in $\R^n$
+  requires
+  \[
+    \frac{1}{p} - \frac{1}{q} = \frac{|\alpha|}{n}.
+  \]
+  We want $q = \infty$, $p = 2$, so $|\alpha| = n / 2$.
+  However, Sobolev embedding
+  into $L^\infty$ requires $|\alpha| > n / 2$.
+\end{remark}
