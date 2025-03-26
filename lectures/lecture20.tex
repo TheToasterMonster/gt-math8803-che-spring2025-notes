@@ -1,0 +1,213 @@
+\chapter{Mar.~26 --- Scattering Theory}
+
+\section{Sharp Agmon Estimate}
+\begin{theorem}[Sharp Agmon estimate in $\R^3$]
+  In $\R^3$, suppose $(-\Delta + V) \psi = E\psi$ with
+  $E < 0$, and
+  let $V$ have ``nice'' decay (the precise
+  condition is $V \in L^{3 / 2, 1})$ Then
+  \[
+    |\psi(x)| \lesssim \frac{1}{\langle x \rangle} e^{-(\sqrt{-E}) |x|}.
+  \]
+\end{theorem}
+
+\begin{remark}
+  Recall that we have previously shown
+  $|\psi| \le e^{-(1 - \epsilon) P_E(x)}$, where
+  $P_E(x) \sim (\sqrt{-E}) |x|$. Note that this
+  bound is not sharp, we have an $\epsilon$ loss
+  in the exponent.
+\end{remark}
+
+\section{Short-Range Scattering Theory}
+
+\begin{remark}
+  Let $H_0 = -\Delta$ and $H = -\Delta + V$.
+  We would like to compare $e^{i H_0 t}$ and $e^{i H t}$.
+  More precisely, for $f \in L^2$,
+  we would like to determine if we can  find
+  $g$ such that
+  \[
+    \|e^{-itH_0} f - e^{-itH} g\|_{L^2} \xrightarrow[t \to \infty]{} 0. \tag{$*$}
+  \]
+  The goal is the following: For a prescribed free flow,
+  can we find a perturbed flow such that they match as
+  $t \to \infty$? This is known as the
+  \emph{wave operator}
+  $\Omega_{\mp} = \lim_{t \to \pm \infty} e^{itH} e^{-itH_0}$
+  (in the strong $L^2$ sense).
+
+  Note that the equation $(*)$ is equivalent to (since
+  $e^{itH}$ is an isometry on $L^2$)
+  \[
+    \|e^{itH} e^{-i t H_0} f - g\|_{L^2} \xrightarrow[t \to \infty]{} 0,
+  \]
+  so if the wave operator $\Omega_-$ exists,
+  then $\|\Omega_- f - g\|_{L^2} = 0$, so
+  we can take $g = \Omega_- f$.
+\end{remark}
+
+\begin{theorem}
+  Suppose that $\sup_x |V(x)| (1 + |x|)^{1 + \epsilon} < \infty$. Then
+  \begin{enumerate}
+    \item $\Omega_{\mp}$ exist;
+    \item $\Omega_{\mp}$ are isometries;
+    \item (intertwining properties)
+      $\Omega_- e^{-itH_0} = e^{-itH} \Omega_-$, so
+      $e^{-itH_0} = \Omega_-^{-1} e^{-itH} \Omega_-$
+      and $e^{-itH} = \Omega_- e^{-itH_0} \Omega_-^{-1}$;
+    \item $\Omega_- H_0 f = H \Omega_- f$
+      for $f \in H^2$;
+    \item $H \circ P_{\Ran(\Omega_-)} = \Omega_- H_0 \Omega_-^*$
+      in $H^2$;
+    \item $\Ran(\Omega_-) \subseteq L^2_{\mathrm{ac}}(H) = \HH_{\mathrm{ac}}$.
+  \end{enumerate}
+\end{theorem}
+
+\begin{proof}
+  $(1)$ The following proof is known as \emph{Cook's method}.
+  For a dense subspace of $L^2$, we will show that
+  $e^{itH} e^{-itH_0} f$ is a Cauchy sequence
+  in time. Fix $s \ge t$, then
+  \[
+    e^{isH} e^{-isH_0} f - e^{itH} e^{-itH_0} f
+    = \int_{t}^s \frac{d}{d\tau} (e^{i\tau H} e^{-i\tau H_0} f) \, d\tau.
+  \]
+  We would like to show that
+  $\|e^{isH} e^{-isH_0} f - e^{itH} e^{-itH_0} f\|_{L^2} \to 0$
+  as $s, t \to \infty$, for which is suffices to prove
+  \[
+    \left|\int_{t}^s \frac{d}{d\tau} (e^{i\tau H} e^{-i\tau H_0} f) \, d\tau\right|
+    \xrightarrow[t, s \to \infty]{} 0.
+  \]
+  We can compute that (recall that $H = H_0 + V$)
+  \[
+    \frac{d}{d\tau} (e^{i\tau H} e^{-i\tau H_0} f)
+    = e^{i\tau H} H e^{-i\tau H_0} f
+    - e^{i\tau H} H_0 e^{-i\tau H_0} f
+    = e^{i\tau H} V e^{-i\tau H_0} f.
+  \]
+  Then we can bound (since $e^{i\tau H}$ is an isometry)
+  \[
+    \left\|\int_{t}^s \frac{d}{d\tau} (e^{i\tau H} e^{-i\tau H_0} f) \, d\tau\right\|_{L^2}
+    = \left\|\int_{t}^s e^{i\tau H} V e^{-i \tau H_0} \, d\tau\right\|_{L^2}
+    \le \int_{t}^s \left\|V e^{-i \tau H_0}\right\|_{L^2} \, d\tau.
+  \]
+  We want to show that $\|V e^{-i \tau H_0} f\|_{L^2}$
+  is integrable in $\tau$, so the above goes to $0$ as $s, t \to \infty$.\footnote{Note that if $V$ is nice, then $\|Ve^{-i\tau H_0} f\|_{L^2} \lesssim \|e^{-i\tau H_0} f\|_{L^\infty} \lesssim |\tau|^{-d / 2}$, which is integrable for $d \ge 3$. But for $d = 1, 2$, we need a more careful argument.}
+  Define
+  \[
+    \mathcal{C} = \{f \in \mathcal{S}(\R^d)
+      : \widehat{f}(\xi) = 0 \text{ for  $|\xi| < a$ and $|\xi| > b$, for some $a, b \in \R^+$}
+    \},
+  \]
+  and note that $\mathcal{C}$ is dense in $L^2$.
+  Take $f \in \mathcal{C}$, then for some $a, b$
+  we have $\widehat{f}(\xi) = 0$ whenever
+  $|\xi| < a$ or $|\xi| > b$. We can write
+  \[
+    e^{-i t H_0} f
+    = \int e^{ix\xi} e^{-i |\xi|^2 t}
+    \widehat{f}(\xi)\, d\xi.
+  \]
+  Write $e^{ix \xi} e^{-i |\xi|^2 t} = e^{it (-|\xi|^2 + \xi(x / t))} = e^{it \phi(\xi)}$.
+  We use a stationary phase argument to estimate
+  this integral: The
+  critical point $\nabla \phi(\xi) = 0$ is the point
+  where the oscillations stop. When $\nabla \phi \ne 0$,
+  we can write
+  \[
+    \int e^{it\phi(\xi)} \widehat{f}(\xi)\, d\xi
+    = \int \left(\frac{1}{it \nabla \phi(\xi)} \frac{d}{d\xi} e^{it \phi(\xi)}\right) \widehat{f}(\xi)\, d\xi
+    = -\frac{1}{t} \int e^{it \phi(\xi)} \frac{d}{d\xi} \left(\widehat{f}(\xi) \frac{1}{\nabla \phi(\xi)}\right)\, d\xi
+  \]
+  by integration by parts. So it suffices to
+  consider the critical point, which happens when
+  $x / t - 2 \xi = 0$, or $\xi = -x / 2t$.
+  Note that $\widehat{f}(\xi)$ is supported in
+  $a < |\xi| < b$, so if
+  $|x / 2t| < a$ or $|x / 2t| < b$, then
+  \[
+    \int e^{ix \xi} e^{-it |\xi|^2} \widehat{f}(\xi)\, d\xi
+  \]
+  has no critical points. So we get that
+  \[
+    \left|\int e^{ix \xi} e^{-it |\xi|^2} \widehat{f}(\xi)\, d\xi\right|
+    \lesssim |t|^{-n}, \quad
+    \text{for any $n \in \N$}.
+  \]
+  So if $|x| < 2at$ or $|x| > 2tb$,
+  then $\|e^{iH_0 f}\|_{L^\infty} \lesssim t^{-n}$
+  for any $n \in \N$.
+  So we focus on $2at < |x| < 2tb$.
+  But in this region, by the pointwise decay of
+  $e^{i H_0 t} f$, we have
+  $\|e^{i H_0 t} f\|_{L^\infty} \lesssim t^{-d / 2}$.
+  Then
+  \begin{align*}
+    \|V e^{i H_0 t f}\|_{L^2(2at < |x| < 2bt)}
+    &\lesssim \frac{1}{(1 + |t|)^{1 + \epsilon}} \|e^{iH_0 t} f\|_{L^2(2at < |x| < 2bt)}
+    \lesssim \frac{1}{(1 + |t|)^{1 + \epsilon}} t^{d / 2}
+    \|e^{iH_0 t} f\|_{L^\infty} \\
+    &\lesssim \frac{1}{(1 + |t|)^{1 + \epsilon}} t^{d / 2}
+    t^{-d / 2}
+    \lesssim \frac{1}{(1 + |t|)^{1 + \epsilon}}
+  \end{align*}
+  where we used the hypothesis that
+  $|V| \lesssim 1 / (1 + |x|)^{1 + \epsilon}$.
+  So
+  \[
+    \|Ve^{i\tau H_0} f\|_{L^2}
+    = \|Ve^{i\tau H_0} f\|_{L^2(|x| < 2a\tau)}
+    + \|Ve^{i\tau H_0} f\|_{L^2(|x| > 2b\tau)}
+    + \|Ve^{i\tau H_0} f\|_{L^2(2a\tau < |x| < 2b\tau)}.
+  \]
+  We have already shown that the last term is
+  integrable. For the
+  first term, we have
+  \[
+    \|Ve^{i\tau H_0} f\|_{L^2(|x| < 2a\tau)}
+    \lesssim \|V\|_{L^2(|x| < 2a\tau)} \| e^{-i\tau H_0} f \|_{L^\infty(|x| < 2a \tau)}
+    \lesssim 2a|\tau|^{d / 2} \cdot \tau^{-n} \quad \text{for any $n \in \N$},
+  \]
+  so if we take $n > d / 2 + 1$, then this
+  term is integrable.
+  Finally, for the second term,
+  \[
+    \|Ve^{i\tau H_0} f\|_{L^2(|x| > 2b\tau)}
+    \lesssim \|V\|_{L^\infty(|x| > 2b\tau)} \| e^{-i\tau H_0} f \|_{L^2}
+    \lesssim \frac{1}{(1 + |\tau|)^{1 + \epsilon}},
+  \]
+  which is integrable (note that $\|e^{-i \tau H_0} f\|_{L^2} = \|f\|_{L^2}$).
+  Thus we obtain
+  \[
+    \|Ve^{-i \tau H_0}\|_{L^2} \lesssim \tau^{-1 - \epsilon},
+  \]
+  which is integrable in $\tau$. The conclusion from
+  this is that for $s \ge t$,
+  \[
+    \|e^{isH} e^{-isH_0} f - e^{itH} e^{-itH_0} f\|_{L^2}
+    \xrightarrow[s, t \to \infty]{} 0,
+  \]
+  so $\lim_{t \to \infty} e^{itH} e^{-itH_0} f$ exists
+  strongly in $L^2$.
+  A similar argument shows that $\Omega_+$ exists.
+
+  $(2)$ This follows since
+  $e^{-itH_0}, e^{itH}$ are both isometries,
+  so that $e^{itH} e^{-itH_0}$ is an isometry.
+  A strong limit of isometries is still an isometry,
+  so we get that $\Omega_{\mp}$ are also isometries.
+
+  $(3)$ We can see that (note the group properties
+  of $e^{itH}$ and $e^{itH_0}$)
+  \begin{align*}
+    \Omega_- e^{-it H_0} f
+    &= \left(\lim_{s \to \infty} e^{isH -isH_0}\right)
+    e^{-itH_0} f
+    = e^{iHt} \left(\lim_{s \to \infty} e^{itH} e^{isH} e^{-isH} e^{-itH_0}\right) f \\
+    &= e^{-iHt} \lim_{s \to \infty} \left(e^{i(t + s) H} e^{-i(s + t) H_0}\right) f
+    = e^{-iHt} \Omega_- f,
+  \end{align*}
+  which proves the desired result.
+\end{proof}
