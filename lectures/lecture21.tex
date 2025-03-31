@@ -1,0 +1,197 @@
+\chapter{Mar.~31 --- Scattering Theory, Part 2}
+
+\section{Short-Range Scattering Theory, Continued}
+\begin{proof}[Proof of Theorem \ref{thm:wave-op-properties}, continued]
+  $(4)$ The idea is to use the Laplace transform.
+  By $(3)$, we have
+  \[
+    \Omega_- \int_0^\infty e^{-itH_0} e^{-t\epsilon}\, dt
+    = \int_0^\infty \Omega_- e^{-itH_0} e^{-t\epsilon}\, dt
+    = \int_0^\infty e^{-itH} \Omega_- e^{-t\epsilon}\, dt
+    = \left(\int_0^\infty e^{-itH} e^{-t\epsilon}\, dt\right) \Omega_-
+  \]
+  since $\Omega_-$ is independent of $t$.
+  Integrating both sides, we get
+  \[
+    \Omega(iH_0 + \epsilon)^{-1}
+    = (iH + \epsilon)^{-1} \Omega_-.
+  \]
+  Note that these are bounded $L^2 \to H^2$
+  operators. Applying $(iH + \epsilon)$ on the left
+  on both sides,
+  \[
+    (i H + \epsilon) \Omega_- (i H_0 + \epsilon)^{-1}
+    = \Omega_-
+  \]
+  in $L^2$. For any $f \in L^2$, we have
+  $(i H_0 + \epsilon)^{-1} f \in H^2$, and
+  $\Omega_- (i H_0 + \epsilon)^{-1} f \in H^2$
+  by the isometry property, so
+  $(i H + \epsilon) \Omega_- (i H_0 + \epsilon)^{-1} f \in L^2$.
+  Now $(i H + \epsilon) \Omega_- (i H_0 + \epsilon)^{-1} g = \Omega_- g$
+  for any $g \in L^2$, and we can find $f \in H^2$
+  such that $g = (i H_0 + \epsilon)^{-1} f$, so
+  we get
+  $(iH + \epsilon) \Omega_- f = \Omega_- (iH_0 + \epsilon) f$.
+  Finally, passing $\epsilon \to 0$, we
+  obtain $iH \Omega_- f = \Omega_- iH_0 f$,
+  so we have $H \Omega_- f = \Omega_- H_0 f$.
+
+  $(5)$ Define $Q = \Omega_-^* \Omega_-$, where
+  $\Omega_-^*$ is the adjoint of $\Omega_-$.
+  We claim that $Q = \id$ and
+  $\Omega_- \Omega_-^* = P_{\Ran(\Omega_-)}$.
+  We clearly have $Q^* = Q \ge 0$,
+  since $\langle Qf, f \rangle = \|\Omega_- f\|_{L^2}^2 = \|f\|_{L^2}^2 \ge 0$ (recall that
+  $\Omega_-$ is an isometry). Then
+  \[
+    \langle Qf, f \rangle = \langle f, f \rangle
+    \implies \langle (Q - \id) f, f \rangle = 0
+  \]
+  for all $f$. But $Q - \id$ is self-adjoint, so
+  spectral theory implies that
+  $Q - \id = 0$, i.e. $Q = \id$.
+  On the other hand, $P = \Omega_- \Omega_-^*$
+  is a projection since we have
+  \[
+    P^2 = \Omega_- \Omega_-^* \Omega_- \Omega_-^*
+    = \Omega_- \id \Omega_-^* = \Omega_- \Omega_-^* = P.
+  \]
+  One can also see that $P^* = P \ge 0$, so
+  $P$ is an orthogonal projection. So it only
+  remains to check the range. Since $P$ is a
+  projection, $\ker P = (\Ran P)^\perp$, and we
+  can identify that
+  \[
+    \ker P
+    = \{f : \langle Pf, f \rangle = 0\}
+    = \{f : \|\Omega_-^* f \|_{L^2}^2 = 0\}
+    = \ker \Omega_-^*
+  \]
+  Since $(\ker T)^\perp = \overline{\Ran T^*}$,
+  we find that (note that $\Ran P$ is closed since
+  $P$ is a projection)
+  \[
+    \Ran P = (\ker P)^\perp
+    = (\ker \Omega_-^*)^\perp
+    = \overline{\Ran \Omega_-}.
+  \]
+  One can check that $\Omega_-$ is a closed
+  operator, so $\overline{\Ran \Omega_-} = \Ran \Omega_-$
+  and $\Ran P = \Ran \Omega_-$. So $P = \Omega_- \Omega_-^*$
+  is an orthogonal projection onto
+  $\Ran(\Omega_-)$. From $(4)$, taking
+  $f = \Omega_-^* g$, we get
+  $\Omega_- H_0 \Omega_-^* = H \Omega_- \Omega_-^* = H P$.
+
+  $(6)$ Let $E(d\lambda)$ be the
+  spectral resolution for $H$. Then by $(5)$,
+  $E(d\lambda) P_{\Ran \Omega_-}
+    = \Omega_- E_0(d\lambda) \Omega_-^*$, so
+    \[
+      P_{\Ran \Omega_-} E(d\lambda) P_{\Ran \Omega_-}
+      = \Omega_- \Omega_-^* \Omega_- E_0(d\lambda) \Omega_-^*
+      = \Omega_- E_0(d\lambda) \Omega_-^*,
+    \]
+  where $\Omega_-^* \Omega_- = \id$ by $(4)$.
+  Thus we see that
+  \[
+    \langle E(d\lambda) P_{\Ran \Omega_-} f, P_{\Ran \Omega_-} f \rangle
+    = \langle E_0(d\lambda) \Omega_-^* f, \Omega_-^* f \rangle.
+  \]
+  Since $E_0$ is the free case, it is
+  always absolutely continuous with respect
+  to the Lebesgue measure, so we have
+  $P_{\Ran \Omega_-} f \in \Hac$, i.e.
+  $\Ran \Omega_- \subseteq \Hac$.
+\end{proof}
+
+\begin{corollary}
+  If $T$ is a Borel measurable function,
+  then
+  $T(H) \Omega_- f = \Omega_- T(H_0) f$.
+\end{corollary}
+
+\begin{proof}
+  This follows from the proof of $(4)$ in the
+  previous theorem.
+\end{proof}
+
+\begin{remark}
+  When do we have the equality
+  $\Ran \Omega_- = \Hac$? We have the following
+  result:
+\end{remark}
+
+\begin{prop}
+  Assume $d \ge 3$ and $|V(x)| \lesssim (1 + |x|)^{1 - \epsilon}$ (this is the \emph{short-range condition})
+  with $\|V\|_{L^2(\R^d)} < \infty$. Assume that
+  \[
+    \|e^{-itH}P_{\mathrm{ac}} f \|_{L^\infty}
+    \lesssim |t|^{-d / 2} \|f\|_{L^1}.
+  \]
+  Then $\Ran \Omega_- = \Hac$.
+\end{prop}
+
+\begin{proof}
+  Define $\widetilde{\Omega} = \lim_{t \to \infty} e^{itH} e^{-itH} P_{\mathrm{ac}}(H)$ in $L^2$.
+  To show that $\widetilde{\Omega}$ exists, we
+  again use Cook's method:
+  \begin{align*}
+    \int_1^\infty \left\| \frac{d}{dt} e^{itH_0} e^{-itH} P_{\mathrm{ac}} f \right\|_{L^2} dt
+    &\le \int_1^\infty \| e^{itH_0} V e^{-itH} P_{\mathrm{ac}} f \|_{L^2}\, dt
+    \le \int_1^\infty \| V e^{-itH} P_{\mathrm{ac}} f \|_{L^2}\, dt \\
+    &\le
+    \int_1^\infty \| V \|_{L^2} \| e^{-itH} P_{\mathrm{ac}} f \|_{L^\infty}\, dt
+    \lesssim \int_1^\infty |t|^{-d / 2} \|f\|_{L^1}\, dt < \infty
+  \end{align*}
+  for $d \ge 3$ (technically we should use
+  $f \in L^2$, but it suffices to consider the
+  dense subspace $L^1 \cap L^2 \subseteq L^2$ for
+  Cook's method).
+  So $\widetilde{\Omega}$ exists. Then
+  $\Omega_- \widetilde{\Omega} f = \lim_{t \to \infty} (e^{itH} e^{-itH_0}) \widetilde{\Omega} f$, so
+  for all $\eta > 0$, we can find $T_\eta$ such
+  that for all $t \ge T_\eta$,
+  \[
+    \Omega_- \widetilde{\Omega} f
+    = e^{itH} e^{-itH_0} \widetilde{\Omega} f
+    + o_{L^2}(\eta).
+  \]
+  Since $\widetilde{\Omega}$ also exists,
+  there is $\widetilde{T}_\eta$ such that
+  for all $t \ge \widetilde{T}_\eta$,
+  \[
+    \widetilde{\Omega} f
+    = e^{itH_0} e^{-itH}
+    P_{\mathrm{ac}} f + o_{L^2}(\eta).  
+  \]
+  So for $t \ge \max\{T_\eta, \widetilde{T}_\eta\}$,
+  we can write
+  \[
+    \Omega_- \widetilde{\Omega} f
+    = e^{itH} e^{-itH_0} (e^{itH_0} e^{-itH} P_{\mathrm{ac}}) f + o_{L^2}(\eta)
+    = P_{\mathrm{ac}} f + o_{L^2}(\eta).
+  \]
+  This holds for arbitrary $\eta$, so
+  $\Omega_- \widetilde{\Omega} f = P_{\mathrm{ac}} f$
+  for every $f \in L^2$. So
+  $\Ran \Omega_- = \Ran P_{\mathrm{ac}}(H) = \Hac$.
+\end{proof}
+
+\begin{remark}
+  Recall that when $d = 3$,
+  \[
+    \sup_x \int \frac{|V(y)|}{|x - y|}\, dy
+    < \infty. \tag{$*$}
+  \]
+  Assuming that $H$ has no zero eigenvalues or
+  resonance, we have
+  \[
+    \|e^{-itH} P_{\mathrm{ac}}(H) f\|_{L^\infty}
+    \lesssim |t|^{-3 / 2} \|f\|_{L^1}.
+  \]
+  In particular, if $(*) \le 4\pi$,
+  then the dispersive estimate holds and
+  the proposition applies.
+\end{remark}

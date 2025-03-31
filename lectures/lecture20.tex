@@ -47,7 +47,7 @@
   we can take $g = \Omega_- f$.
 \end{remark}
 
-\begin{theorem}
+\begin{theorem}\label{thm:wave-op-properties}
   Suppose that $\sup_x |V(x)| (1 + |x|)^{1 + \epsilon} < \infty$. Then
   \begin{enumerate}
     \item $\Omega_{\mp}$ exist;
@@ -59,7 +59,8 @@
     \item $\Omega_- H_0 f = H \Omega_- f$
       for $f \in H^2$;
     \item $H \circ P_{\Ran(\Omega_-)} = \Omega_- H_0 \Omega_-^*$
-      in $H^2$;
+      in $H^2$, so if
+      $f \in \Ran(\Omega_-)$ then $\Omega_- H_0 \Omega_-^* f = Hf$;
     \item $\Ran(\Omega_-) \subseteq L^2_{\mathrm{ac}}(H) = \HH_{\mathrm{ac}}$.
   \end{enumerate}
 \end{theorem}
@@ -205,9 +206,11 @@
     \Omega_- e^{-it H_0} f
     &= \left(\lim_{s \to \infty} e^{isH -isH_0}\right)
     e^{-itH_0} f
-    = e^{iHt} \left(\lim_{s \to \infty} e^{itH} e^{isH} e^{-isH} e^{-itH_0}\right) f \\
+    = e^{-iHt} \left(\lim_{s \to \infty} e^{itH} e^{isH} e^{-isH} e^{-itH_0}\right) f \\
     &= e^{-iHt} \lim_{s \to \infty} \left(e^{i(t + s) H} e^{-i(s + t) H_0}\right) f
     = e^{-iHt} \Omega_- f,
   \end{align*}
   which proves the desired result.
+
+  We finish the proof of $(4)$-$(6)$ next time.
 \end{proof}
