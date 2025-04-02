@@ -1,0 +1,262 @@
+\chapter{Apr.~2 --- Classical Scattering}
+
+\section{Consequences of Wave Operators}
+
+\begin{theorem}[Enss]
+  Suppose $|V(x)| \le 1 / (1 + |x|)^{1 + \epsilon}$
+  for $\epsilon > 0$. Then
+  \[
+    \Ran \Omega_{\mp} = L^2_{\mathrm{ac}} = \Hac
+    \quad \text{and} \quad
+    L^2_{\mathrm{sc}} = \varnothing.
+  \]
+\end{theorem}
+
+\begin{corollary}
+  If $|V(x)| \le 1 / (1 + |x|)^{1 + \epsilon}$ for
+  $\epsilon > 0$, then for all $f \in L^2(\R^d)$,
+  there exist $\{f_j\}_{j = 0}^N \in L^2$
+  such that $Hf_j = \lambda_j f_j$ for some
+  $\lambda_j \le 0$ and
+  \[
+    e^{-iHt} f
+    = \sum_{j = 1}^N e^{-i \lambda_j t} f_j + e^{iH_0 t} f_0 + R(t)
+  \]
+  such that $\|R(t)\|_{L^2} \to 0$ as $t \to \infty$.
+\end{corollary}
+
+\begin{proof}
+  By Enss's theorem, we have
+  $L^2 = L^2_{\mathrm{ac}} + L^2_{\mathrm{pp}}$, so
+  we can write
+  \[
+    f = g + \sum_{j = 1}^N f_j,
+  \]
+  where $g \in L^2_{\mathrm{ac}}$ and
+  $\{f_j\}$ spans $L^2_{\mathrm{pp}}$ (so
+  $Hf_j = \lambda_j f_j$). Then
+  \[
+    e^{-iHt} f = e^{-iHt} g + \sum_{j = 1}^N e^{-i \lambda_j t} f_j. \tag{$*$}
+  \]
+  Since $g \in L^2_{\mathrm{ac}} = \Ran \Omega_-$,
+  we can find $f_0 \in L^2$ such that
+  $\Omega_- f_0 = g$. By the definition of
+  $\Omega_-$,
+  \[
+    \| e^{-iHt g} - e^{-iH_0 t} f_0 \|_{L^2} \xrightarrow[t \to \infty]{} 0,
+  \]
+  so $R(t) = e^{-iHt} g - e^{-iH_0 t} f_0 \to 0$
+  in $L^2$ as $t \to \infty$. This proves the
+  claim after substituting in $(*)$.
+\end{proof}
+
+\section{Classical Scattering}
+
+\begin{remark}
+  Consider the following equation for $x, \xi \in \R^d$:
+  \[
+    \begin{cases}
+      \dot{x}(t) = \xi(t), \\
+      \dot{\xi}(t) = -\nabla V(x(t)). \\
+    \end{cases}
+    \tag{$+$}
+  \]
+  Let $x(t; y, \eta)$, $\xi(t; y, \eta)$
+  denote the solution to
+  $(+)$ with $x(0) = y$ and $\dot{x}(0) = \xi(0) = \eta)$.
+  Define
+  \[
+    \Sigma_{\pm} =
+    \left\{
+      (y, \eta) \in \R^{2d} :
+      V(y) + \frac{1}{2} |\eta|^2 > 0 \text{ and }
+      \limsup_{t \to \pm \infty} |x(t; y, \eta)| = \infty
+    \right\},
+  \]
+  and set $\Sigma_{\mathrm{scattering}} = \Sigma_+ \cap \Sigma_-$.
+  Denote $E(t) = V(x(t)) + |\xi(t)|^2 / 2$
+  with $(x(t), \xi(t))$ solving $(+)$, so
+  \[
+    \frac{d}{dt} E(t)
+    = \nabla V(x(t)) \cdot \dot{x}(t)
+    + \dot{\xi}(t) \cdot \xi(t)
+    = \nabla V(x(t)) \cdot \xi(t) - \nabla V(x(t)) \cdot \xi(t)
+    = 0.
+  \]
+  This shows that we have conservation of the
+  energy $E$.
+\end{remark}
+
+\begin{lemma}
+  Assume that $|\nabla V(x)| \le C_0 (1 + |x|)^{-1 - \epsilon}$
+  and $|V(x)| \to 0$ as $x \to \infty$. Then
+  $(y, \eta) \in \Sigma_+$ if and only if
+  $\lim_{t \to \infty} \xi(t; y, \eta)$ exists
+  and $\lim_{t \to \infty} \xi(t; y, \eta) \ne 0$.
+\end{lemma}
+
+\begin{proof}
+  $(\Leftarrow)$ Suppose
+  $\lim_{t \to \infty} \xi(t; y, \eta) \ne 0$.
+  So for some constant $c > 0$, we will have
+  $|\dot{x}(t)| \ge c$ for all $t$ large enough.
+  Clearly this implies $|x(t)| \to \infty$ as
+  $t \to \infty$.
+  We can also see that
+  \[
+    E(t) = V(x(t)) + \frac{1}{2} |\xi(t)|^2
+    \xrightarrow[t \to \infty]{} \frac{1}{2} |\xi(t)|^2 > 0
+  \]
+  since $|V| \to 0$ as $|x| \to \infty$, so
+  by conservation of energy,
+  $E(0) = V(y) + |\eta|^2 / 2 > 0$.
+  So $(y, \eta) \in \Sigma_+$.
+
+  $(\Rightarrow)$ Assume $(y, \eta) \in \Sigma_+$,
+  we want to show $|x(t; y, \eta)| \ge at$
+  for some $a > 0$. If this can be done, then
+  by the fundamental theorem of calculus, we
+  can estimate
+  \begin{align*}
+    |\xi(t; y, \eta) - \xi(s; y, \eta)|
+    &\le \left|\int_s^t \dot{\xi}(\tau; y, \eta)\, d\tau\right|
+    = \int_s^t |\nabla V(x(\tau; y, \eta))|\, d\tau
+    \le C_0 \int_s^t (1 + x(\tau; y, \eta))^{-1 - \epsilon}\, d\tau \\
+    &\le C_0 \int_s^t (a|\tau|)^{-1 - \epsilon}\, d\tau
+    = \frac{C_0}{a^{1 + \epsilon}} \int_s^\infty \tau^{-1 - \epsilon}\, d\tau
+    \xrightarrow[s \to \infty]{} 0
+  \end{align*}
+  since $\tau^{-1 - \epsilon}$ is integrable.
+  So $\xi(t; y, \eta)$ is a Cauchy sequence in
+  $t$, so $\lim_{t \to \infty} \xi(t; y, \eta)$ exists.
+  We also know that
+  $\lim_{t \to \infty} \xi(t; y, \eta) \ne 0$
+  since $|x(t; y, \eta)| \ge a|t|$, so the
+  result would be proved.
+
+  So it suffices to show $|x(t; y, \eta)| \ge at$
+  for some $a > 0$.
+  We claim that
+  \[
+    |x(t)| \ge \max\left\{\frac{R}{2}, C_1(t - t_0)\right\}
+  \]
+  for some $t_0$ large and $C_1$ independent
+  of $R$, which we will prove using a
+  bootstrap argument. Assume the claim holds
+  on $[t_0, T]$, then we show that it can be
+  extended. We can estimate
+  \begin{align*}
+    |\xi(t) - \xi(t_0)|
+    &\le \int_{t_0}^t |\nabla V(x(\tau))|\, d\tau
+    = \int_{t_0}^{t_0 + R / 2C_1} |\nabla V(x(\tau))|\, d\tau
+    + \int_{t_0 + R / 2C_1}^t |\nabla V(x(\tau))|\, d\tau \\
+    &\le \int_{t_0}^{t_0 + R / 2 C_1} \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau
+    + \int_{t_0 + R / 2C_1}^t \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau \\
+    &\le \int_{t_0}^{t_0 + R / 2 C_1} C_0 \left(\frac{R}{2}\right)^{-1 - \epsilon}\, d\tau
+    + \int_{t_0 + R / 2C_1}^t C_0 (C_1(\tau - t_0))^{-1 - \epsilon}\, d\tau \\
+    &\le C_0 \frac{2\epsilon R^{-\epsilon}}{C_1}
+    + \frac{C_0 C_1^{-1 - \epsilon}}{\epsilon}
+    \left(\frac{R}{2C_1}\right)^{-\epsilon}
+    = \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}.
+  \end{align*}
+  By the fundamental theorem of calculus, we have
+  \begin{align*}
+    x(t) = x(t_0) + \int_{t_0}^t \xi(\tau)\, d\tau
+    &= x(t_0) + (t - t_0) \xi(t_0) + \int_{t_0}^t (\xi(\tau) - \xi(t_0))\, d\tau \\
+    &\ge \sqrt{R^2 + |t - t_0|^2 |\xi(t_0)|^2}
+    - \int_{t_0}^t \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\, d\tau \\
+    &\ge \frac{R}{2} + \frac{(t - t_0) |\xi(t_0)|}{\sqrt{2}} - (t - t_0) \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon} \\
+    &\ge \frac{R}{2} + (t - t_0) \left(\frac{|\xi(t_0)|}{\sqrt{2}} - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\right).
+  \end{align*}
+  Note that $t_0$ is given, so $|\xi(t_0)|$ is
+  fixed. The second part of the inner sum
+  can be made small by taking $R$ large enough,
+  so we can choose $C_1, R$ such that
+  \[
+    \frac{|\xi(t_0)|}{\sqrt{2}}
+    - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}
+    < C_1.
+  \]
+  Then we can applying a bootstrap to
+  extend the estimate beyond $T$ and get
+  $x(t) \ge C_1(t - t_0)$, which then implies
+  that $|x(t)| \ge at$ for some $a > 0$ and
+  $t$ large enough.
+\end{proof}
+
+\begin{prop}
+  Assume $|\nabla V(x)| \le C_0 (1 + |x|)^{-1 - \epsilon}$
+  and $|\nabla^2 V(x)| \le C_1 (1 + |x|)^{-2 - \epsilon}$.
+  Then for every $(y, \eta) \in \Sigma_+$,
+  there exists $(a, p) \in \R^{2d}$ with
+  $p \ne 0$, such that
+  \[
+    |x(t; y, \eta) - (tp + a)| \xrightarrow[t \to \infty]{} 0 \quad \text{and} \quad
+    |p - \xi(t; y, \eta)| \xrightarrow[t \to \infty]{} 0.
+  \]
+  Furthermore, the converse also holds, i.e.
+  for every $(a, p) \in \R^{2d}$ with $p \ne 0$,
+  we can find $(y, \eta) \in \Sigma_+$ such that
+  the above conditions hold.
+\end{prop}
+
+\begin{proof}
+  $(\Rightarrow)$ Let $(y, \eta) \in \Sigma_+$.
+  From the lemma, we know
+  $\lim_{t \to \infty} \xi(t; y, \eta)$ exists,
+  so set
+  \[
+    p = \lim_{t \to \infty} \xi(t; y, \eta) \ne 0.
+  \]
+  We can write
+  \[
+    x(t; y, \eta)
+    = y + \int_0^t \xi(s; y, \eta) \, ds
+    = y + p t + \int_0^t (\xi(s) - p)\, ds
+    = y + pt + \int_0^\infty \int_s^\infty \nabla V(x(\tau))\, d\tau ds
+  \]
+  where we think of $p$ as $\xi(\infty)$. Then 
+  we have
+  \[
+    x(t; y, \eta) =
+    y + pt + \int_0^\infty \int_s^\infty \nabla V(x(\tau))\, d\tau ds
+    - \int_t^\infty \int_s^\infty \nabla V(x(\tau))\, d\tau ds,
+  \]
+  where the latter integral goes to $0$ as
+  $t \to \infty$. The former integral is
+  a constant, so we can define $a$ such that
+  $a - y$ equals that integral. This proves
+  the claim.
+
+  $(\Leftarrow)$ Given $(a, p) \in \R^{2d}$ with
+  $p \ne 0$, we want to find $x(t)$, $\xi(t)$
+  solving $(+)$ of the form
+  \[
+    x(t) = a + pt + R(t),
+  \]
+  where $R(t) \to 0$ as $t \to \infty$. Because
+  of the equation $(+)$, we can formally write
+  \[
+    x(t) = a + pt + R(t)
+    = a + pt - \int_t^\infty \int_s^\infty \nabla V(x(\tau))\, d\tau ds.
+  \]
+  This is the same as the situation from above.
+  We can write
+  \[
+    a + pt + R(t) = a + pt
+    - \int_t^\infty \int_s^\infty \nabla V(a + \tau p + R(\tau)\, d\tau ds,
+  \]
+  which gives the equation
+  \[
+    R(t) = -\int_t^\infty \int_s^\infty \nabla V(a + \tau p + R(\tau))\, d\tau ds.
+  \]
+  We can solve this uniquely via
+  contraction mapping, which we will do
+  next time.
+\end{proof}
+
+\begin{remark}
+  We say there is a ``classical version of
+  $\Omega_-$'' given by
+  $\Omega_-(a, p) = (y, \eta)$.
+\end{remark}
