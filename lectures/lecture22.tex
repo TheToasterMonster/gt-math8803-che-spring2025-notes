@@ -136,56 +136,117 @@
 
   So it suffices to show $|x(t; y, \eta)| \ge at$
   for some $a > 0$.
-  We claim that
+  % We claim that
+  % \[
+  %   |x(t)| \ge \max\left\{\frac{R}{2}, C_1(t - t_0)\right\}
+  % \]
+  % for some $t_0$ large and $C_1$ independent
+  % of $R$, which we will prove using a
+  % bootstrap argument. Assume the claim holds
+  % on $[t_0, T]$, then we show that it can be
+  % extended. We can estimate
+  % \begin{align*}
+  %   |\xi(t) - \xi(t_0)|
+  %   &\le \int_{t_0}^t |\nabla V(x(\tau))|\, d\tau
+  %   = \int_{t_0}^{t_0 + R / 2C_1} |\nabla V(x(\tau))|\, d\tau
+  %   + \int_{t_0 + R / 2C_1}^t |\nabla V(x(\tau))|\, d\tau \\
+  %   &\le \int_{t_0}^{t_0 + R / 2 C_1} \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau
+  %   + \int_{t_0 + R / 2C_1}^t \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau \\
+  %   &\le \int_{t_0}^{t_0 + R / 2 C_1} C_0 \left(\frac{R}{2}\right)^{-1 - \epsilon}\, d\tau
+  %   + \int_{t_0 + R / 2C_1}^t C_0 (C_1(\tau - t_0))^{-1 - \epsilon}\, d\tau \\
+  %   &\le C_0 \frac{2\epsilon R^{-\epsilon}}{C_1}
+  %   + \frac{C_0 C_1^{-1 - \epsilon}}{\epsilon}
+  %   \left(\frac{R}{2C_1}\right)^{-\epsilon}
+  %   = \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}.
+  % \end{align*}
+  % By the fundamental theorem of calculus, we have
+  % \begin{align*}
+  %   x(t) = x(t_0) + \int_{t_0}^t \xi(\tau)\, d\tau
+  %   &= x(t_0) + (t - t_0) \xi(t_0) + \int_{t_0}^t (\xi(\tau) - \xi(t_0))\, d\tau \\
+  %   &\ge \sqrt{R^2 + |t - t_0|^2 |\xi(t_0)|^2}
+  %   - \int_{t_0}^t \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\, d\tau \\
+  %   &\ge \frac{R}{2} + \frac{(t - t_0) |\xi(t_0)|}{\sqrt{2}} - (t - t_0) \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon} \\
+  %   &\ge \frac{R}{2} + (t - t_0) \left(\frac{|\xi(t_0)|}{\sqrt{2}} - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\right).
+  % \end{align*}
+  % Note that $t_0$ is given, so $|\xi(t_0)|$ is
+  % fixed. The second part of the inner sum
+  % can be made small by taking $R$ large enough,
+  % so we can choose $C_1, R$ such that
+  % \[
+  %   \frac{|\xi(t_0)|}{\sqrt{2}}
+  %   - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}
+  %   < C_1.
+  % \]
+  % Then we can applying a bootstrap to
+  % extend the estimate beyond $T$ and get
+  % $x(t) \ge C_1(t - t_0)$, which then implies
+  % that $|x(t)| \ge at$ for some $a > 0$ and
+  % $t$ large enough.
+  Set $A(t) = |x(t)|^2 = \langle x(t), x(t) \rangle$, this is a
+  \emph{Lyapunov function} from ODE theory.
+  Differentiating in time, we get
   \[
-    |x(t)| \ge \max\left\{\frac{R}{2}, C_1(t - t_0)\right\}
+    \frac{d}{dt} A(t)
+    = 2 \langle x(t), \dot{x}(t) \rangle
+    = 2 \langle x(t), \xi(t) \rangle
   \]
-  for some $t_0$ large and $C_1$ independent
-  of $R$, which we will prove using a
-  bootstrap argument. Assume the claim holds
-  on $[t_0, T]$, then we show that it can be
-  extended. We can estimate
+  and similarly
   \begin{align*}
-    |\xi(t) - \xi(t_0)|
-    &\le \int_{t_0}^t |\nabla V(x(\tau))|\, d\tau
-    = \int_{t_0}^{t_0 + R / 2C_1} |\nabla V(x(\tau))|\, d\tau
-    + \int_{t_0 + R / 2C_1}^t |\nabla V(x(\tau))|\, d\tau \\
-    &\le \int_{t_0}^{t_0 + R / 2 C_1} \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau
-    + \int_{t_0 + R / 2C_1}^t \frac{C_0}{|x(\tau)|^{1 + \epsilon}}\, d\tau \\
-    &\le \int_{t_0}^{t_0 + R / 2 C_1} C_0 \left(\frac{R}{2}\right)^{-1 - \epsilon}\, d\tau
-    + \int_{t_0 + R / 2C_1}^t C_0 (C_1(\tau - t_0))^{-1 - \epsilon}\, d\tau \\
-    &\le C_0 \frac{2\epsilon R^{-\epsilon}}{C_1}
-    + \frac{C_0 C_1^{-1 - \epsilon}}{\epsilon}
-    \left(\frac{R}{2C_1}\right)^{-\epsilon}
-    = \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}.
+    \frac{d^2}{dt^2} A(t)
+    &= 2 \langle \dot{x}(t), \xi(t) \rangle
+    + 2 \langle x(t), \dot{\xi}(t) \rangle
+    = 2 |\xi(t)|^2 - 2 x(t) \cdot \nabla V(x(t)) \\
+    &= 4 \left(\frac{1}{2} |\xi(t)|^2 + V(x(t))\right)
+    - 4V(x(t)) - 2x(t) \cdot \nabla V(x(t)).
   \end{align*}
-  By the fundamental theorem of calculus, we have
-  \begin{align*}
-    x(t) = x(t_0) + \int_{t_0}^t \xi(\tau)\, d\tau
-    &= x(t_0) + (t - t_0) \xi(t_0) + \int_{t_0}^t (\xi(\tau) - \xi(t_0))\, d\tau \\
-    &\ge \sqrt{R^2 + |t - t_0|^2 |\xi(t_0)|^2}
-    - \int_{t_0}^t \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\, d\tau \\
-    &\ge \frac{R}{2} + \frac{(t - t_0) |\xi(t_0)|}{\sqrt{2}} - (t - t_0) \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon} \\
-    &\ge \frac{R}{2} + (t - t_0) \left(\frac{|\xi(t_0)|}{\sqrt{2}} - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}\right).
-  \end{align*}
-  Note that $t_0$ is given, so $|\xi(t_0)|$ is
-  fixed. The second part of the inner sum
-  can be made small by taking $R$ large enough,
-  so we can choose $C_1, R$ such that
+  Note that $|\xi(t)|^2 / 2 + V(x(t)) = E(t) = E_0 > 0$
+  and as $|x(t)| \to \infty$, we have
+  $|V(x(t))| \to 0$. We also get that
+  $|x(t) \cdot \nabla V(x(t))| \to 0$
+  as $|x(t)| \to \infty$
+  since $|\nabla V(x(t))| \le C_0 (1 + |x(t)|)^{-1 - \epsilon}$
+  by assumption. So we can find $R_0$
+  large such that when $|x(t)| > R_0$,
+  we have $\ddot{A}(t) > E_0 / 2$. We claim that we
+  can find $t_0$ with
   \[
-    \frac{|\xi(t_0)|}{\sqrt{2}}
-    - \frac{C_0}{C_1} 2^\epsilon \left(1 + \frac{1}{\epsilon}\right) R^{-\epsilon}
-    < C_1.
+    |x(t_0)| > R_0 \quad \text{and} \quad
+    \frac{d}{dt} A(t_0) > 0.
   \]
-  Then we can applying a bootstrap to
-  extend the estimate beyond $T$ and get
-  $x(t) \ge C_1(t - t_0)$, which then implies
-  that $|x(t)| \ge at$ for some $a > 0$ and
-  $t$ large enough.
+  To see this, note that $A(t) = |x(t)|^2$, so
+  $A(t) \to \infty$ as $t \to \infty$, so
+  such a $t_0$ must exist. Then at $t_0$,
+  \[
+    A(t_0) > R_0^2, \quad \dot{A}(t_0) > 0, \quad
+    \ddot{A}(t_0) > \frac{E_0}{2},
+  \]
+  so for any $t > t_0$, we have
+  $\dot{A}(t) > \dot{A}(t_0) > 0$,
+  $\ddot{A}(t) > E_0 / 2 > 0$, and $A(t) > R_0^2$. Thus
+  we have
+  \begin{align*}
+    \dot{A}(t)
+    &= \int_{t_0}^t \ddot{A}(s)\, ds + \dot{A}(t_0)
+    \ge (t - t_0) \frac{E_0}{2} + \dot{A}(t_0), \\
+    A(t)
+    & = A(t_0) + \int_{t_0}^t \dot{A}(s)\, ds
+    \ge \frac{1}{2} (t - t_0)^2 \frac{E_0}{2}
+    + (t - t_0) \dot{A}(t_0) + A(t_0),
+  \end{align*}
+  so $x(t) = \sqrt{A(t)} \ge a|t - t_0|$
+  for some $a > 0$, as desired
 \end{proof}
 
-\begin{prop}
-  Assume $|\nabla V(x)| \le C_0 (1 + |x|)^{-1 - \epsilon}$
+\begin{remark}
+  Physically, the above lemma tells us that
+  if $(y, \eta) \in \Sigma_+$, then a classical
+  particle will escape from the potential $V$
+  and move away with ``super-linear''
+  trajectory.
+\end{remark}
+
+\begin{prop}\label{prop:classical-scattering}
+  Assume $|\nabla V(x)| \le C_0 (1 + |x|)^{-2 - \epsilon}$
   and $|\nabla^2 V(x)| \le C_1 (1 + |x|)^{-2 - \epsilon}$.
   Then for every $(y, \eta) \in \Sigma_+$,
   there exists $(a, p) \in \R^{2d}$ with
@@ -254,9 +315,3 @@
   contraction mapping, which we will do
   next time.
 \end{proof}
-
-\begin{remark}
-  We say there is a ``classical version of
-  $\Omega_-$'' given by
-  $\Omega_-(a, p) = (y, \eta)$.
-\end{remark}

@@ -1,0 +1,68 @@
+\chapter{Apr.~7 --- Classical Scattering, Part 2}
+
+\section{Classical Scattering, Continued}
+
+\begin{proof}[Proof of Proposition \ref{prop:classical-scattering}, continued]
+  We continue by solving the equation
+  \[
+    R(t) = -\int_t^\infty \int_s^\infty \nabla V(a + \tau p + R(\tau))\, d\tau ds.
+  \]
+  We do this by contraction mapping in the
+  unit ball in $C([T, \infty); \R^d)$: Set
+  \[
+    A(z(t))
+    = -\int_t^\infty \int_s^\infty \nabla V(a + \tau p + z(\tau))\, d\tau ds.
+  \]
+  Note that $|a + \tau p + z(\tau)| \ge |a + \tau p| - 1 \ge \tau |p| / 2$
+  if $\tau$ is large enough. Then
+  \[
+    |A(z(t))|
+    \le \int_t^\infty \int_s^\infty \left(\frac{1}{2} \tau p\right)^{-2 - \epsilon}\, d\tau ds
+    \le |p|^{-2 - \epsilon} T^{-\epsilon} \le 1
+  \]
+  if we pick $T$ sufficiently large. We can
+  also see that
+  \begin{align*}
+    |A(z(t)) - A(\widetilde{z}(t))|
+    &\le \int_t^\infty \int_s^\infty
+    |\nabla V(a + \tau p + z(\tau)) - \nabla V(a + \tau p + \widetilde{z}(\tau))|\, d\tau ds \\
+    &\le \int_t^\infty \int_s^\infty
+    \left(\frac{1}{2} \tau |p|\right)^{-2 - \epsilon}
+    |z(\tau) - \widetilde{z}(\tau)|\, d\tau ds
+    \le p^{-2 - \epsilon} T^{-\epsilon} \|z - \widetilde{z}\|_{C([T, \infty); \R^d)},
+  \end{align*}
+  which is a contraction if $T$ is large.
+  So we can find a fixed point $R(t)$.
+\end{proof}
+
+\begin{remark}
+  The map $\Omega_-(a, p) = (y, \eta)$
+  can be seen as a classical analogue of the
+  wave operator.
+\end{remark}
+
+\section{More on Scattering for the Schr\"odinger Equation}
+\begin{lemma}
+  Let $H = -\Delta + V$ and $f \in L^2_{\mathrm{ac}}$.
+  Then we have
+  \[
+    \|\chi_{\{|x| \le R\}} e^{itH} f\|_{L^2} \xrightarrow[t \to \infty]{} 0
+  \]
+\end{lemma}
+
+\begin{remark}
+  We have $\|e^{itH} f\|_{L^2} = \|f\|_{L^2}$,
+  but if we localize the solution, then
+  \[
+    \|\chi_{\{|x| \le R\}} e^{itH} f\|_{L^2} \xrightarrow[t \to \infty]{} 0
+  \]
+  if $f \in L^2_{\mathrm{ac}}$. But if
+  $f$ is an eigenfunction of $H$, i.e.
+  $f \in L^2$ with $e^{iH t} f = e^{i\lambda t} f$,
+  this does not hold.
+  In particular, if a quantum particle is
+  not trapped by the potential $V$, then
+  the probability of finding it in any
+  compact region will go to $0$ as
+  $t \to \infty$.
+\end{remark}
