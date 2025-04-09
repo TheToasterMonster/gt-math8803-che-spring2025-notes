@@ -220,7 +220,8 @@
     A(t_0) > R_0^2, \quad \dot{A}(t_0) > 0, \quad
     \ddot{A}(t_0) > \frac{E_0}{2},
   \]
-  so for any $t > t_0$, we have
+  so for any $t_0 \le t \le t_0 + \delta$, we
+  have
   $\dot{A}(t) > \dot{A}(t_0) > 0$,
   $\ddot{A}(t) > E_0 / 2 > 0$, and $A(t) > R_0^2$. Thus
   we have
@@ -234,7 +235,8 @@
     + (t - t_0) \dot{A}(t_0) + A(t_0),
   \end{align*}
   so $x(t) = \sqrt{A(t)} \ge a|t - t_0|$
-  for some $a > 0$, as desired
+  for some $a > 0$. This proves the
+  claim after a bootstrap argument.
 \end{proof}
 
 \begin{remark}
