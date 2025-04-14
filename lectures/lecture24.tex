@@ -1,0 +1,160 @@
+\chapter{Apr.~14 --- Scattering Theory, Part 3}
+
+\section{More Scattering Theory}
+
+\begin{proof}[Proof of Lemma \ref{lem:local}]
+  By density, it suffices to check
+  the statement for $f = (H + i)^{-1} g$. Note
+  that the operator
+  $(H + i)^{-1}$ is well-defined since
+  the spectrum of $H$ lies on the real line. If
+  $f = L^2_{\mathrm{ac}}$, then
+  $P_{\mathrm{ac}} g = g$ by spectral theory.
+  In terms of $g$, we need to show that
+  \[
+    \|\chi_{\{|x| \le R\}} (H + i)^{-1} e^{itH} g\|_{L^2} \xrightarrow[t \to \infty]{} 0.
+  \]
+  The operator $C = \chi_{\{|x| \le R\}} (H + i)^{-1}$
+  is compact, so it can be approximated
+  by finite-rank operators. So it suffices
+  to prove $\|M e^{itH} g\|_{L^2} \to 0$
+  as $t \to \infty$, where $M$ is a finite-rank
+  operator. We can further assume that
+  the rank of $M$ is $1$, i.e. we can find
+  $\psi_1, \psi_2 \in L^2$ such that
+  $Mg = \langle g, \psi_2 \rangle \psi_1$. So
+  \[
+    \|M e^{itH} g \|_{L^2}
+    = \| \psi_1 \langle e^{itH} g, \psi_2 \rangle \|_{L^2}
+    = \| \psi_1 \|_{L^2} |\langle e^{itH} g, \psi_2 \rangle|.
+  \]
+  By spectral theory, write
+  \[
+    \|M e^{itH} g \|_{L^2}
+    = \left|
+    \int_{-\infty}^\infty e^{-it \lambda}
+    \langle E(d\lambda) g, \psi_2
+    \right|.
+  \]
+  Write $\langle E(d\lambda) g, \psi_2 \rangle = G(\lambda)\, d\lambda$ for some continuous
+  function $G$ (since
+  $g \in L^2_{\mathrm{ac}}$, so we can
+  differentiate with respect to Lebesgue measure).
+  Then we have
+  \[
+    \int_{-\infty}^\infty e^{-it\lambda}
+    \langle E(d\lambda) g, \psi_2 \rangle
+    = \int_{-\infty}^\infty e^{-it\lambda} G(\lambda)\, d\lambda
+    \xrightarrow[t \to \infty]{} 0
+  \]
+  by the Riemann-Lebesgue lemma since
+  $G$ is continuous, which proves the result.
+\end{proof}
+
+\begin{theorem}[RAGE: Ruelle-Amrein-Georgescu-Enss]
+  Let $f \in L^2_{\mathrm{c}} = L^2_{\mathrm{ac}} \oplus L^2_{\mathrm{sc}}$.
+  Then
+  \[
+    \frac{1}{T} \int_{-T}^T \| \chi_{\{|x| \le R\}} e^{-itH} f \|_{L^2}^2\, dt
+    \xrightarrow[T \to \infty]{} 0.
+  \]
+\end{theorem}
+
+\begin{proof}
+  By density,
+  we consider $f = (H + i)^{-1} g$. Using
+  the same reduction as before, it suffices
+  to show
+  \[
+    \frac{1}{T} \int_{-T}^T \|\langle e^{itH} g, \psi_2 \rangle \psi_1\|_{L^2}^2\, dt \xrightarrow[T \to \infty]{} 0
+    \iff
+    \frac{1}{T} \int_{-T}^T |\langle e^{itH} g, \psi_2\rangle|^2\, dt \xrightarrow[T \to \infty]{} 0.
+  \]
+  As $T \to \infty$, by spectral theory,
+  \[
+    \frac{1}{T} \int_{-T}^T \left| \int_{-\infty}^\infty e^{i\lambda t} \langle E(d\lambda) g, \psi_2 \rangle\, d\lambda \right|^2 dt
+    = \frac{1}{T} \int_{-T}^T \left| \int_{-\infty}^\infty e^{i t \lambda} \mu_{g, \psi_2}(d\lambda) \right|^2 dt
+    = \frac{1}{T} \int_{-T}^T |\widehat{\mu}_{g, \psi_2}(t)|^2\, dt
+  \]
+  for some measure $\mu_{g, \psi_2}$.
+  Wiener's theorem (Theorem \ref{thm:wiener})
+  then implies that
+  \[
+    \frac{1}{T} \int_{-T}^T |\widehat{\mu}_{g, \psi_2}(t)|^2\, dt
+    \xrightarrow[T \to \infty]{}
+    2 \sum_{\tau \in \R} |\mu_{g, \psi_2}(\{\tau\})|^2 = 0
+  \]
+  since $\mu_{g, \psi_2}$ is a continuous
+  measure, so
+  $\mu_{g, \psi_2}(\{\tau\}) = 0$ for all $\tau \in \R$.
+\end{proof}
+
+\begin{theorem}[Wiener]\label{thm:wiener}
+  Let $\mu \in \mathcal{M}(\R)$, i.e. $\mu$ is
+  a measure on $\R$. Then
+  \[
+    \frac{1}{2T} \int_{-T}^T |\widehat{\mu}(t)|^2\, dt
+    \xrightarrow[T \to \infty]{} \sum_{\tau \in \R} |\mu(\{\tau\})|^2.
+  \]
+\end{theorem}
+
+\begin{proof}
+  For $\mu, \nu \in \mathcal{M}(\R)$ and
+  a measurable set $E$, denote
+  \[
+    \mu * \nu(E)
+    = \int_\R \mu(E - t)\, \nu(dt).
+  \]
+  Set $\mu^\#(E) = \overline{\mu(-E)}$, so that
+  $\widehat{\mu^\#}(\xi) = \overline{\widehat{\mu}(\xi)}$.
+  Then we have
+  \begin{align*}
+    \mu * \mu^\#(\{0\})
+    = \int_\R \mu(\{-t\})\, \mu^\#(dt)
+    &= \sum_{\text{$-t$ atom of $\mu$}}
+    \mu(\{-t\}) \mu^\#(\{t\})
+    = \sum_{\text{$t$ atom of $\mu$}}
+    \mu(\{t\}) \mu^\#(\{-t\}) \\
+    &= \sum_{\text{$t$ atom of $\mu$}}
+    \mu(\{t\}) \overline{\mu(\{t\})}
+    = \sum_{\text{$t$ atom of $\mu$}}
+    |\mu(\{t\})|^2.
+  \end{align*}
+  We can also compute that
+  \[
+    \frac{1}{2T} \int_{-T}^T e^{it\tau} \widehat{\mu}(\tau)\, dt
+    = \frac{1}{2T} \int_{-T}^T e^{it\tau} \int_{-\infty}^\infty e^{-is\tau} \mu(ds) dt
+    = \frac{1}{2T} \int_{-T}^T \int_{-\infty}^\infty e^{i(t - s)\tau} \mu(ds) dt.
+  \]
+  By Fubini's theorem, we can write
+  \begin{align*}
+    \frac{1}{2T} \int_{-T}^T e^{it\tau} \widehat{\mu}(\tau)\, dt
+    &= \int_{-\infty}^\infty \left(\frac{1}{2T} \int_{-T}^T e^{i(t - s)\tau} dt \right) \mu(ds)
+    = \int_{-\infty}^\infty \frac{1}{2T} D_T(s - t)\, \mu(ds) \\
+    &= \mu(t) + \int_{-\infty}^\infty \frac{1}{2T} D_T(s - t) \left(\mu(ds) - \mu(t) \delta_{\{t\}}(ds)\right),
+  \end{align*}
+  where $D_T$ is the Dirichlet kernel. Note
+  that $D_T$ satisfies
+  \[
+    \int_{-\infty}^\infty \frac{1}{2T} D_T(s - t) \delta_{\{t\}}(ds) = 1,
+  \]
+  and $D_T(\tau) / 2T$ is an approximation
+  of the identity, so we have
+  \[
+    \frac{1}{2T} \int_{-T}^T e^{it\tau} \widehat{\mu}(\tau)\, dt
+    = \mu(t) + \int_{-\infty}^\infty \frac{1}{2T} D_T(s - t) \left(\mu(ds) - \mu(t) \delta_{\{t\}}(ds)\right)
+    \xrightarrow[T \to \infty]{} \mu(t).
+  \]
+  Applying this to the measure
+  $\mu * \mu^\#(\{0\})$, we obtain
+  \[
+    \frac{1}{2T} \int_{-T}^T |\widehat{\mu}|^2\, d\tau
+    =
+    \frac{1}{2T} \int_{-T}^T \widehat{\mu} \cdot \widehat{\mu^\#}\, d\tau
+    = \frac{1}{2T} \int_{-T}^T (\mu * \mu^\#)^{\wedge}\, dt
+    \xrightarrow[T \to \infty]{} \mu * \mu^\#(\{0\})
+    = \sum_{\text{$t$ atom of $\mu$}}
+    |\mu(\{t\})|^2,
+  \]
+  which is the desired result.
+\end{proof}
