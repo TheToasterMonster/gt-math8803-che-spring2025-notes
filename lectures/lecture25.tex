@@ -1,0 +1,267 @@
+\chapter{Apr.~16 --- Nonlinear Equations}
+
+\section{Strichartz Estimates, Revisited}
+\begin{definition}
+  A pair $(p, q)$ is called \emph{(Strichartz) admissible}
+  if
+  \[\frac{2}{p} + \frac{d}{q} = \frac{d}{2}\]
+  and $2 \le p \le \infty$ with
+  $(p, q) \ne (2, \infty)$.
+\end{definition}
+
+\begin{theorem}[General Strichartz]\label{thm:strichartz-full}
+  Suppose $i \partial_t \psi - \Delta \psi = h$
+  in $\R \times \R^d$ and $\psi(0) = f$. Then
+  \[
+    \|\psi\|_{L^p_t L^q_x}
+    \lesssim \|f\|_{L^2} + \|h\|_{L^{p'}_t L^{q'}_x}
+  \]
+  for $(p, q)$ Strichartz admissible and
+  $1 / p + 1 / p' = 1 / q + 1 / q' = 1$.
+\end{theorem}
+
+\begin{remark}
+  Recall that the $(p, q)$ Strichartz admissible
+  restriction comes from scaling. If we define
+  \[
+    \psi_\lambda(t, x) = \psi(\lambda^2 t, \lambda x),
+  \]
+  then $i \partial_t \psi_\lambda - \Delta \psi_\lambda = h(\lambda^2 t, \lambda x) / \lambda^2$
+  and $\psi_\lambda(0) = f(\lambda x)$. The
+  bound on $\psi_\lambda$ forces
+  $2 / p + d / q = d / 2$.
+\end{remark}
+
+\begin{remark}
+  If $p < \infty$, then $q > 2$. So in the
+  time average sense, solutions
+  gain integrability. This is related to the
+  smoothing phenomenon of the Schr\"odinger
+  equation.
+\end{remark}
+
+\begin{proof}[Proof of Theorem \ref{thm:strichartz-full}]
+  We use a $TT^*$ argument. Let
+  $Tf = e^{-i\Delta t} f$, then $T^*$ acts
+  on $g(t, x)$ by
+  \[
+    T^* g
+    = \int_{-\infty}^\infty e^{is\Delta} g(s)\, ds.
+  \]
+  The goal is to show the following inequality:
+  \[
+    \|Tf\|_{L^p_t L^q_x}
+    \lesssim \|f\|_{L^2}
+    \iff \|T^* g\|_{L^2} \lesssim \|g\|_{L^{p'}_t L^{q'}_x}
+    \iff \|T T^* g\|_{L^p_t L^q_x}
+    \lesssim \|g\|_{L^{p'}_t L^{q'}_x}.
+  \]
+  Recall that $\|Tf\|_{L^q_x} \lesssim t^{-d(1 / q' - 1 / q) / 2} \|f\|_{L^{q'}_x}$
+  for $1 \le q' \le 2$. We have
+  \begin{align*}
+    \|TT^* g\|_{L^q_x}
+    =
+    \left\|
+    \int_{-\infty}^\infty e^{i(t - s)\Delta} g(s)\, ds
+    \right\|_{L^q_x}
+    &\le \int_{-\infty}^\infty
+    \|e^{i(t - s)\Delta} g(s)\|_{L^q_x}\, ds \\
+    &\le \int_{-\infty}^\infty
+    |t - s|^{-d (1 / q' - 1 / q) / 2}
+    \|g(s)\|_{L^{q'}_x}\, ds.
+  \end{align*}
+  Fractional integration then implies that
+  for $1 + 1 / p = 1 / p' + d(1 / q' - 1 / q) / 2$ (provided that we have
+  $0 < d (1 / q' - 1 / q) / 2 < 1$, which happens
+  if and only if $p > 2$),
+  \[
+    \|TT^* g\|_{L^p_t L^q_x}
+    \lesssim \left\|\int_{-\infty}^\infty |t - s|^{-d(1 / q' - 1 / q) / 2}
+    \|g\|_{L^{q'}_x}\, ds\right\|_{L^p_t}
+    \lesssim \|g\|_{L^{p'}_t L^{q'}_x}.
+  \]
+  This proves that $\|Tf\|_{L^p_t L^q_x} = \|e^{i\Delta t} f\|_{L^p_t L^q_x} \lesssim \|f\|_{L^2}$.
+  To move to the inhomogeneous case, we can
+  simply use Duhamel's formula. If
+  $\psi$ satisfies the equation
+  \[
+    \psi(t) = \int_0^t e^{i(t - s)\Delta} h(s)\, ds
+    = \int_{-\infty}^\infty \chi_{\{0 < s < t\}}
+    e^{i(t - s)\Delta} h(s)\, ds,
+  \]
+  then we can run the same argument as above
+  to get
+  \[
+    \|\psi\|_{L^q_x}
+    \lesssim \int_{-\infty}^\infty \chi_{\{0 < s < t\}} \|h(s)\|_{L^{q}_x}\, ds
+    \lesssim \int_{-\infty}^\infty \|e^{i(t - s)\Delta} h(s)\|_{L^q_x}\, ds.
+  \]
+  This is now the same expression as before,
+  so the same argument as before applies, and
+  we get
+  \[
+    \|\psi\|_{L^p_t L^q_x} \lesssim \|h\|_{L^{p'}_t L^{q'}_x}.
+  \]
+  This proves the inhomogeneous case.
+\end{proof}
+
+\begin{remark}
+  In the above estimates, we require
+  $p > 2$. For $d = 2$ and the pair
+  $(p, q) = (2, \infty)$,
+  the Strichartz estimate fails in general.
+  To get $p = 2$ for $d \ge 3$, one needs to
+  use a more complex argument (Keel-Tao), and
+  these are called \emph{endpoint} Strichartz
+  estimates.
+\end{remark}
+
+\section{Existence and Uniqueness for Nonlinear Equations}
+
+\begin{remark}
+  Now we want to consider the equation
+  \[
+    \begin{cases}
+      i \partial_t \psi + \Delta \psi = \mu |\psi|^{4 / d} \psi, & (t, x) \in \R \times \R^d, \\
+      \psi(0) = \psi_0.
+    \end{cases}
+    \tag{$*$}
+  \]
+  The reason for
+  $|\psi|^{4 / d} \psi$ is that it is
+  \emph{$L^2$-critical} (the $L^2$ norm
+  is important for Schr\"odinger equations).
+  If $\psi$ is a solution, then
+  $\psi_{\lambda} = \lambda^{d / 2} \psi(\lambda^2 t, \lambda x)$
+  satisfies $\|\psi_{\lambda}\|_{L^2} = \|\psi\|_{L^2}$.
+  Moreover, for the nonlinearity $|\psi|^{4 / d} \psi$, the scaled solution
+  $\psi_\lambda$ solves
+  \[
+    i \partial_t \psi_\lambda + \Delta \psi_\lambda
+    = \mu |\psi_\lambda|^{4 / d} \psi_\lambda,
+  \]
+  which is the same equation that $\psi$ solves.
+  So the equation with $|\psi|^{4 / d} \psi$ is
+  \emph{scaling invariant}.
+\end{remark}
+
+\begin{definition}\label{def:solution}
+  Given $\psi_0 \in L^2(\R^d)$,
+  $\psi(t)$ is a \emph{solution} if
+  \[
+    \psi(t) = e^{it\Delta} \psi_0
+    + i \mu \int_0^\infty e^{i(t - s)\Delta}
+    |\psi(s)|^{4 / d} \psi(s)\, ds
+  \]
+  and $\psi(t)$ lies in
+  $X = (C_t \cap L^\infty_t)([0, \infty); L^2_x(\R^d)) \cap L^{p_0}_t([0, \infty); L^{2p_0}_x(\R^d))$
+  with $p_0 = 1 + 4 / d = (d + 4) / d$.
+\end{definition}
+
+\begin{remark}
+  Note that $(p_0, 2p_0)$ is Strichartz
+  admissible since
+  \[
+    \frac{2}{p_0} + \frac{d}{2p_0}
+    = \frac{4 + d}{2p_0}
+    = \left(\frac{4 + d}{2}\right) \frac{1}{p_0}
+    = \frac{d}{2}.
+  \]
+\end{remark}
+
+\begin{remark}
+  The motivation for choosing
+  $p_0 = 1 + 4 / d$ is
+  the following: We have
+  \[
+    \|\psi\|_{L^2}
+    \le \|\psi_0\|_{L^2}
+    + \left\|\int_0^\infty e^{i(t - s)\Delta} |\psi(s)|^{4 / d} \psi(s)\, ds\right\|_{L^2}
+    \le \|\psi_0\|_{L^2}
+    + \int_0^\infty \||\psi(s)|^{4 / d} \psi(s)\|_{L^2}\, ds.
+  \]
+  One can check that
+  $\||\psi|^{4 / d} \psi\|_{L^2_x} \le \| |\psi|^{4 / d + 1} \|_{L^2_x} = \|\psi\|_{L^{2p_0}_x}^{p_0}$, so
+  \[
+    \int_0^\infty \||\psi(s)|^{4 / d} \psi(s)\|_{L^2}\, ds
+    \lesssim
+    \int_0^\infty \|\psi\|_{L^{2p_0}_x}^{p_0}\, ds
+    \lesssim \|\psi\|_{L^{p_0}_t L^{2p_0}_x}^{p_0}.
+  \]
+\end{remark}
+
+\begin{corollary}
+  The equation $(*)$ has a unique
+  solution in the sense of Definition \ref{def:solution},
+  provided that $\|\psi_0\|_{L^2} \ll 1$
+  is small enough depending on $\mu$ and $d$.
+\end{corollary}
+
+\begin{proof}
+  For simplicity, take $d = 2$, so
+  $\mu |\psi|^{4 / d} \psi = \mu |\psi|^2 \psi$
+  and $p_0 = 4 / d + 1 = 3$. Define
+  \[
+    A \psi
+    = e^{it\Delta} \psi_0 + i \mu \int_0^\infty
+    e^{i(t - s)\Delta} |\psi|^2 \psi\, ds,
+  \]
+  and we will show that $A$ is a contraction
+  in $X$ if
+  $\|\psi_0\|_{L^2}$ is small enough.
+  By the Strichartz estimate,
+  \[
+    \|A\psi\|_{X}
+    \le C(\|\psi_0\|_{L^2} + |\mu| \|\psi\|_{X}^3).
+  \]
+  To show that $A$ is a contraction in a
+  ball in $X$ with radius $R$, take
+  $R = C_1 \epsilon$. We want
+  \[
+    C(\|\psi_0\|_{L^2} + |\mu| \|\psi\|_{X}^3)
+    \le C(\epsilon + |\mu| (C_1 \epsilon)^3)
+    < C_1 \epsilon,
+  \]
+  so we can take $C_1 = 2C$ and $\epsilon$
+  small enough such that
+  $C(1 + |\mu| C_1^3 \epsilon^2) < C_1$,
+  which will make $A$ map $\psi$ back into
+  the ball of radius $R$ in $X$. For the
+  difference estimate, we have
+  \[
+    A(\psi) - A(\varphi)
+    = i \mu \int_0^\infty e^{i(t - s)\Delta}
+    (|\psi|^2 \psi - |\varphi|^2 \varphi)\, ds,
+  \]
+  so we can estimate (note that
+  $|\psi|^2 \psi - |\varphi|^2 \varphi = |\psi|^2 \psi - |\psi|^2 \varphi + |\psi|^2 \varphi - |\varphi|^2 \varphi$)
+  \[
+    \|A(\psi) - A(\varphi)\|_{X}
+    \le |\mu| \| |\psi|^2 \psi - |\varphi|^2 \varphi\|_{L^1_t L^2_x}
+    \le C |\mu| (\|\psi\|_X + \|\varphi\|_X)^2 \|\psi - \varphi\|_X,
+  \]
+  so if we take $\epsilon$ small enough so that
+  $C |\mu|(2R)^2 = C|\mu| (C_1 \epsilon)^2 < 1$, then we
+  get a contraction. Thus $A$ has a unique
+  fixed point in the ball of radius $R$ in
+  $X$, which is the desired solution.
+\end{proof}
+
+\begin{remark}
+  Suppose $H = -\Delta + V$ has no eigenvalues
+  and $H$ is ``nice'' at zero energy (e.g.
+  if $V$ is very small), then recall that
+  we have
+  \[
+    \|e^{iHt} f\|_{L^\infty}
+    \lesssim t^{-d / 2} \|f\|_{L^1}.
+  \]
+  In this setting, we can show
+  the general Strichartz estimates hold, and
+  one can show global existence for
+  \[
+    i \partial_t \psi - \Delta \psi + V \psi
+    = |\psi|^{4 / d} \psi
+  \]
+  with small initial data.
+\end{remark}
